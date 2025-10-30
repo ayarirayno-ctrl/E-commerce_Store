@@ -1,0 +1,2678 @@
+================================================================================
+    E-COMMERCE STORE - TECHNICAL IMPLEMENTATION SCHEMA
+    Professional Front-End Development Guide
+================================================================================
+
+PROJECT STATUS: 85% Complete - Core Features Implemented
+TARGET: 100% Complete - Production-Grade Front-End Application
+FOCUS: Technical Implementation & Best Practices
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1. Current Technical Architecture Analysis
+2. Core Technical Improvements Required
+3. Component Development Strategy
+4. State Management Enhancement
+5. Performance Optimization Plan
+6. Testing Implementation
+7. Code Quality & Maintainability
+8. Advanced Features Implementation
+9. Development Workflow & Tools
+
+================================================================================
+1. CURRENT TECHNICAL ARCHITECTURE ANALYSIS
+================================================================================
+
+TECH STACK (Verified)
+---------------------
+✓ React 18.2.0          - Latest stable, concurrent features
+✓ TypeScript 5.2.2      - Strict type checking
+✓ Redux Toolkit 2.0.1   - State management
+✓ React Router v6.20.1  - Client-side routing
+✓ Tailwind CSS 3.3.5    - Utility-first styling
+✓ Vite 5.0.0            - Build tool & dev server
+✓ Lucide React 0.294.0  - Icon library
+
+PROJECT STRUCTURE (Current)
+---------------------------
+src/
+├── components/
+│   ├── ui/              - Base UI components (Button, Input, Modal, Badge, Loading)
+│   ├── layout/          - Layout components (Header, Footer)
+│   ├── product/         - Product components (ProductCard)
+│   ├── cart/            - Cart components (CartItem, CartSidebar)
+│   └── common/          - Shared components (ErrorBoundary, NotificationSystem)
+│
+├── pages/               - Route components (7 pages)
+│   ├── HomePage.tsx
+│   ├── ProductsPage.tsx
+│   ├── ProductDetailPage.tsx
+│   ├── CartPage.tsx
+│   ├── CheckoutPage.tsx
+│   ├── CategoriesPage.tsx
+│   └── AboutPage.tsx
+│
+├── store/               - Redux implementation
+│   ├── index.ts         - Store configuration
+│   ├── slices/          - Redux slices (cart, products, ui)
+│   └── api/             - API service layer
+│
+├── hooks/               - Custom hooks (useCart, useProducts, useLocalStorage)
+├── utils/               - Utility functions (formatters, validators, constants)
+├── types/               - TypeScript definitions
+├── assets/              - Static assets
+├── styles/              - Global styles
+└── data/                - Mock data (products.json)
+
+COMPLETED FEATURES
+------------------
+✓ Product catalog with grid layout
+✓ Product detail pages with image gallery
+✓ Shopping cart with CRUD operations
+✓ Cart persistence (localStorage)
+✓ Checkout flow with form validation
+✓ Search & filter system (Redux state)
+✓ Responsive design (mobile/tablet/desktop)
+✓ Error boundary implementation
+✓ Loading states
+✓ Notification system
+✓ TypeScript type coverage (100%)
+
+TECHNICAL GAPS IDENTIFIED
+--------------------------
+✗ No unit tests (0% coverage)
+✗ No integration tests
+✗ Limited error recovery mechanisms
+✗ No image optimization/lazy loading
+✗ Limited code splitting
+✗ Missing accessibility features (ARIA, keyboard nav)
+✗ No performance monitoring
+✗ Limited caching strategies
+✗ No form field-level validation
+✗ Missing advanced React patterns (React.memo, useMemo, useCallback)
+
+================================================================================
+2. CORE TECHNICAL IMPROVEMENTS REQUIRED
+================================================================================
+
+PRIORITY 1: TESTING INFRASTRUCTURE (Critical)
+----------------------------------------------
+
+Install Dependencies:
+npm install -D vitest @vitest/ui @vitest/coverage-c8
+npm install -D @testing-library/react @testing-library/jest-dom
+npm install -D @testing-library/user-event jsdom
+npm install -D happy-dom
+
+Configuration Files to Create:
+
+File: vitest.config.ts
+----------------------
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: ['./src/test/setup.ts'],
+    coverage: {
+      provider: 'c8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/test/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/dist/**',
+      ],
+    },
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+
+File: src/test/setup.ts
+-----------------------
+import '@testing-library/jest-dom';
+import { cleanup } from '@testing-library/react';
+import { afterEach } from 'vitest';
+
+// Cleanup after each test
+afterEach(() => {
+  cleanup();
+});
+
+// Mock localStorage
+const localStorageMock = {
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
+};
+global.localStorage = localStorageMock as any;
+
+// Mock IntersectionObserver
+global.IntersectionObserver = class IntersectionObserver {
+  constructor() {}
+  disconnect() {}
+  observe() {}
+  takeRecords() { return []; }
+  unobserve() {}
+} as any;
+
+Test Structure to Implement:
+
+src/
+├── components/
+│   ├── ui/
+│   │   ├── Button.tsx
+│   │   └── __tests__/
+│   │       ├── Button.test.tsx
+│   │       ├── Input.test.tsx
+│   │       ├── Modal.test.tsx
+│   │       └── Loading.test.tsx
+│   │
+│   ├── product/
+│   │   ├── ProductCard.tsx
+│   │   └── __tests__/
+│   │       └── ProductCard.test.tsx
+│   │
+│   └── cart/
+│       ├── CartItem.tsx
+│       └── __tests__/
+│           ├── CartItem.test.tsx
+│           └── CartSidebar.test.tsx
+│
+├── store/
+│   └── slices/
+│       └── __tests__/
+│           ├── cartSlice.test.ts
+│           ├── productsSlice.test.ts
+│           └── uiSlice.test.ts
+│
+├── hooks/
+│   └── __tests__/
+│       ├── useCart.test.ts
+│       ├── useLocalStorage.test.ts
+│       └── useProducts.test.ts
+│
+└── utils/
+    └── __tests__/
+        ├── formatters.test.ts
+        ├── validators.test.ts
+        └── cn.test.ts
+
+Example Test Template:
+
+File: src/components/ui/__tests__/Button.test.tsx
+-------------------------------------------------
+import { describe, it, expect, vi } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import Button from '../Button';
+
+describe('Button Component', () => {
+  it('renders button with text', () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByText('Click me')).toBeInTheDocument();
+  });
+
+  it('calls onClick handler when clicked', () => {
+    const handleClick = vi.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    fireEvent.click(screen.getByText('Click me'));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('applies variant styles correctly', () => {
+    render(<Button variant="primary">Primary</Button>);
+    const button = screen.getByText('Primary');
+    expect(button).toHaveClass('bg-blue-500');
+  });
+
+  it('disables button when disabled prop is true', () => {
+    render(<Button disabled>Disabled</Button>);
+    expect(screen.getByText('Disabled')).toBeDisabled();
+  });
+});
+
+File: src/store/slices/__tests__/cartSlice.test.ts
+---------------------------------------------------
+import { describe, it, expect } from 'vitest';
+import cartReducer, {
+  addToCart,
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+} from '../cartSlice';
+import { CartState } from '../../../types/cart';
+
+const initialState: CartState = {
+  items: [],
+  totalPrice: 0,
+  totalItems: 0,
+  isOpen: false,
+};
+
+describe('cartSlice', () => {
+  it('should handle initial state', () => {
+    expect(cartReducer(undefined, { type: 'unknown' })).toEqual(initialState);
+  });
+
+  it('should handle addToCart', () => {
+    const product = {
+      id: 1,
+      title: 'Test Product',
+      price: 99.99,
+      thumbnail: 'test.jpg',
+      brand: 'Test Brand',
+    };
+    
+    const actual = cartReducer(
+      initialState,
+      addToCart({ product, quantity: 2 })
+    );
+    
+    expect(actual.items).toHaveLength(1);
+    expect(actual.items[0].quantity).toBe(2);
+    expect(actual.totalPrice).toBe(199.98);
+    expect(actual.totalItems).toBe(2);
+  });
+
+  it('should handle removeFromCart', () => {
+    const stateWithItem: CartState = {
+      items: [{
+        id: 1,
+        product: { id: 1, title: 'Test', price: 99.99, thumbnail: '', brand: '' },
+        quantity: 2,
+        totalPrice: 199.98,
+      }],
+      totalPrice: 199.98,
+      totalItems: 2,
+      isOpen: false,
+    };
+    
+    const actual = cartReducer(stateWithItem, removeFromCart(1));
+    expect(actual.items).toHaveLength(0);
+    expect(actual.totalPrice).toBe(0);
+    expect(actual.totalItems).toBe(0);
+  });
+
+  it('should handle updateQuantity', () => {
+    const stateWithItem: CartState = {
+      items: [{
+        id: 1,
+        product: { id: 1, title: 'Test', price: 99.99, thumbnail: '', brand: '' },
+        quantity: 2,
+        totalPrice: 199.98,
+      }],
+      totalPrice: 199.98,
+      totalItems: 2,
+      isOpen: false,
+    };
+    
+    const actual = cartReducer(
+      stateWithItem,
+      updateQuantity({ id: 1, quantity: 5 })
+    );
+    
+    expect(actual.items[0].quantity).toBe(5);
+    expect(actual.totalPrice).toBe(499.95);
+    expect(actual.totalItems).toBe(5);
+  });
+
+  it('should handle clearCart', () => {
+    const stateWithItems: CartState = {
+      items: [/* items */],
+      totalPrice: 299.97,
+      totalItems: 3,
+      isOpen: false,
+    };
+    
+    const actual = cartReducer(stateWithItems, clearCart());
+    expect(actual).toEqual(initialState);
+  });
+});
+
+Target Test Coverage:
+- Unit Tests: 70%+ coverage
+- Integration Tests: Key user flows (add to cart, checkout)
+- Hook Tests: All custom hooks
+- Redux Tests: All slices and actions
+
+
+PRIORITY 2: PERFORMANCE OPTIMIZATION
+-------------------------------------
+
+A. Code Splitting & Lazy Loading
+
+Current Implementation (Already Done):
+// src/App.tsx - Already using lazy loading for routes
+const HomePage = lazy(() => import('./pages/HomePage'));
+const ProductsPage = lazy(() => import('./pages/ProductsPage'));
+// etc.
+
+Additional Code Splitting Needed:
+
+File: src/utils/lazyLoad.ts (Create)
+------------------------------------
+import { lazy, ComponentType, LazyExoticComponent } from 'react';
+
+export const lazyLoad = <T extends ComponentType<any>>(
+  importFunc: () => Promise<{ default: T }>,
+  fallback?: React.ReactNode
+): LazyExoticComponent<T> => {
+  return lazy(importFunc);
+};
+
+// Usage with retry logic
+export const lazyWithRetry = <T extends ComponentType<any>>(
+  importFunc: () => Promise<{ default: T }>,
+  retriesLeft = 3,
+  interval = 1000
+): LazyExoticComponent<T> => {
+  return lazy(() =>
+    new Promise((resolve, reject) => {
+      importFunc()
+        .then(resolve)
+        .catch((error) => {
+          setTimeout(() => {
+            if (retriesLeft === 1) {
+              reject(error);
+              return;
+            }
+            lazyWithRetry(importFunc, retriesLeft - 1, interval).then(resolve, reject);
+          }, interval);
+        });
+    })
+  );
+};
+
+B. React Performance Optimization
+
+Optimize Heavy Components:
+
+File: src/components/product/ProductCard.tsx (Update)
+-----------------------------------------------------
+import { memo, useMemo, useCallback } from 'react';
+import { Product } from '../../types/product';
+
+interface ProductCardProps {
+  product: Product;
+  onAddToCart: (product: Product) => void;
+}
+
+const ProductCard = memo(({ product, onAddToCart }: ProductCardProps) => {
+  // Memoize expensive calculations
+  const discountedPrice = useMemo(() => {
+    if (product.discountPercentage) {
+      return product.price * (1 - product.discountPercentage / 100);
+    }
+    return product.price;
+  }, [product.price, product.discountPercentage]);
+
+  // Memoize event handlers
+  const handleAddToCart = useCallback(() => {
+    onAddToCart(product);
+  }, [product, onAddToCart]);
+
+  return (
+    <div className="product-card">
+      {/* Component JSX */}
+      <button onClick={handleAddToCart}>Add to Cart</button>
+    </div>
+  );
+}, (prevProps, nextProps) => {
+  // Custom comparison function
+  return prevProps.product.id === nextProps.product.id;
+});
+
+ProductCard.displayName = 'ProductCard';
+export default ProductCard;
+
+C. Image Optimization
+
+Install Dependencies:
+npm install react-lazy-load-image-component
+npm install -D @types/react-lazy-load-image-component
+
+File: src/components/common/OptimizedImage.tsx (Create)
+--------------------------------------------------------
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+import { useState } from 'react';
+
+interface OptimizedImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+  width?: number;
+  height?: number;
+}
+
+const OptimizedImage = ({ src, alt, className, width, height }: OptimizedImageProps) => {
+  const [error, setError] = useState(false);
+
+  const placeholderSrc = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23e5e7eb" width="400" height="300"/%3E%3C/svg%3E';
+  const errorSrc = '/images/placeholder.jpg';
+
+  return (
+    <LazyLoadImage
+      alt={alt}
+      src={error ? errorSrc : src}
+      effect="blur"
+      className={className}
+      width={width}
+      height={height}
+      placeholderSrc={placeholderSrc}
+      onError={() => setError(true)}
+    />
+  );
+};
+
+export default OptimizedImage;
+
+D. Virtual Scrolling for Long Lists
+
+Install Dependencies:
+npm install @tanstack/react-virtual
+
+File: src/components/product/VirtualizedProductList.tsx (Create)
+-----------------------------------------------------------------
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useRef } from 'react';
+import { Product } from '../../types/product';
+import ProductCard from './ProductCard';
+
+interface VirtualizedProductListProps {
+  products: Product[];
+  onAddToCart: (product: Product) => void;
+}
+
+const VirtualizedProductList = ({ products, onAddToCart }: VirtualizedProductListProps) => {
+  const parentRef = useRef<HTMLDivElement>(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: Math.ceil(products.length / 3), // 3 items per row
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 400, // Estimated row height
+    overscan: 5,
+  });
+
+  return (
+    <div ref={parentRef} className="h-[600px] overflow-auto">
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative',
+        }}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const startIndex = virtualRow.index * 3;
+          const rowProducts = products.slice(startIndex, startIndex + 3);
+
+          return (
+            <div
+              key={virtualRow.index}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: `${virtualRow.size}px`,
+                transform: `translateY(${virtualRow.start}px)`,
+              }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {rowProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                />
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default VirtualizedProductList;
+
+E. Bundle Optimization
+
+File: vite.config.ts (Update)
+-----------------------------
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    // Optimize build output
+    target: 'esnext',
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+        drop_debugger: true,
+      },
+    },
+    // Code splitting strategy
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Vendor chunks
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-redux': ['@reduxjs/toolkit', 'react-redux'],
+          'vendor-ui': ['lucide-react'],
+          // Feature chunks
+          'feature-product': [
+            './src/components/product/ProductCard',
+            './src/pages/ProductsPage',
+            './src/pages/ProductDetailPage',
+          ],
+          'feature-cart': [
+            './src/components/cart/CartItem',
+            './src/components/cart/CartSidebar',
+            './src/pages/CartPage',
+          ],
+          'feature-checkout': [
+            './src/pages/CheckoutPage',
+          ],
+        },
+      },
+    },
+    // Chunk size warnings
+    chunkSizeWarningLimit: 1000,
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', '@reduxjs/toolkit'],
+  },
+});
+
+
+PRIORITY 3: ERROR HANDLING ENHANCEMENT
+---------------------------------------
+
+A. Global Error Handler
+
+File: src/utils/errorHandler.ts (Create)
+----------------------------------------
+export enum ErrorType {
+  NETWORK = 'NETWORK',
+  VALIDATION = 'VALIDATION',
+  API = 'API',
+  UNKNOWN = 'UNKNOWN',
+}
+
+export interface AppError {
+  type: ErrorType;
+  message: string;
+  code?: string;
+  details?: any;
+  timestamp: number;
+}
+
+export class ErrorHandler {
+  static handle(error: unknown): AppError {
+    const timestamp = Date.now();
+
+    // Network errors
+    if (error instanceof TypeError && error.message.includes('fetch')) {
+      return {
+        type: ErrorType.NETWORK,
+        message: 'Network connection failed. Please check your internet connection.',
+        timestamp,
+      };
+    }
+
+    // API errors
+    if (error instanceof Response) {
+      return {
+        type: ErrorType.API,
+        message: `API Error: ${error.statusText}`,
+        code: error.status.toString(),
+        timestamp,
+      };
+    }
+
+    // Validation errors
+    if (error instanceof Error && error.name === 'ValidationError') {
+      return {
+        type: ErrorType.VALIDATION,
+        message: error.message,
+        timestamp,
+      };
+    }
+
+    // Unknown errors
+    return {
+      type: ErrorType.UNKNOWN,
+      message: error instanceof Error ? error.message : 'An unexpected error occurred',
+      details: error,
+      timestamp,
+    };
+  }
+
+  static log(error: AppError): void {
+    // In development, log to console
+    if (import.meta.env.DEV) {
+      console.error('[ErrorHandler]', error);
+    }
+
+    // In production, send to error tracking service
+    // Example: Sentry.captureException(error);
+  }
+
+  static getUserMessage(error: AppError): string {
+    switch (error.type) {
+      case ErrorType.NETWORK:
+        return 'Network connection lost. Please check your internet connection and try again.';
+      case ErrorType.API:
+        return 'Unable to load data. Please try again later.';
+      case ErrorType.VALIDATION:
+        return error.message;
+      default:
+        return 'Something went wrong. Please refresh the page and try again.';
+    }
+  }
+}
+
+// Async error wrapper
+export const asyncHandler = <T extends (...args: any[]) => Promise<any>>(
+  fn: T
+) => {
+  return async (...args: Parameters<T>): Promise<ReturnType<T>> => {
+    try {
+      return await fn(...args);
+    } catch (error) {
+      const appError = ErrorHandler.handle(error);
+      ErrorHandler.log(appError);
+      throw appError;
+    }
+  };
+};
+
+B. Enhanced Error Boundary
+
+File: src/components/common/ErrorBoundary.tsx (Update)
+------------------------------------------------------
+import { Component, ErrorInfo, ReactNode } from 'react';
+import { ErrorHandler, AppError, ErrorType } from '../../utils/errorHandler';
+
+interface Props {
+  children: ReactNode;
+  fallback?: ReactNode;
+}
+
+interface State {
+  hasError: boolean;
+  error: AppError | null;
+}
+
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null,
+    };
+  }
+
+  static getDerivedStateFromError(error: Error): State {
+    const appError = ErrorHandler.handle(error);
+    return {
+      hasError: true,
+      error: appError,
+    };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    const appError = ErrorHandler.handle(error);
+    ErrorHandler.log({
+      ...appError,
+      details: {
+        ...appError.details,
+        componentStack: errorInfo.componentStack,
+      },
+    });
+  }
+
+  handleReset = () => {
+    this.setState({ hasError: false, error: null });
+  };
+
+  handleReload = () => {
+    window.location.reload();
+  };
+
+  render() {
+    if (this.state.hasError && this.state.error) {
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+          <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
+            <div className="flex justify-center mb-4">
+              <svg
+                className="w-16 h-16 text-red-500"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                />
+              </svg>
+            </div>
+
+            <h2 className="text-2xl font-bold text-center mb-2">
+              Oops! Something went wrong
+            </h2>
+
+            <p className="text-gray-600 text-center mb-6">
+              {ErrorHandler.getUserMessage(this.state.error)}
+            </p>
+
+            {import.meta.env.DEV && (
+              <div className="bg-gray-100 rounded p-4 mb-6 overflow-auto max-h-40">
+                <p className="text-xs font-mono text-gray-700">
+                  {this.state.error.message}
+                </p>
+              </div>
+            )}
+
+            <div className="flex gap-3">
+              <button
+                onClick={this.handleReset}
+                className="flex-1 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+              >
+                Try Again
+              </button>
+              <button
+                onClick={this.handleReload}
+                className="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded hover:bg-gray-300 transition"
+              >
+                Reload Page
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
+
+export default ErrorBoundary;
+
+C. Error Pages
+
+File: src/pages/NotFoundPage.tsx (Create)
+-----------------------------------------
+import { Link } from 'react-router-dom';
+
+const NotFoundPage = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="text-center">
+        <h1 className="text-9xl font-bold text-gray-200">404</h1>
+        <h2 className="text-3xl font-bold text-gray-800 mt-4 mb-2">
+          Page Not Found
+        </h2>
+        <p className="text-gray-600 mb-8">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <Link
+          to="/"
+          className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+        >
+          Go Back Home
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default NotFoundPage;
+
+File: src/pages/ErrorPage.tsx (Create)
+--------------------------------------
+import { useRouteError, Link } from 'react-router-dom';
+
+const ErrorPage = () => {
+  const error = useRouteError() as any;
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <div className="max-w-md w-full text-center">
+        <h1 className="text-6xl font-bold text-red-500 mb-4">Error</h1>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">
+          Something went wrong
+        </h2>
+        <p className="text-gray-600 mb-8">
+          {error?.statusText || error?.message || 'An unexpected error occurred'}
+        </p>
+        <Link
+          to="/"
+          className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+        >
+          Go Back Home
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default ErrorPage;
+
+Update App.tsx to include error routes:
+import NotFoundPage from './pages/NotFoundPage';
+import ErrorPage from './pages/ErrorPage';
+
+// In Routes
+<Route path="*" element={<NotFoundPage />} />
+<Route errorElement={<ErrorPage />} />
+
+
+PRIORITY 4: ACCESSIBILITY (A11Y)
+---------------------------------
+
+A. Keyboard Navigation
+
+File: src/hooks/useKeyboardNavigation.ts (Create)
+-------------------------------------------------
+import { useEffect, useCallback } from 'react';
+
+interface UseKeyboardNavigationProps {
+  onEscape?: () => void;
+  onEnter?: () => void;
+  onArrowUp?: () => void;
+  onArrowDown?: () => void;
+  onArrowLeft?: () => void;
+  onArrowRight?: () => void;
+}
+
+export const useKeyboardNavigation = ({
+  onEscape,
+  onEnter,
+  onArrowUp,
+  onArrowDown,
+  onArrowLeft,
+  onArrowRight,
+}: UseKeyboardNavigationProps) => {
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      switch (event.key) {
+        case 'Escape':
+          onEscape?.();
+          break;
+        case 'Enter':
+          onEnter?.();
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          onArrowUp?.();
+          break;
+        case 'ArrowDown':
+          event.preventDefault();
+          onArrowDown?.();
+          break;
+        case 'ArrowLeft':
+          onArrowLeft?.();
+          break;
+        case 'ArrowRight':
+          onArrowRight?.();
+          break;
+      }
+    },
+    [onEscape, onEnter, onArrowUp, onArrowDown, onArrowLeft, onArrowRight]
+  );
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
+};
+
+File: src/hooks/useFocusTrap.ts (Create)
+----------------------------------------
+import { useEffect, useRef } from 'react';
+
+export const useFocusTrap = (isActive: boolean) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isActive) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const focusableElements = container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    // Focus first element
+    firstElement?.focus();
+
+    container.addEventListener('keydown', handleKeyDown as any);
+
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown as any);
+    };
+  }, [isActive]);
+
+  return containerRef;
+};
+
+B. ARIA Implementation
+
+File: src/components/ui/Modal.tsx (Update with ARIA)
+----------------------------------------------------
+import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { X } from 'lucide-react';
+import { useFocusTrap } from '../../hooks/useFocusTrap';
+import { useKeyboardNavigation } from '../../hooks/useKeyboardNavigation';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const Modal = ({ isOpen, onClose, title, children, size = 'md' }: ModalProps) => {
+  const containerRef = useFocusTrap(isOpen);
+
+  useKeyboardNavigation({
+    onEscape: onClose,
+  });
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const sizeClasses = {
+    sm: 'max-w-md',
+    md: 'max-w-lg',
+    lg: 'max-w-4xl',
+  };
+
+  return createPortal(
+    <div
+      className="fixed inset-0 z-50 overflow-y-auto"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Modal */}
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div
+          ref={containerRef}
+          className={`relative w-full ${sizeClasses[size]} bg-white rounded-lg shadow-xl transform transition-all`}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between p-6 border-b">
+            <h2 id="modal-title" className="text-xl font-semibold">
+              {title}
+            </h2>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+              aria-label="Close modal"
+            >
+              <X size={24} />
+            </button>
+          </div>
+
+          {/* Content */}
+          <div className="p-6">{children}</div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+};
+
+export default Modal;
+
+C. Skip to Content Link
+
+File: src/components/common/SkipToContent.tsx (Create)
+------------------------------------------------------
+const SkipToContent = () => {
+  return (
+    <a
+      href="#main-content"
+      className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-600"
+    >
+      Skip to main content
+    </a>
+  );
+};
+
+export default SkipToContent;
+
+// Add to App.tsx before Header
+<SkipToContent />
+
+// Add id to main element
+<main id="main-content" className="flex-1">
+
+
+================================================================================
+3. COMPONENT DEVELOPMENT STRATEGY
+================================================================================
+
+ADVANCED FEATURES TO IMPLEMENT
+-------------------------------
+
+A. WISHLIST FUNCTIONALITY
+
+File: src/store/slices/wishlistSlice.ts (Create)
+------------------------------------------------
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Product } from '../../types/product';
+
+interface WishlistState {
+  items: Product[];
+}
+
+const loadWishlistFromStorage = (): Product[] => {
+  try {
+    const saved = localStorage.getItem('wishlist');
+    return saved ? JSON.parse(saved) : [];
+  } catch {
+    return [];
+  }
+};
+
+const saveWishlistToStorage = (items: Product[]) => {
+  try {
+    localStorage.setItem('wishlist', JSON.stringify(items));
+  } catch (error) {
+    console.error('Failed to save wishlist:', error);
+  }
+};
+
+const initialState: WishlistState = {
+  items: loadWishlistFromStorage(),
+};
+
+const wishlistSlice = createSlice({
+  name: 'wishlist',
+  initialState,
+  reducers: {
+    addToWishlist: (state, action: PayloadAction<Product>) => {
+      const exists = state.items.find(item => item.id === action.payload.id);
+      if (!exists) {
+        state.items.push(action.payload);
+        saveWishlistToStorage(state.items);
+      }
+    },
+    removeFromWishlist: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter(item => item.id !== action.payload);
+      saveWishlistToStorage(state.items);
+    },
+    clearWishlist: (state) => {
+      state.items = [];
+      saveWishlistToStorage([]);
+    },
+  },
+});
+
+export const { addToWishlist, removeFromWishlist, clearWishlist } = wishlistSlice.actions;
+export default wishlistSlice.reducer;
+
+File: src/hooks/useWishlist.ts (Create)
+---------------------------------------
+import { useAppDispatch, useAppSelector } from '../store';
+import { addToWishlist, removeFromWishlist } from '../store/slices/wishlistSlice';
+import { Product } from '../types/product';
+
+export const useWishlist = () => {
+  const dispatch = useAppDispatch();
+  const wishlist = useAppSelector(state => state.wishlist.items);
+
+  const isInWishlist = (productId: number) => {
+    return wishlist.some(item => item.id === productId);
+  };
+
+  const toggleWishlist = (product: Product) => {
+    if (isInWishlist(product.id)) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist(product));
+    }
+  };
+
+  return {
+    wishlist,
+    isInWishlist,
+    toggleWishlist,
+    wishlistCount: wishlist.length,
+  };
+};
+
+File: src/components/product/WishlistButton.tsx (Create)
+--------------------------------------------------------
+import { Heart } from 'lucide-react';
+import { useWishlist } from '../../hooks/useWishlist';
+import { Product } from '../../types/product';
+import { cn } from '../../utils/cn';
+
+interface WishlistButtonProps {
+  product: Product;
+  className?: string;
+}
+
+const WishlistButton = ({ product, className }: WishlistButtonProps) => {
+  const { isInWishlist, toggleWishlist } = useWishlist();
+  const inWishlist = isInWishlist(product.id);
+
+  return (
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleWishlist(product);
+      }}
+      className={cn(
+        'p-2 rounded-full transition-all hover:scale-110',
+        inWishlist ? 'text-red-500' : 'text-gray-400 hover:text-red-500',
+        className
+      )}
+      aria-label={inWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+    >
+      <Heart
+        size={20}
+        fill={inWishlist ? 'currentColor' : 'none'}
+        className="transition-all"
+      />
+    </button>
+  );
+};
+
+export default WishlistButton;
+
+File: src/pages/WishlistPage.tsx (Create)
+-----------------------------------------
+import { useWishlist } from '../hooks/useWishlist';
+import { useCart } from '../hooks/useCart';
+import ProductCard from '../components/product/ProductCard';
+import { Heart } from 'lucide-react';
+
+const WishlistPage = () => {
+  const { wishlist } = useWishlist();
+  const { addItem } = useCart();
+
+  if (wishlist.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-md mx-auto text-center">
+          <Heart size={64} className="mx-auto text-gray-300 mb-4" />
+          <h2 className="text-2xl font-bold mb-2">Your wishlist is empty</h2>
+          <p className="text-gray-600 mb-8">
+            Start adding products you love!
+          </p>
+          <a
+            href="/products"
+            className="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
+          >
+            Browse Products
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8">My Wishlist ({wishlist.length})</h1>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {wishlist.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={(product) => addItem(product, 1)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default WishlistPage;
+
+B. SEARCH WITH DEBOUNCE
+
+File: src/hooks/useDebounce.ts (Create)
+---------------------------------------
+import { useState, useEffect } from 'react';
+
+export const useDebounce = <T>(value: T, delay: number = 300): T => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+File: src/components/search/SearchBar.tsx (Create)
+--------------------------------------------------
+import { useState, useEffect } from 'react';
+import { Search, X } from 'lucide-react';
+import { useDebounce } from '../../hooks/useDebounce';
+
+interface SearchBarProps {
+  onSearch: (query: string) => void;
+  placeholder?: string;
+  className?: string;
+}
+
+const SearchBar = ({ onSearch, placeholder, className }: SearchBarProps) => {
+  const [query, setQuery] = useState('');
+  const [recentSearches, setRecentSearches] = useState<string[]>([]);
+  const debouncedQuery = useDebounce(query, 300);
+
+  // Load recent searches
+  useEffect(() => {
+    const saved = localStorage.getItem('recentSearches');
+    if (saved) {
+      setRecentSearches(JSON.parse(saved));
+    }
+  }, []);
+
+  // Trigger search when debounced value changes
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
+      onSearch(debouncedQuery);
+      
+      // Save to recent searches
+      const updated = [
+        debouncedQuery,
+        ...recentSearches.filter(s => s !== debouncedQuery)
+      ].slice(0, 5);
+      setRecentSearches(updated);
+      localStorage.setItem('recentSearches', JSON.stringify(updated));
+    }
+  }, [debouncedQuery]);
+
+  const handleClear = () => {
+    setQuery('');
+    onSearch('');
+  };
+
+  return (
+    <div className={`relative ${className}`}>
+      <div className="relative">
+        <Search
+          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          size={20}
+        />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={placeholder || 'Search products...'}
+          className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="Search products"
+        />
+        {query && (
+          <button
+            onClick={handleClear}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            aria-label="Clear search"
+          >
+            <X size={20} />
+          </button>
+        )}
+      </div>
+
+      {/* Recent Searches Dropdown */}
+      {!query && recentSearches.length > 0 && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+          <div className="p-2">
+            <p className="text-xs text-gray-500 px-2 mb-1">Recent Searches</p>
+            {recentSearches.map((search, index) => (
+              <button
+                key={index}
+                onClick={() => setQuery(search)}
+                className="w-full text-left px-3 py-2 hover:bg-gray-100 rounded text-sm"
+              >
+                {search}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default SearchBar;
+
+C. ADVANCED FILTERS
+
+File: src/components/filters/FilterPanel.tsx (Create)
+-----------------------------------------------------
+import { useState } from 'react';
+import { Filter, X } from 'lucide-react';
+
+interface FilterOption {
+  label: string;
+  value: string;
+  count?: number;
+}
+
+interface FilterPanelProps {
+  categories: FilterOption[];
+  brands: FilterOption[];
+  priceRange: { min: number; max: number };
+  onFilterChange: (filters: any) => void;
+}
+
+const FilterPanel = ({
+  categories,
+  brands,
+  priceRange,
+  onFilterChange,
+}: FilterPanelProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [price, setPrice] = useState(priceRange);
+  const [minRating, setMinRating] = useState(0);
+
+  const handleCategoryToggle = (category: string) => {
+    const updated = selectedCategories.includes(category)
+      ? selectedCategories.filter(c => c !== category)
+      : [...selectedCategories, category];
+    setSelectedCategories(updated);
+    applyFilters({ categories: updated });
+  };
+
+  const handleBrandToggle = (brand: string) => {
+    const updated = selectedBrands.includes(brand)
+      ? selectedBrands.filter(b => b !== brand)
+      : [...selectedBrands, brand];
+    setSelectedBrands(updated);
+    applyFilters({ brands: updated });
+  };
+
+  const handlePriceChange = (min: number, max: number) => {
+    setPrice({ min, max });
+    applyFilters({ priceRange: { min, max } });
+  };
+
+  const handleRatingChange = (rating: number) => {
+    setMinRating(rating);
+    applyFilters({ minRating: rating });
+  };
+
+  const applyFilters = (partialFilters: any) => {
+    onFilterChange({
+      categories: selectedCategories,
+      brands: selectedBrands,
+      priceRange: price,
+      minRating,
+      ...partialFilters,
+    });
+  };
+
+  const clearAllFilters = () => {
+    setSelectedCategories([]);
+    setSelectedBrands([]);
+    setPrice(priceRange);
+    setMinRating(0);
+    onFilterChange({});
+  };
+
+  const activeFiltersCount =
+    selectedCategories.length +
+    selectedBrands.length +
+    (price.min !== priceRange.min || price.max !== priceRange.max ? 1 : 0) +
+    (minRating > 0 ? 1 : 0);
+
+  return (
+    <div className="relative">
+      {/* Mobile Filter Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg"
+      >
+        <Filter size={20} />
+        Filters
+        {activeFiltersCount > 0 && (
+          <span className="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+            {activeFiltersCount}
+          </span>
+        )}
+      </button>
+
+      {/* Filter Panel */}
+      <div
+        className={`
+          ${isOpen ? 'fixed inset-0 z-40 bg-white' : 'hidden'}
+          lg:block lg:relative lg:bg-transparent
+          overflow-y-auto
+        `}
+      >
+        {/* Mobile Header */}
+        <div className="lg:hidden flex items-center justify-between p-4 border-b">
+          <h2 className="text-lg font-semibold">Filters</h2>
+          <button onClick={() => setIsOpen(false)}>
+            <X size={24} />
+          </button>
+        </div>
+
+        <div className="p-4 space-y-6">
+          {/* Categories */}
+          <div>
+            <h3 className="font-semibold mb-3">Categories</h3>
+            <div className="space-y-2">
+              {categories.map((category) => (
+                <label key={category.value} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedCategories.includes(category.value)}
+                    onChange={() => handleCategoryToggle(category.value)}
+                    className="rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                  />
+                  <span className="text-sm">
+                    {category.label}
+                    {category.count && (
+                      <span className="text-gray-400 ml-1">({category.count})</span>
+                    )}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Brands */}
+          <div>
+            <h3 className="font-semibold mb-3">Brands</h3>
+            <div className="space-y-2">
+              {brands.map((brand) => (
+                <label key={brand.value} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedBrands.includes(brand.value)}
+                    onChange={() => handleBrandToggle(brand.value)}
+                    className="rounded border-gray-300 text-blue-500 focus:ring-blue-500"
+                  />
+                  <span className="text-sm">{brand.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Price Range */}
+          <div>
+            <h3 className="font-semibold mb-3">Price Range</h3>
+            <div className="space-y-4">
+              <input
+                type="range"
+                min={priceRange.min}
+                max={priceRange.max}
+                value={price.max}
+                onChange={(e) => handlePriceChange(price.min, Number(e.target.value))}
+                className="w-full"
+              />
+              <div className="flex justify-between text-sm">
+                <span>${price.min}</span>
+                <span>${price.max}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Rating */}
+          <div>
+            <h3 className="font-semibold mb-3">Minimum Rating</h3>
+            <div className="space-y-2">
+              {[4, 3, 2, 1].map((rating) => (
+                <label key={rating} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="rating"
+                    checked={minRating === rating}
+                    onChange={() => handleRatingChange(rating)}
+                    className="text-blue-500 focus:ring-blue-500"
+                  />
+                  <span className="text-sm">
+                    {rating}+ ⭐
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          {/* Clear Filters */}
+          {activeFiltersCount > 0 && (
+            <button
+              onClick={clearAllFilters}
+              className="w-full py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+            >
+              Clear All Filters
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default FilterPanel;
+
+
+================================================================================
+4. STATE MANAGEMENT ENHANCEMENT
+================================================================================
+
+REDUX STORE OPTIMIZATION
+-------------------------
+
+File: src/store/index.ts (Update)
+---------------------------------
+import { configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import cartReducer, { loadCartFromStorage } from './slices/cartSlice';
+import productsReducer from './slices/productsSlice';
+import uiReducer from './slices/uiSlice';
+import wishlistReducer from './slices/wishlistSlice';
+
+// Load persisted state
+const preloadedState = {
+  cart: loadCartFromStorage(),
+};
+
+export const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    products: productsReducer,
+    ui: uiReducer,
+    wishlist: wishlistReducer,
+  },
+  preloadedState,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ['cart/loadCart'],
+        // Ignore these field paths in all actions
+        ignoredActionPaths: ['payload.timestamp'],
+        // Ignore these paths in the state
+        ignoredPaths: ['items.date'],
+      },
+    }),
+  devTools: import.meta.env.DEV,
+});
+
+// Subscribe to store changes and persist cart
+store.subscribe(() => {
+  const state = store.getState();
+  // Save cart to localStorage on every change
+  try {
+    localStorage.setItem('cart', JSON.stringify(state.cart));
+  } catch (error) {
+    console.error('Failed to save cart:', error);
+  }
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+// Typed hooks
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+CUSTOM HOOK PATTERNS
+--------------------
+
+File: src/hooks/useAsync.ts (Create)
+------------------------------------
+import { useState, useEffect, useCallback } from 'react';
+
+interface AsyncState<T> {
+  data: T | null;
+  loading: boolean;
+  error: Error | null;
+}
+
+export const useAsync = <T>(
+  asyncFunction: () => Promise<T>,
+  immediate = true
+) => {
+  const [state, setState] = useState<AsyncState<T>>({
+    data: null,
+    loading: immediate,
+    error: null,
+  });
+
+  const execute = useCallback(async () => {
+    setState({ data: null, loading: true, error: null });
+    
+    try {
+      const response = await asyncFunction();
+      setState({ data: response, loading: false, error: null });
+      return response;
+    } catch (error) {
+      setState({ data: null, loading: false, error: error as Error });
+      throw error;
+    }
+  }, [asyncFunction]);
+
+  useEffect(() => {
+    if (immediate) {
+      execute();
+    }
+  }, [execute, immediate]);
+
+  return { ...state, execute };
+};
+
+File: src/hooks/useLocalStorage.ts (Update)
+-------------------------------------------
+import { useState, useEffect, useCallback } from 'react';
+
+export const useLocalStorage = <T>(
+  key: string,
+  initialValue: T
+): [T, (value: T | ((val: T) => T)) => void, () => void] => {
+  // State to store our value
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.error(`Error loading ${key} from localStorage:`, error);
+      return initialValue;
+    }
+  });
+
+  // Return a wrapped version of useState's setter function that persists the new value to localStorage
+  const setValue = useCallback(
+    (value: T | ((val: T) => T)) => {
+      try {
+        // Allow value to be a function so we have same API as useState
+        const valueToStore = value instanceof Function ? value(storedValue) : value;
+        setStoredValue(valueToStore);
+        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        
+        // Dispatch custom event for cross-tab synchronization
+        window.dispatchEvent(
+          new CustomEvent('localStorageChange', {
+            detail: { key, value: valueToStore },
+          })
+        );
+      } catch (error) {
+        console.error(`Error saving ${key} to localStorage:`, error);
+      }
+    },
+    [key, storedValue]
+  );
+
+  // Function to remove item from localStorage
+  const removeValue = useCallback(() => {
+    try {
+      window.localStorage.removeItem(key);
+      setStoredValue(initialValue);
+    } catch (error) {
+      console.error(`Error removing ${key} from localStorage:`, error);
+    }
+  }, [key, initialValue]);
+
+  // Listen for changes from other tabs
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === key && e.newValue) {
+        try {
+          setStoredValue(JSON.parse(e.newValue));
+        } catch (error) {
+          console.error('Error parsing localStorage value:', error);
+        }
+      }
+    };
+
+    const handleCustomEvent = (e: CustomEvent) => {
+      if (e.detail.key === key) {
+        setStoredValue(e.detail.value);
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('localStorageChange', handleCustomEvent as EventListener);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleCustomEvent as EventListener);
+    };
+  }, [key]);
+
+  return [storedValue, setValue, removeValue];
+};
+
+
+================================================================================
+5. FORM VALIDATION ENHANCEMENT
+================================================================================
+
+File: src/utils/validation/formValidation.ts (Create)
+-----------------------------------------------------
+export interface ValidationRule {
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: RegExp;
+  custom?: (value: any) => boolean;
+  message?: string;
+}
+
+export interface ValidationErrors {
+  [key: string]: string;
+}
+
+export class FormValidator {
+  private rules: { [key: string]: ValidationRule[] };
+
+  constructor(rules: { [key: string]: ValidationRule[] }) {
+    this.rules = rules;
+  }
+
+  validate(data: { [key: string]: any }): ValidationErrors {
+    const errors: ValidationErrors = {};
+
+    Object.keys(this.rules).forEach((field) => {
+      const fieldRules = this.rules[field];
+      const value = data[field];
+
+      for (const rule of fieldRules) {
+        const error = this.validateRule(field, value, rule);
+        if (error) {
+          errors[field] = error;
+          break; // Stop at first error for this field
+        }
+      }
+    });
+
+    return errors;
+  }
+
+  private validateRule(field: string, value: any, rule: ValidationRule): string | null {
+    // Required
+    if (rule.required && !value) {
+      return rule.message || `${this.formatFieldName(field)} is required`;
+    }
+
+    // Skip other validations if value is empty and not required
+    if (!value) return null;
+
+    // Min length
+    if (rule.minLength && value.length < rule.minLength) {
+      return rule.message || `${this.formatFieldName(field)} must be at least ${rule.minLength} characters`;
+    }
+
+    // Max length
+    if (rule.maxLength && value.length > rule.maxLength) {
+      return rule.message || `${this.formatFieldName(field)} must be at most ${rule.maxLength} characters`;
+    }
+
+    // Pattern
+    if (rule.pattern && !rule.pattern.test(value)) {
+      return rule.message || `${this.formatFieldName(field)} is invalid`;
+    }
+
+    // Custom validation
+    if (rule.custom && !rule.custom(value)) {
+      return rule.message || `${this.formatFieldName(field)} is invalid`;
+    }
+
+    return null;
+  }
+
+  private formatFieldName(field: string): string {
+    return field
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, (str) => str.toUpperCase())
+      .trim();
+  }
+}
+
+// Common validation patterns
+export const VALIDATION_PATTERNS = {
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  phone: /^\+?[\d\s\-\(\)]+$/,
+  zipCode: /^\d{5}(-\d{4})?$/,
+  creditCard: /^\d{13,19}$/,
+  cvv: /^\d{3,4}$/,
+  url: /^https?:\/\/.+/,
+};
+
+// Pre-built validators
+export const validators = {
+  email: (message?: string): ValidationRule => ({
+    pattern: VALIDATION_PATTERNS.email,
+    message: message || 'Please enter a valid email address',
+  }),
+
+  phone: (message?: string): ValidationRule => ({
+    pattern: VALIDATION_PATTERNS.phone,
+    message: message || 'Please enter a valid phone number',
+  }),
+
+  zipCode: (message?: string): ValidationRule => ({
+    pattern: VALIDATION_PATTERNS.zipCode,
+    message: message || 'Please enter a valid ZIP code',
+  }),
+
+  minLength: (length: number, message?: string): ValidationRule => ({
+    minLength: length,
+    message: message || `Must be at least ${length} characters`,
+  }),
+
+  maxLength: (length: number, message?: string): ValidationRule => ({
+    maxLength: length,
+    message: message || `Must be at most ${length} characters`,
+  }),
+
+  required: (message?: string): ValidationRule => ({
+    required: true,
+    message: message || 'This field is required',
+  }),
+
+  matches: (field: string, message?: string): ValidationRule => ({
+    custom: (value, formData) => value === formData[field],
+    message: message || 'Fields do not match',
+  }),
+};
+
+// Example usage in CheckoutPage:
+/*
+const validator = new FormValidator({
+  email: [
+    validators.required(),
+    validators.email(),
+  ],
+  firstName: [
+    validators.required(),
+    validators.minLength(2),
+  ],
+  phone: [
+    validators.required(),
+    validators.phone(),
+  ],
+  zipCode: [
+    validators.required(),
+    validators.zipCode(),
+  ],
+});
+
+const errors = validator.validate(formData);
+*/
+
+File: src/hooks/useForm.ts (Create)
+-----------------------------------
+import { useState, useCallback } from 'react';
+import { FormValidator, ValidationErrors } from '../utils/validation/formValidation';
+
+interface UseFormOptions<T> {
+  initialValues: T;
+  validator?: FormValidator;
+  onSubmit: (values: T) => void | Promise<void>;
+}
+
+export const useForm = <T extends Record<string, any>>({
+  initialValues,
+  validator,
+  onSubmit,
+}: UseFormOptions<T>) => {
+  const [values, setValues] = useState<T>(initialValues);
+  const [errors, setErrors] = useState<ValidationErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = useCallback(
+    (field: keyof T) => (value: any) => {
+      setValues((prev) => ({ ...prev, [field]: value }));
+      
+      // Clear error for this field when user starts typing
+      if (errors[field as string]) {
+        setErrors((prev) => {
+          const newErrors = { ...prev };
+          delete newErrors[field as string];
+          return newErrors;
+        });
+      }
+    },
+    [errors]
+  );
+
+  const handleBlur = useCallback((field: keyof T) => () => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    
+    // Validate this field on blur
+    if (validator) {
+      const fieldErrors = validator.validate({ [field]: values[field] });
+      if (fieldErrors[field as string]) {
+        setErrors((prev) => ({ ...prev, ...fieldErrors }));
+      }
+    }
+  }, [validator, values]);
+
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      
+      // Mark all fields as touched
+      const allTouched = Object.keys(values).reduce(
+        (acc, key) => ({ ...acc, [key]: true }),
+        {}
+      );
+      setTouched(allTouched);
+      
+      // Validate all fields
+      if (validator) {
+        const validationErrors = validator.validate(values);
+        if (Object.keys(validationErrors).length > 0) {
+          setErrors(validationErrors);
+          return;
+        }
+      }
+      
+      // Submit
+      setIsSubmitting(true);
+      try {
+        await onSubmit(values);
+      } catch (error) {
+        console.error('Form submission error:', error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [values, validator, onSubmit]
+  );
+
+  const resetForm = useCallback(() => {
+    setValues(initialValues);
+    setErrors({});
+    setTouched({});
+    setIsSubmitting(false);
+  }, [initialValues]);
+
+  return {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    resetForm,
+    setFieldValue: (field: keyof T, value: any) => {
+      setValues((prev) => ({ ...prev, [field]: value }));
+    },
+    setFieldError: (field: keyof T, error: string) => {
+      setErrors((prev) => ({ ...prev, [field]: error }));
+    },
+  };
+};
+
+
+================================================================================
+6. API INTEGRATION ENHANCEMENT
+================================================================================
+
+File: src/store/api/productsApi.ts (Update with Error Handling)
+---------------------------------------------------------------
+import { Product } from '../../types/product';
+import localProducts from '../../data/products.json';
+import { ErrorHandler, ErrorType } from '../../utils/errorHandler';
+
+const API_BASE_URL = 'https://dummyjson.com';
+const API_TIMEOUT = 10000; // 10 seconds
+
+interface FetchProductsParams {
+  search?: string;
+  category?: string;
+  brand?: string;
+  limit?: number;
+  skip?: number;
+}
+
+interface ProductsResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+// Fetch with timeout
+const fetchWithTimeout = async (
+  url: string,
+  options: RequestInit = {},
+  timeout = API_TIMEOUT
+): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+  try {
+    const response = await fetch(url, {
+      ...options,
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+    return response;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    throw error;
+  }
+};
+
+// Retry logic
+const fetchWithRetry = async (
+  url: string,
+  options: RequestInit = {},
+  retries = 3
+): Promise<Response> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetchWithTimeout(url, options);
+      if (response.ok) return response;
+      
+      // Don't retry on 4xx errors
+      if (response.status >= 400 && response.status < 500) {
+        throw ErrorHandler.handle(response);
+      }
+    } catch (error) {
+      if (i === retries - 1) throw error;
+      // Wait before retry (exponential backoff)
+      await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+    }
+  }
+  throw new Error('Max retries reached');
+};
+
+export const fetchProducts = async (
+  params?: FetchProductsParams
+): Promise<ProductsResponse> => {
+  try {
+    let url = `${API_BASE_URL}/products`;
+    
+    if (params?.search) {
+      url += `/search?q=${encodeURIComponent(params.search)}`;
+    } else if (params?.category) {
+      url += `/category/${encodeURIComponent(params.category)}`;
+    }
+    
+    // Add pagination
+    const queryParams = new URLSearchParams();
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    if (params?.skip) queryParams.append('skip', params.skip.toString());
+    
+    if (queryParams.toString()) {
+      url += `${url.includes('?') ? '&' : '?'}${queryParams}`;
+    }
+    
+    const response = await fetchWithRetry(url);
+    const data = await response.json();
+    
+    return {
+      products: data.products,
+      total: data.total,
+      skip: data.skip || 0,
+      limit: data.limit || 30,
+    };
+  } catch (error) {
+    console.error('Failed to fetch products from API, using local data:', error);
+    
+    // Fallback to local data
+    let filteredProducts = localProducts.products;
+    
+    // Apply search filter
+    if (params?.search) {
+      const query = params.search.toLowerCase();
+      filteredProducts = filteredProducts.filter(
+        (p: any) =>
+          p.title.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query) ||
+          p.brand.toLowerCase().includes(query)
+      );
+    }
+    
+    // Apply category filter
+    if (params?.category) {
+      filteredProducts = filteredProducts.filter(
+        (p: any) => p.category === params.category
+      );
+    }
+    
+    // Apply brand filter
+    if (params?.brand) {
+      filteredProducts = filteredProducts.filter(
+        (p: any) => p.brand === params.brand
+      );
+    }
+    
+    // Apply pagination
+    const skip = params?.skip || 0;
+    const limit = params?.limit || 30;
+    const paginatedProducts = filteredProducts.slice(skip, skip + limit);
+    
+    return {
+      products: paginatedProducts as Product[],
+      total: filteredProducts.length,
+      skip,
+      limit,
+    };
+  }
+};
+
+export const fetchProductById = async (id: number): Promise<Product> => {
+  try {
+    const response = await fetchWithRetry(`${API_BASE_URL}/products/${id}`);
+    return await response.json();
+  } catch (error) {
+    console.error(`Failed to fetch product ${id}, using local data:`, error);
+    
+    // Fallback to local data
+    const product = localProducts.products.find((p: any) => p.id === id);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+    return product as Product;
+  }
+};
+
+export const fetchCategories = async (): Promise<string[]> => {
+  try {
+    const response = await fetchWithRetry(`${API_BASE_URL}/products/categories`);
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch categories, using local data:', error);
+    
+    // Extract unique categories from local data
+    const categories = [...new Set(localProducts.products.map((p: any) => p.category))];
+    return categories as string[];
+  }
+};
+
+
+================================================================================
+7. DEVELOPMENT WORKFLOW & TOOLS
+================================================================================
+
+SCRIPTS TO ADD TO package.json
+-------------------------------
+
+Update package.json scripts section:
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css,md}\"",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "type-check": "tsc --noEmit",
+    "validate": "npm run type-check && npm run lint && npm run test run",
+    "clean": "rm -rf dist node_modules",
+    "reinstall": "npm run clean && npm install"
+  }
+}
+
+ESLINT CONFIGURATION
+--------------------
+
+File: .eslintrc.cjs (Update)
+---------------------------
+module.exports = {
+  root: true,
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+  ],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
+  },
+};
+
+PRETTIER CONFIGURATION
+----------------------
+
+File: .prettierrc (Create)
+--------------------------
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "always",
+  "endOfLine": "lf"
+}
+
+File: .prettierignore (Create)
+------------------------------
+dist
+node_modules
+coverage
+.vscode
+*.md
+
+GIT HOOKS WITH HUSKY (Optional but Recommended)
+-----------------------------------------------
+
+Install:
+npm install -D husky lint-staged
+
+Initialize:
+npx husky-init && npm install
+
+File: .husky/pre-commit (Create)
+--------------------------------
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+
+File: .lintstagedrc.js (Create)
+-------------------------------
+module.exports = {
+  '*.{ts,tsx}': [
+    'eslint --fix',
+    'prettier --write',
+  ],
+  '*.{json,css,md}': [
+    'prettier --write',
+  ],
+};
+
+
+================================================================================
+8. DEVELOPMENT TIMELINE & MILESTONES
+================================================================================
+
+WEEK 1: FOUNDATION & INFRASTRUCTURE
+------------------------------------
+Day 1-2:
+✓ Install all dependencies (testing, validation, optimization)
+✓ Setup vitest configuration
+✓ Create test utilities and setup files
+✓ Create error handling infrastructure
+✓ Add error pages (404, 500)
+
+Day 3-4:
+✓ Implement form validation system
+✓ Create useForm custom hook
+✓ Enhance API service with retry logic
+✓ Add error boundaries with better UX
+✓ Create accessibility hooks
+
+Day 5-7:
+✓ Write tests for utility functions (formatters, validators)
+✓ Write tests for custom hooks
+✓ Write tests for Redux slices
+✓ Fix any bugs discovered during testing
+✓ Code cleanup and documentation
+
+WEEK 2: PERFORMANCE & TESTING
+------------------------------
+Day 1-2:
+✓ Implement React performance optimizations (memo, useMemo, useCallback)
+✓ Add code splitting for heavy components
+✓ Implement image lazy loading
+✓ Optimize bundle size (Vite config)
+
+Day 3-4:
+✓ Write component tests (UI components)
+✓ Write component tests (product components)
+✓ Write component tests (cart components)
+✓ Achieve 50%+ test coverage
+
+Day 5-7:
+✓ Write integration tests (key user flows)
+✓ Add virtual scrolling for product lists
+✓ Optimize re-renders
+✓ Achieve 70%+ test coverage
+
+WEEK 3: ADVANCED FEATURES
+--------------------------
+Day 1-2:
+✓ Implement wishlist functionality
+✓ Create wishlist Redux slice
+✓ Create wishlist page
+✓ Add wishlist button to product cards
+
+Day 3-4:
+✓ Implement advanced search with debounce
+✓ Add search history
+✓ Create filter panel component
+✓ Implement multi-select filters
+
+Day 5-7:
+✓ Add sort functionality
+✓ Implement recently viewed products
+✓ Add product comparison feature (optional)
+✓ Write tests for new features
+
+WEEK 4: ACCESSIBILITY & POLISH
+-------------------------------
+Day 1-2:
+✓ Implement keyboard navigation
+✓ Add ARIA labels to all interactive elements
+✓ Implement focus management
+✓ Create skip-to-content link
+
+Day 3-4:
+✓ Add focus trap for modals
+✓ Ensure color contrast compliance
+✓ Test with screen reader
+✓ Fix accessibility issues
+
+Day 5-7:
+✓ Add animations (page transitions, micro-interactions)
+✓ Create loading skeleton screens
+✓ Improve empty states
+✓ Final polish and bug fixes
+
+
+================================================================================
+9. TECHNICAL BEST PRACTICES CHECKLIST
+================================================================================
+
+CODE QUALITY
+------------
+✓ Use TypeScript strict mode
+✓ No 'any' types
+✓ Proper error handling everywhere
+✓ Consistent naming conventions
+✓ Single responsibility principle
+✓ DRY (Don't Repeat Yourself)
+✓ SOLID principles
+✓ JSDoc comments for complex functions
+✓ No console.logs in production code
+✓ Proper prop types for all components
+
+REACT BEST PRACTICES
+---------------------
+✓ Use functional components with hooks
+✓ Proper use of useEffect dependencies
+✓ Avoid unnecessary re-renders (React.memo)
+✓ Memoize expensive calculations (useMemo)
+✓ Memoize callbacks (useCallback)
+✓ Proper key props in lists
+✓ Lift state up when needed
+✓ Custom hooks for reusable logic
+✓ Error boundaries for error handling
+✓ Lazy loading for code splitting
+
+REDUX BEST PRACTICES
+---------------------
+✓ Use Redux Toolkit (createSlice)
+✓ Normalized state structure
+✓ Immutable updates (Immer built-in)
+✓ Use selectors for derived data
+✓ Type-safe actions and reducers
+✓ Slice-based organization
+✓ Persist important state (localStorage)
+✓ Handle loading and error states
+✓ Use createAsyncThunk for async logic
+
+PERFORMANCE
+-----------
+✓ Code splitting (React.lazy)
+✓ Image lazy loading
+✓ Virtual scrolling for long lists
+✓ Debounce expensive operations
+✓ Optimize bundle size (< 500KB gzipped)
+✓ Remove unused dependencies
+✓ Tree shaking enabled
+✓ Production builds minified
+✓ Caching strategies
+
+ACCESSIBILITY
+-------------
+✓ Semantic HTML
+✓ ARIA labels where needed
+✓ Keyboard navigation support
+✓ Focus management in modals
+✓ Color contrast (WCAG AA)
+✓ Alt text for images
+✓ Skip to content link
+✓ Screen reader friendly
+✓ Form labels and errors
+
+TESTING
+-------
+✓ Unit tests for utilities
+✓ Unit tests for hooks
+✓ Component tests
+✓ Redux slice tests
+✓ Integration tests for key flows
+✓ 70%+ code coverage
+✓ Test edge cases
+✓ Test error states
+✓ Test loading states
+
+SECURITY
+--------
+✓ Input validation
+✓ XSS prevention
+✓ No sensitive data in localStorage
+✓ HTTPS in production
+✓ Environment variables for sensitive data
+✓ Dependency security audits
+✓ No console.logs with sensitive data
+
+
+================================================================================
+10. FINAL TECHNICAL RECOMMENDATIONS
+================================================================================
+
+IMMEDIATE PRIORITIES (This Week)
+---------------------------------
+1. Fix dependency issues
+   npm install --save-dev @types/node
+   npm install
+
+2. Setup testing infrastructure
+   - Install Vitest and Testing Library
+   - Create vitest.config.ts
+   - Create test setup file
+   - Write first tests
+
+3. Enhance error handling
+   - Create ErrorHandler utility
+   - Add error pages
+   - Update ErrorBoundary
+   - Add try-catch in async operations
+
+4. Code cleanup
+   - Remove console.logs
+   - Fix ESLint errors
+   - Add TypeScript strict mode
+   - Remove unused code
+
+SHORT-TERM GOALS (Next 2 Weeks)
+-------------------------------
+1. Achieve 70%+ test coverage
+   - Unit tests for all utilities
+   - Component tests for UI library
+   - Redux slice tests
+   - Integration tests
+
+2. Performance optimization
+   - Implement React.memo where needed
+   - Add useMemo/useCallback
+   - Setup code splitting
+   - Optimize images
+
+3. Implement advanced features
+   - Wishlist functionality
+   - Advanced search with debounce
+   - Filter panel
+   - Recently viewed products
+
+4. Accessibility improvements
+   - ARIA labels
+   - Keyboard navigation
+   - Focus management
+   - Screen reader testing
+
+MEDIUM-TERM GOALS (Next 4 Weeks)
+--------------------------------
+1. Complete feature set
+   - Product reviews (optional)
+   - Product comparison (optional)
+   - Advanced filters
+   - Sort options
+
+2. Polish and refinement
+   - Animations
+   - Empty states
+   - Loading skeletons
+   - Error messages
+
+3. Code quality
+   - Comprehensive testing
+   - Code documentation
+   - Refactor complex components
+   - Performance audits
+
+4. Technical debt
+   - Fix all TypeScript errors
+   - Remove all any types
+   - Optimize bundle size
+   - Improve caching
+
+
+================================================================================
+CONCLUSION
+================================================================================
+
+This technical schema provides a complete roadmap for developing your e-commerce
+store to production-ready standards from a front-end developer perspective.
+
+KEY FOCUS AREAS:
+1. Testing Infrastructure (Critical)
+2. Performance Optimization
+3. Error Handling Enhancement
+4. Code Quality & Type Safety
+5. Accessibility Implementation
+6. Advanced Features (Wishlist, Filters, Search)
+7. Component Optimization
+8. State Management Enhancement
+
+ESTIMATED TIMELINE:
+- Week 1: Foundation & Infrastructure
+- Week 2: Performance & Testing
+- Week 3: Advanced Features
+- Week 4: Accessibility & Polish
+
+Total: 4 weeks of focused development (2-3 hours/day)
+
+The project has a strong foundation. Focus on testing, performance, and
+accessibility to make it production-ready. Implement features incrementally,
+test thoroughly, and maintain high code quality standards.
+
+================================================================================
+END OF TECHNICAL IMPLEMENTATION SCHEMA
+================================================================================
+
+
+
+

@@ -1,0 +1,88 @@
+# E-Commerce Store Frontend Project Prompt for Cursor AI
+
+## Goal
+Build a modern **E-commerce Store (frontend only)** that includes:
+- Product listing page
+- Product detail page (optional, nice-to-have)
+- Cart system
+- Checkout page
+- State management with **Redux Toolkit** OR **Zustand** OR **React Context API** (choose one clean implementation)
+
+This is a **frontend-only project**, so either:
+- Use a **Fake API** (e.g. JSON placeholder, dummyjson.com, or hardcoded mock data)
+- OR store data locally in a `products.json` file and fetch it.
+
+---
+
+## Tech Stack
+- **React + Vite** (preferred) or Next.js (optional)
+- **Tailwind CSS** for styling
+- **Redux Toolkit** (recommended) or Zustand / Context API for global state
+- **React Router** for navigation
+- **Fake API** (dummyjson.com, fakestoreapi.com, or custom mock JSON)
+
+---
+
+## Required Features
+1. **Homepage / Product Listing**
+   - Grid of products (image, title, price, "Add to Cart" button).
+   - Responsive design.
+
+2. **Cart**
+   - Shows added products.
+   - Ability to increase/decrease quantity.
+   - Remove product from cart.
+   - Display total price.
+
+3. **Checkout Page**
+   - Simple checkout form (name, email, address).
+   - Show cart summary.
+   - "Place Order" button (no backend, just confirmation).
+
+4. **State Management**
+   - Global store for products and cart.
+   - Actions: `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`.
+
+---
+
+## Bonus Features (Optional)
+- Search & filter products.
+- Product detail page.
+- Save cart in `localStorage`.
+
+---
+
+## UI/UX Requirements
+- Clean, modern, and responsive design.
+- Tailwind components with good spacing & typography.
+- Use reusable components (e.g. `ProductCard`, `CartItem`, `Navbar`).
+
+---
+
+## Example Inspirations
+- [https://fakestoreapi.com/](https://fakestoreapi.com/) → Fake Store API
+- [https://dummyjson.com/products](https://dummyjson.com/products) → Dummy JSON products
+- [https://tailwindui.com/components/ecommerce](https://tailwindui.com/components/ecommerce) → Tailwind UI Ecommerce components
+- [https://redux-toolkit.js.org/tutorials/quick-start](https://redux-toolkit.js.org/tutorials/quick-start) → Redux Toolkit Docs
+- [https://zustand-demo.pmnd.rs/](https://zustand-demo.pmnd.rs/) → Zustand demo
+
+---
+
+## Deliverables
+- Fully working **React app** with routing & state management.
+- Organized folder structure:
+  ```
+  src/
+    components/
+    pages/
+    store/
+    assets/
+  ```
+- Code should be clean, commented, and production-ready.
+
+---
+
+## Notes
+- This is **frontend only** — no backend required.
+- Use **mock API** or static JSON for products.
+- Keep the code modular and scalable.

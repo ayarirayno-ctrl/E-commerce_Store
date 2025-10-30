@@ -1,0 +1,175 @@
+{
+  "overview": {
+    "totalRevenue": 145680.50,
+    "totalOrders": 1247,
+    "averageOrderValue": 116.82,
+    "conversionRate": 3.45,
+    "cartAbandonmentRate": 68.2,
+    "totalUsers": 8934,
+    "revenueChange": 12.5,
+    "ordersChange": 8.3,
+    "aovChange": 3.9,
+    "conversionChange": -1.2
+  },
+  "salesData": [
+    { "date": "2025-10-24", "revenue": 8450.00, "orders": 72, "averageOrderValue": 117.36 },
+    { "date": "2025-10-25", "revenue": 9120.50, "orders": 78, "averageOrderValue": 116.93 },
+    { "date": "2025-10-26", "revenue": 7890.00, "orders": 65, "averageOrderValue": 121.38 },
+    { "date": "2025-10-27", "revenue": 10250.00, "orders": 89, "averageOrderValue": 115.17 },
+    { "date": "2025-10-28", "revenue": 11340.00, "orders": 95, "averageOrderValue": 119.37 },
+    { "date": "2025-10-29", "revenue": 9870.00, "orders": 84, "averageOrderValue": 117.50 },
+    { "date": "2025-10-30", "revenue": 12560.00, "orders": 106, "averageOrderValue": 118.49 }
+  ],
+  "topProducts": [
+    {
+      "id": "1",
+      "name": "Premium Wireless Headphones",
+      "category": "Electronics",
+      "sales": 234,
+      "revenue": 23400.00,
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400",
+      "views": 5678
+    },
+    {
+      "id": "2",
+      "name": "Smart Watch Pro",
+      "category": "Electronics",
+      "sales": 189,
+      "revenue": 37800.00,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400",
+      "views": 4521
+    },
+    {
+      "id": "3",
+      "name": "Designer Sunglasses",
+      "category": "Fashion",
+      "sales": 156,
+      "revenue": 15600.00,
+      "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400",
+      "views": 3890
+    },
+    {
+      "id": "4",
+      "name": "Leather Handbag",
+      "category": "Fashion",
+      "sales": 142,
+      "revenue": 21300.00,
+      "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
+      "views": 3654
+    },
+    {
+      "id": "5",
+      "name": "Running Shoes Elite",
+      "category": "Sports",
+      "sales": 128,
+      "revenue": 12800.00,
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400",
+      "views": 3210
+    },
+    {
+      "id": "6",
+      "name": "Ergonomic Office Chair",
+      "category": "Furniture",
+      "sales": 98,
+      "revenue": 29400.00,
+      "image": "https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=400",
+      "views": 2987
+    },
+    {
+      "id": "7",
+      "name": "Stainless Steel Water Bottle",
+      "category": "Sports",
+      "sales": 245,
+      "revenue": 7350.00,
+      "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400",
+      "views": 4123
+    },
+    {
+      "id": "8",
+      "name": "Wireless Keyboard & Mouse Combo",
+      "category": "Electronics",
+      "sales": 167,
+      "revenue": 10020.00,
+      "image": "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400",
+      "views": 2876
+    }
+  ],
+  "userMetrics": [
+    { "date": "2025-10-24", "newUsers": 45, "returningUsers": 128, "totalUsers": 173 },
+    { "date": "2025-10-25", "newUsers": 52, "returningUsers": 142, "totalUsers": 194 },
+    { "date": "2025-10-26", "newUsers": 38, "returningUsers": 115, "totalUsers": 153 },
+    { "date": "2025-10-27", "newUsers": 61, "returningUsers": 156, "totalUsers": 217 },
+    { "date": "2025-10-28", "newUsers": 58, "returningUsers": 168, "totalUsers": 226 },
+    { "date": "2025-10-29", "newUsers": 49, "returningUsers": 145, "totalUsers": 194 },
+    { "date": "2025-10-30", "newUsers": 67, "returningUsers": 178, "totalUsers": 245 }
+  ],
+  "promoPerformance": [
+    {
+      "code": "WELCOME10",
+      "uses": 234,
+      "revenue": 28080.00,
+      "discount": 2808.00,
+      "conversionRate": 4.2
+    },
+    {
+      "code": "SUMMER2025",
+      "uses": 189,
+      "revenue": 37800.00,
+      "discount": 9450.00,
+      "conversionRate": 5.1
+    },
+    {
+      "code": "FREESHIP",
+      "uses": 567,
+      "revenue": 34020.00,
+      "discount": 5663.33,
+      "conversionRate": 6.8
+    },
+    {
+      "code": "FLASH50",
+      "uses": 98,
+      "revenue": 14700.00,
+      "discount": 7350.00,
+      "conversionRate": 8.9
+    },
+    {
+      "code": "SAVE20",
+      "uses": 156,
+      "revenue": 18720.00,
+      "discount": 3120.00,
+      "conversionRate": 4.5
+    }
+  ],
+  "categorySales": [
+    {
+      "category": "Electronics",
+      "revenue": 58450.00,
+      "orders": 487,
+      "percentage": 40.1
+    },
+    {
+      "category": "Fashion",
+      "revenue": 36900.00,
+      "orders": 312,
+      "percentage": 25.3
+    },
+    {
+      "category": "Sports",
+      "revenue": 20150.00,
+      "orders": 245,
+      "percentage": 13.8
+    },
+    {
+      "category": "Furniture",
+      "revenue": 29400.00,
+      "orders": 98,
+      "percentage": 20.2
+    },
+    {
+      "category": "Other",
+      "revenue": 780.50,
+      "orders": 105,
+      "percentage": 0.6
+    }
+  ]
+}

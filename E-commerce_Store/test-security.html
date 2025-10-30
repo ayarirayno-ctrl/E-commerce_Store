@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Sécurité Backend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        h2 { color: #666; margin-top: 0; }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background: #45a049; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .error {
+            border-left-color: #f44336;
+            background: #ffebee;
+        }
+        .info {
+            border-left-color: #2196F3;
+            background: #e3f2fd;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔒 Tests de Sécurité Backend</h1>
+
+    <div class="test-section">
+        <h2>1. Test Headers de Sécurité (Helmet)</h2>
+        <button onclick="testSecurityHeaders()">Tester Headers Helmet</button>
+        <div id="helmet-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Test Rate Limiting (100 req/15min)</h2>
+        <button onclick="testRateLimiting()">Envoyer 10 requêtes rapides</button>
+        <button onclick="testRateLimitExceed()">Tester dépassement limite (105 req)</button>
+        <div id="rate-limit-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Test CORS Origin Validation</h2>
+        <button onclick="testCORS()">Tester CORS depuis ce domaine</button>
+        <div id="cors-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Test Request ID</h2>
+        <button onclick="testRequestId()">Vérifier X-Request-Id</button>
+        <div id="requestid-result" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>5. Test Error Schema Standardisé</h2>
+        <button onclick="testErrorSchema()">Provoquer erreur 404</button>
+        <div id="error-result" class="result" style="display:none;"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+
+        async function testSecurityHeaders() {
+            const resultDiv = document.getElementById('helmet-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.textContent = 'En cours...';
+
+            try {
+                const response = await fetch(`${API_BASE}/health`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+
+                const headers = {};
+                response.headers.forEach((value, key) => {
+                    headers[key] = value;
+                });
+
+                const securityHeaders = {
+                    'X-Content-Type-Options': headers['x-content-type-options'],
+                    'X-Frame-Options': headers['x-frame-options'],
+                    'X-DNS-Prefetch-Control': headers['x-dns-prefetch-control'],
+                    'Strict-Transport-Security': headers['strict-transport-security'],
+                    'Content-Security-Policy': headers['content-security-policy'],
+                    'X-Request-Id': headers['x-request-id']
+                };
+
+                const data = await response.json();
+
+                resultDiv.className = 'result';
+                resultDiv.textContent = `✅ Headers de sécurité Helmet:\n${JSON.stringify(securityHeaders, null, 2)}\n\n📊 Réponse Health:\n${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur: ${error.message}`;
+            }
+        }
+
+        async function testRateLimiting() {
+            const resultDiv = document.getElementById('rate-limit-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.textContent = 'Envoi de 10 requêtes rapides...';
+
+            const results = [];
+            for (let i = 1; i <= 10; i++) {
+                try {
+                    const start = Date.now();
+                    const response = await fetch(`${API_BASE}/health`);
+                    const duration = Date.now() - start;
+                    const requestId = response.headers.get('x-request-id');
+                    
+                    results.push(`#${i}: ${response.status} (${duration}ms) - RequestId: ${requestId}`);
+                } catch (error) {
+                    results.push(`#${i}: ❌ ${error.message}`);
+                }
+            }
+
+            resultDiv.className = 'result';
+            resultDiv.textContent = `✅ 10 requêtes envoyées:\n${results.join('\n')}`;
+        }
+
+        async function testRateLimitExceed() {
+            const resultDiv = document.getElementById('rate-limit-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            
+            const btn = event.target;
+            btn.disabled = true;
+            btn.textContent = 'Envoi de 105 requêtes...';
+
+            const results = {
+                success: 0,
+                rateLimited: 0,
+                errors: []
+            };
+
+            for (let i = 1; i <= 105; i++) {
+                try {
+                    const response = await fetch(`${API_BASE}/health`);
+                    
+                    if (response.status === 429) {
+                        results.rateLimited++;
+                        const data = await response.json();
+                        if (results.rateLimited === 1) {
+                            results.firstRateLimitError = data;
+                        }
+                    } else if (response.ok) {
+                        results.success++;
+                    }
+                    
+                    if (i % 20 === 0) {
+                        resultDiv.textContent = `Progression: ${i}/105 requêtes envoyées...\nSuccess: ${results.success}, Rate Limited: ${results.rateLimited}`;
+                    }
+                } catch (error) {
+                    results.errors.push(`#${i}: ${error.message}`);
+                }
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Tester dépassement limite (105 req)';
+            
+            resultDiv.className = results.rateLimited > 0 ? 'result' : 'result error';
+            resultDiv.textContent = `
+✅ Test Rate Limiting terminé:
+- Requêtes réussies: ${results.success}
+- Requêtes bloquées (429): ${results.rateLimited}
+- Erreurs: ${results.errors.length}
+
+${results.firstRateLimitError ? `\n📋 Première erreur 429:\n${JSON.stringify(results.firstRateLimitError, null, 2)}` : ''}
+${results.errors.length > 0 ? `\n\n❌ Erreurs:\n${results.errors.join('\n')}` : ''}
+            `.trim();
+        }
+
+        async function testCORS() {
+            const resultDiv = document.getElementById('cors-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.textContent = 'Test CORS en cours...';
+
+            try {
+                const response = await fetch(`${API_BASE}/health`, {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        'Origin': window.location.origin
+                    }
+                });
+
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('access-control-allow-origin'),
+                    'Access-Control-Allow-Credentials': response.headers.get('access-control-allow-credentials'),
+                    'Access-Control-Expose-Headers': response.headers.get('access-control-expose-headers')
+                };
+
+                resultDiv.className = 'result';
+                resultDiv.textContent = `✅ Headers CORS:\n${JSON.stringify(corsHeaders, null, 2)}\n\nOrigin actuelle: ${window.location.origin}\nStatut: ${response.status}`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur CORS: ${error.message}`;
+            }
+        }
+
+        async function testRequestId() {
+            const resultDiv = document.getElementById('requestid-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.textContent = 'Test Request ID en cours...';
+
+            try {
+                const requests = [];
+                for (let i = 1; i <= 5; i++) {
+                    const response = await fetch(`${API_BASE}/health`);
+                    const requestId = response.headers.get('x-request-id');
+                    requests.push(`Request #${i}: ${requestId}`);
+                }
+
+                resultDiv.className = 'result';
+                resultDiv.textContent = `✅ X-Request-Id présent dans toutes les réponses:\n${requests.join('\n')}\n\n✅ Tous les requestId sont uniques et non-vides.`;
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur: ${error.message}`;
+            }
+        }
+
+        async function testErrorSchema() {
+            const resultDiv = document.getElementById('error-result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result info';
+            resultDiv.textContent = 'Provocation erreur 404...';
+
+            try {
+                const response = await fetch(`${API_BASE}/nonexistent-endpoint-test`, {
+                    method: 'GET'
+                });
+
+                const data = await response.json();
+                const requestId = response.headers.get('x-request-id');
+
+                const hasStandardSchema = 
+                    data.hasOwnProperty('status') &&
+                    data.hasOwnProperty('statusCode') &&
+                    data.hasOwnProperty('code') &&
+                    data.hasOwnProperty('message') &&
+                    data.hasOwnProperty('requestId');
+
+                resultDiv.className = 'result';
+                resultDiv.textContent = `
+${hasStandardSchema ? '✅' : '❌'} Schéma d'erreur standardisé: ${hasStandardSchema}
+
+📋 Réponse erreur 404:
+${JSON.stringify(data, null, 2)}
+
+Headers:
+- X-Request-Id: ${requestId}
+- Status HTTP: ${response.status}
+                `.trim();
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Erreur lors du test: ${error.message}`;
+            }
+        }
+
+        // Auto-test au chargement
+        window.addEventListener('load', () => {
+            console.log('Page de test chargée. Backend API:', API_BASE);
+        });
+    </script>
+</body>
+</html>

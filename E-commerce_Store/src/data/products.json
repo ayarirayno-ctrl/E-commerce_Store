@@ -1,0 +1,1191 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "iPhone 15 Pro",
+      "description": "Latest iPhone with titanium design and advanced camera system",
+      "price": 999,
+      "discountPercentage": 5,
+      "rating": 4.8,
+      "stock": 50,
+      "brand": "Apple",
+      "category": "smartphones",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Samsung Galaxy S24",
+      "description": "Premium Android smartphone with AI-powered features",
+      "price": 899,
+      "discountPercentage": 8,
+      "rating": 4.7,
+      "stock": 75,
+      "brand": "Samsung",
+      "category": "smartphones",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Google Pixel 8 Pro",
+      "description": "AI-powered smartphone with exceptional camera capabilities",
+      "price": 999,
+      "discountPercentage": 6,
+      "rating": 4.6,
+      "stock": 40,
+      "brand": "Google",
+      "category": "smartphones",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "OnePlus 12",
+      "description": "Flagship smartphone with fast charging and premium design",
+      "price": 799,
+      "discountPercentage": 7,
+      "rating": 4.5,
+      "stock": 60,
+      "brand": "OnePlus",
+      "category": "smartphones",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "MacBook Pro 16-inch",
+      "description": "Powerful laptop with M3 Pro chip for professionals",
+      "price": 2499,
+      "discountPercentage": 3,
+      "rating": 4.9,
+      "stock": 25,
+      "brand": "Apple",
+      "category": "laptops",
+      "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Dell XPS 15",
+      "description": "Premium Windows laptop with stunning display",
+      "price": 1899,
+      "discountPercentage": 6,
+      "rating": 4.6,
+      "stock": 40,
+      "brand": "Dell",
+      "category": "laptops",
+      "thumbnail": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "HP Spectre x360",
+      "description": "Convertible laptop with 2-in-1 design and premium build",
+      "price": 1299,
+      "discountPercentage": 8,
+      "rating": 4.4,
+      "stock": 35,
+      "brand": "HP",
+      "category": "laptops",
+      "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Lenovo ThinkPad X1 Carbon",
+      "description": "Business laptop with exceptional keyboard and durability",
+      "price": 1599,
+      "discountPercentage": 5,
+      "rating": 4.7,
+      "stock": 30,
+      "brand": "Lenovo",
+      "category": "laptops",
+      "thumbnail": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Chanel No. 5",
+      "description": "Iconic women's fragrance with timeless elegance",
+      "price": 120,
+      "discountPercentage": 10,
+      "rating": 4.8,
+      "stock": 100,
+      "brand": "Chanel",
+      "category": "fragrances",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Dior Sauvage",
+      "description": "Modern men's fragrance with fresh and spicy notes",
+      "price": 95,
+      "discountPercentage": 8,
+      "rating": 4.6,
+      "stock": 80,
+      "brand": "Dior",
+      "category": "fragrances",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Tom Ford Black Orchid",
+      "description": "Luxury unisex fragrance with dark and mysterious notes",
+      "price": 150,
+      "discountPercentage": 12,
+      "rating": 4.7,
+      "stock": 60,
+      "brand": "Tom Ford",
+      "category": "fragrances",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 12,
+      "title": "CeraVe Foaming Facial Cleanser",
+      "description": "Gentle cleanser for normal to oily skin with ceramides",
+      "price": 15,
+      "discountPercentage": 15,
+      "rating": 4.5,
+      "stock": 200,
+      "brand": "CeraVe",
+      "category": "skincare",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 13,
+      "title": "The Ordinary Niacinamide 10%",
+      "description": "Serum for reducing blemishes and balancing oil production",
+      "price": 8,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 150,
+      "brand": "The Ordinary",
+      "category": "skincare",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 14,
+      "title": "La Mer The Moisturizing Cream",
+      "description": "Luxury moisturizer with marine ingredients and anti-aging properties",
+      "price": 350,
+      "discountPercentage": 5,
+      "rating": 4.9,
+      "stock": 25,
+      "brand": "La Mer",
+      "category": "skincare",
+      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Organic Quinoa",
+      "description": "Premium organic quinoa for healthy cooking",
+      "price": 12,
+      "discountPercentage": 25,
+      "rating": 4.3,
+      "stock": 500,
+      "brand": "Bob's Red Mill",
+      "category": "groceries",
+      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Extra Virgin Olive Oil",
+      "description": "Cold-pressed olive oil from Mediterranean olives",
+      "price": 18,
+      "discountPercentage": 18,
+      "rating": 4.6,
+      "stock": 300,
+      "brand": "California Olive Ranch",
+      "category": "groceries",
+      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Organic Honey",
+      "description": "Raw organic honey with natural enzymes and antioxidants",
+      "price": 22,
+      "discountPercentage": 12,
+      "rating": 4.7,
+      "stock": 200,
+      "brand": "Manuka Health",
+      "category": "groceries",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Modern Wall Art Canvas",
+      "description": "Abstract wall art canvas for home decoration",
+      "price": 45,
+      "discountPercentage": 30,
+      "rating": 4.2,
+      "stock": 80,
+      "brand": "Artisan Home",
+      "category": "home-decoration",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 19,
+      "title": "LED String Lights",
+      "description": "Warm white LED string lights for cozy ambiance",
+      "price": 25,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 120,
+      "brand": "Bright Ideas",
+      "category": "home-decoration",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Decorative Throw Pillows",
+      "description": "Set of 2 decorative throw pillows with modern design",
+      "price": 35,
+      "discountPercentage": 15,
+      "rating": 4.3,
+      "stock": 90,
+      "brand": "Cozy Home",
+      "category": "home-decoration",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Modern Sectional Sofa",
+      "description": "L-shaped sectional sofa with premium fabric upholstery",
+      "price": 1299,
+      "discountPercentage": 10,
+      "rating": 4.6,
+      "stock": 15,
+      "brand": "Comfort Living",
+      "category": "furniture",
+      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Dining Table Set",
+      "description": "6-person dining table with matching chairs",
+      "price": 899,
+      "discountPercentage": 8,
+      "rating": 4.5,
+      "stock": 20,
+      "brand": "Elegant Dining",
+      "category": "furniture",
+      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Office Desk Chair",
+      "description": "Ergonomic office chair with lumbar support",
+      "price": 299,
+      "discountPercentage": 12,
+      "rating": 4.4,
+      "stock": 50,
+      "brand": "WorkPro",
+      "category": "furniture",
+      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Cotton T-Shirt",
+      "description": "Premium cotton t-shirt with comfortable fit",
+      "price": 25,
+      "discountPercentage": 20,
+      "rating": 4.3,
+      "stock": 200,
+      "brand": "Comfort Wear",
+      "category": "tops",
+      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Polo Shirt",
+      "description": "Classic polo shirt with embroidered logo",
+      "price": 45,
+      "discountPercentage": 15,
+      "rating": 4.4,
+      "stock": 150,
+      "brand": "Classic Style",
+      "category": "tops",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Hoodie",
+      "description": "Comfortable hoodie with kangaroo pocket",
+      "price": 65,
+      "discountPercentage": 18,
+      "rating": 4.5,
+      "stock": 100,
+      "brand": "Cozy Wear",
+      "category": "tops",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Summer Dress",
+      "description": "Lightweight summer dress with floral pattern",
+      "price": 55,
+      "discountPercentage": 25,
+      "rating": 4.6,
+      "stock": 80,
+      "brand": "Fashion Forward",
+      "category": "womens-dresses",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Cocktail Dress",
+      "description": "Elegant cocktail dress for special occasions",
+      "price": 120,
+      "discountPercentage": 10,
+      "rating": 4.7,
+      "stock": 40,
+      "brand": "Elegant Style",
+      "category": "womens-dresses",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Maxi Dress",
+      "description": "Flowing maxi dress perfect for beach or casual wear",
+      "price": 75,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 60,
+      "brand": "Beach Style",
+      "category": "womens-dresses",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Running Shoes",
+      "description": "Comfortable running shoes with breathable mesh",
+      "price": 120,
+      "discountPercentage": 15,
+      "rating": 4.5,
+      "stock": 100,
+      "brand": "SportMax",
+      "category": "womens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 31,
+      "title": "High Heels",
+      "description": "Elegant high heels for formal occasions",
+      "price": 85,
+      "discountPercentage": 12,
+      "rating": 4.3,
+      "stock": 70,
+      "brand": "Elegant Steps",
+      "category": "womens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Casual Sneakers",
+      "description": "Versatile casual sneakers for everyday wear",
+      "price": 65,
+      "discountPercentage": 18,
+      "rating": 4.4,
+      "stock": 120,
+      "brand": "Comfort Walk",
+      "category": "womens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 33,
+      "title": "Dress Shirt",
+      "description": "Professional dress shirt with wrinkle-free fabric",
+      "price": 55,
+      "discountPercentage": 20,
+      "rating": 4.4,
+      "stock": 150,
+      "brand": "Professional Wear",
+      "category": "mens-shirts",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 34,
+      "title": "Casual Button-Up",
+      "description": "Relaxed fit casual button-up shirt",
+      "price": 45,
+      "discountPercentage": 15,
+      "rating": 4.3,
+      "stock": 120,
+      "brand": "Casual Style",
+      "category": "mens-shirts",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 35,
+      "title": "Oxford Shirt",
+      "description": "Classic oxford shirt with button-down collar",
+      "price": 65,
+      "discountPercentage": 10,
+      "rating": 4.5,
+      "stock": 90,
+      "brand": "Classic Menswear",
+      "category": "mens-shirts",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 36,
+      "title": "Leather Dress Shoes",
+      "description": "Premium leather dress shoes for formal occasions",
+      "price": 180,
+      "discountPercentage": 8,
+      "rating": 4.6,
+      "stock": 60,
+      "brand": "Premium Leather",
+      "category": "mens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 37,
+      "title": "Athletic Sneakers",
+      "description": "High-performance athletic sneakers for sports",
+      "price": 140,
+      "discountPercentage": 12,
+      "rating": 4.5,
+      "stock": 80,
+      "brand": "SportPro",
+      "category": "mens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 38,
+      "title": "Casual Loafers",
+      "description": "Comfortable casual loafers for everyday wear",
+      "price": 95,
+      "discountPercentage": 15,
+      "rating": 4.4,
+      "stock": 100,
+      "brand": "Comfort Walk",
+      "category": "mens-shoes",
+      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 39,
+      "title": "Luxury Watch",
+      "description": "Premium men's watch with Swiss movement",
+      "price": 2500,
+      "discountPercentage": 5,
+      "rating": 4.8,
+      "stock": 20,
+      "brand": "Swiss Time",
+      "category": "mens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 40,
+      "title": "Smart Watch",
+      "description": "Advanced smartwatch with fitness tracking",
+      "price": 350,
+      "discountPercentage": 10,
+      "rating": 4.5,
+      "stock": 75,
+      "brand": "TechTime",
+      "category": "mens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 41,
+      "title": "Diving Watch",
+      "description": "Professional diving watch with water resistance",
+      "price": 800,
+      "discountPercentage": 8,
+      "rating": 4.7,
+      "stock": 30,
+      "brand": "AquaTime",
+      "category": "mens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 42,
+      "title": "Elegant Women's Watch",
+      "description": "Sophisticated women's watch with diamond accents",
+      "price": 1200,
+      "discountPercentage": 6,
+      "rating": 4.7,
+      "stock": 25,
+      "brand": "Elegant Time",
+      "category": "womens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 43,
+      "title": "Fitness Tracker Watch",
+      "description": "Women's fitness tracker with heart rate monitoring",
+      "price": 200,
+      "discountPercentage": 15,
+      "rating": 4.4,
+      "stock": 100,
+      "brand": "FitLife",
+      "category": "womens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 44,
+      "title": "Rose Gold Watch",
+      "description": "Trendy rose gold watch with leather strap",
+      "price": 450,
+      "discountPercentage": 12,
+      "rating": 4.6,
+      "stock": 60,
+      "brand": "Trendy Time",
+      "category": "womens-watches",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 45,
+      "title": "Designer Handbag",
+      "description": "Luxury designer handbag with premium leather",
+      "price": 800,
+      "discountPercentage": 10,
+      "rating": 4.8,
+      "stock": 40,
+      "brand": "Luxury Bags",
+      "category": "womens-bags",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 46,
+      "title": "Crossbody Bag",
+      "description": "Versatile crossbody bag for everyday use",
+      "price": 120,
+      "discountPercentage": 20,
+      "rating": 4.5,
+      "stock": 80,
+      "brand": "Everyday Style",
+      "category": "womens-bags",
+      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 47,
+      "title": "Tote Bag",
+      "description": "Spacious tote bag perfect for work or travel",
+      "price": 85,
+      "discountPercentage": 18,
+      "rating": 4.4,
+      "stock": 70,
+      "brand": "Practical Style",
+      "category": "womens-bags",
+      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 48,
+      "title": "Diamond Necklace",
+      "description": "Elegant diamond necklace for special occasions",
+      "price": 1500,
+      "discountPercentage": 8,
+      "rating": 4.9,
+      "stock": 15,
+      "brand": "Luxury Jewels",
+      "category": "womens-jewellery",
+      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 49,
+      "title": "Pearl Earrings",
+      "description": "Classic pearl earrings with sterling silver",
+      "price": 180,
+      "discountPercentage": 12,
+      "rating": 4.6,
+      "stock": 50,
+      "brand": "Classic Pearls",
+      "category": "womens-jewellery",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 50,
+      "title": "Gold Bracelet",
+      "description": "Delicate gold bracelet with intricate design",
+      "price": 350,
+      "discountPercentage": 10,
+      "rating": 4.7,
+      "stock": 35,
+      "brand": "Golden Touch",
+      "category": "womens-jewellery",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 51,
+      "title": "Aviator Sunglasses",
+      "description": "Classic aviator sunglasses with UV protection",
+      "price": 120,
+      "discountPercentage": 15,
+      "rating": 4.5,
+      "stock": 100,
+      "brand": "SunStyle",
+      "category": "sunglasses",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 52,
+      "title": "Wayfarer Sunglasses",
+      "description": "Timeless wayfarer sunglasses with polarized lenses",
+      "price": 95,
+      "discountPercentage": 18,
+      "rating": 4.4,
+      "stock": 80,
+      "brand": "Classic Shades",
+      "category": "sunglasses",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 53,
+      "title": "Sport Sunglasses",
+      "description": "Performance sport sunglasses for outdoor activities",
+      "price": 150,
+      "discountPercentage": 12,
+      "rating": 4.6,
+      "stock": 60,
+      "brand": "SportShades",
+      "category": "sunglasses",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 54,
+      "title": "Car Phone Mount",
+      "description": "Universal car phone mount with magnetic attachment",
+      "price": 25,
+      "discountPercentage": 20,
+      "rating": 4.3,
+      "stock": 200,
+      "brand": "AutoTech",
+      "category": "automotive",
+      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 55,
+      "title": "Car Air Freshener",
+      "description": "Long-lasting car air freshener with natural scent",
+      "price": 8,
+      "discountPercentage": 25,
+      "rating": 4.2,
+      "stock": 300,
+      "brand": "Fresh Air",
+      "category": "automotive",
+      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 56,
+      "title": "Car Charger",
+      "description": "Fast charging car charger with multiple ports",
+      "price": 18,
+      "discountPercentage": 22,
+      "rating": 4.4,
+      "stock": 150,
+      "brand": "PowerTech",
+      "category": "automotive",
+      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 57,
+      "title": "Motorcycle Helmet",
+      "description": "Safety motorcycle helmet with ventilation system",
+      "price": 180,
+      "discountPercentage": 15,
+      "rating": 4.6,
+      "stock": 40,
+      "brand": "SafeRide",
+      "category": "motorcycle",
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 58,
+      "title": "Motorcycle Gloves",
+      "description": "Protective motorcycle gloves with grip enhancement",
+      "price": 45,
+      "discountPercentage": 18,
+      "rating": 4.4,
+      "stock": 80,
+      "brand": "RideSafe",
+      "category": "motorcycle",
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 59,
+      "title": "Motorcycle Jacket",
+      "description": "Protective motorcycle jacket with armor inserts",
+      "price": 250,
+      "discountPercentage": 12,
+      "rating": 4.7,
+      "stock": 25,
+      "brand": "ProtectRide",
+      "category": "motorcycle",
+      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 60,
+      "title": "LED Desk Lamp",
+      "description": "Adjustable LED desk lamp with touch control",
+      "price": 65,
+      "discountPercentage": 20,
+      "rating": 4.5,
+      "stock": 120,
+      "brand": "BrightWorks",
+      "category": "lighting",
+      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 61,
+      "title": "Smart Light Bulbs",
+      "description": "WiFi smart light bulbs with app control",
+      "price": 35,
+      "discountPercentage": 15,
+      "rating": 4.4,
+      "stock": 200,
+      "brand": "SmartHome",
+      "category": "lighting",
+      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 62,
+      "title": "Floor Lamp",
+      "description": "Modern floor lamp with adjustable brightness",
+      "price": 120,
+      "discountPercentage": 10,
+      "rating": 4.6,
+      "stock": 60,
+      "brand": "Modern Light",
+      "category": "lighting",
+      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 63,
+      "title": "iPad Pro 12.9-inch",
+      "description": "Professional tablet with M2 chip and Liquid Retina XDR display",
+      "price": 1099,
+      "discountPercentage": 5,
+      "rating": 4.8,
+      "stock": 45,
+      "brand": "Apple",
+      "category": "tablets",
+      "thumbnail": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 64,
+      "title": "Samsung Galaxy Tab S9",
+      "description": "Premium Android tablet with S Pen included",
+      "price": 799,
+      "discountPercentage": 8,
+      "rating": 4.6,
+      "stock": 35,
+      "brand": "Samsung",
+      "category": "tablets",
+      "thumbnail": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 65,
+      "title": "Microsoft Surface Pro 9",
+      "description": "2-in-1 tablet and laptop with detachable keyboard",
+      "price": 999,
+      "discountPercentage": 6,
+      "rating": 4.5,
+      "stock": 30,
+      "brand": "Microsoft",
+      "category": "tablets",
+      "thumbnail": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 66,
+      "title": "PlayStation 5",
+      "description": "Next-generation gaming console with 4K gaming",
+      "price": 499,
+      "discountPercentage": 2,
+      "rating": 4.8,
+      "stock": 30,
+      "brand": "Sony",
+      "category": "gaming",
+      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 67,
+      "title": "Xbox Series X",
+      "description": "Powerful gaming console with 4K gaming and ray tracing",
+      "price": 499,
+      "discountPercentage": 3,
+      "rating": 4.7,
+      "stock": 25,
+      "brand": "Microsoft",
+      "category": "gaming",
+      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 68,
+      "title": "Nintendo Switch OLED",
+      "description": "Gaming console with vibrant OLED screen",
+      "price": 349,
+      "discountPercentage": 7,
+      "rating": 4.9,
+      "stock": 60,
+      "brand": "Nintendo",
+      "category": "gaming",
+      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 69,
+      "title": "Sony WH-1000XM5",
+      "description": "Industry-leading noise canceling wireless headphones",
+      "price": 399,
+      "discountPercentage": 10,
+      "rating": 4.8,
+      "stock": 100,
+      "brand": "Sony",
+      "category": "audio",
+      "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 70,
+      "title": "AirPods Pro 2nd Gen",
+      "description": "Active noise cancellation with spatial audio",
+      "price": 249,
+      "discountPercentage": 4,
+      "rating": 4.7,
+      "stock": 150,
+      "brand": "Apple",
+      "category": "audio",
+      "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 71,
+      "title": "Bose QuietComfort 45",
+      "description": "Premium noise-canceling headphones with superior comfort",
+      "price": 329,
+      "discountPercentage": 8,
+      "rating": 4.6,
+      "stock": 80,
+      "brand": "Bose",
+      "category": "audio",
+      "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 72,
+      "title": "Apple Watch Series 9",
+      "description": "Advanced smartwatch with health monitoring features",
+      "price": 399,
+      "discountPercentage": 6,
+      "rating": 4.7,
+      "stock": 80,
+      "brand": "Apple",
+      "category": "wearables",
+      "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 73,
+      "title": "Samsung Galaxy Watch 6",
+      "description": "Smartwatch with advanced health tracking and fitness features",
+      "price": 299,
+      "discountPercentage": 9,
+      "rating": 4.5,
+      "stock": 65,
+      "brand": "Samsung",
+      "category": "wearables",
+      "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 74,
+      "title": "Fitbit Versa 4",
+      "description": "Fitness smartwatch with built-in GPS and health insights",
+      "price": 199,
+      "discountPercentage": 12,
+      "rating": 4.4,
+      "stock": 90,
+      "brand": "Fitbit",
+      "category": "wearables",
+      "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    }
+  ],
+  "total": 74,
+  "skip": 0,
+  "limit": 74
+}

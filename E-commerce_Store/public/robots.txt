@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://your-domain.com/sitemap.xml
+
+# Disallow admin pages from search engines
+Disallow: /admin/
+Disallow: /checkout
+
+# Crawl delay
+Crawl-delay: 10
