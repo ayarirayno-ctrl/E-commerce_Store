@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline - E-Commerce Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Page hors ligne - E-Commerce Store" />
+  <title>Hors ligne - E-Commerce Store</title>
   <style>
     * {
       margin: 0;
@@ -144,62 +145,62 @@
       📡
     </div>
     
-    <h1>You're Offline</h1>
+    <h1>Vous êtes hors ligne</h1>
     
     <p>
-      No internet connection detected. Don't worry, you can still browse cached pages and products!
+      Aucune connexion Internet détectée. Ne vous inquiétez pas, vous pouvez toujours consulter les pages et produits en cache !
     </p>
 
     <div class="features">
       <div class="feature">
         <div class="feature-icon">✓</div>
         <div class="feature-text">
-          <strong>Browse cached products</strong><br>
-          View previously loaded items
+          <strong>Parcourir les produits en cache</strong><br>
+          Consultez les articles précédemment chargés
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">✓</div>
         <div class="feature-text">
-          <strong>View your cart & wishlist</strong><br>
-          Saved locally on your device
+          <strong>Voir votre panier & liste de souhaits</strong><br>
+          Sauvegardés localement sur votre appareil
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">✓</div>
         <div class="feature-text">
-          <strong>Auto-sync when online</strong><br>
-          Changes sync automatically
+          <strong>Synchronisation automatique</strong><br>
+          Les modifications se synchronisent automatiquement
         </div>
       </div>
     </div>
 
     <a href="/" class="button" onclick="window.location.reload(); return false;">
-      Try Again
+      Réessayer
     </a>
 
     <div class="status pulse">
-      Waiting for connection...
+      En attente de connexion...
     </div>
   </div>
 
   <script>
-    // Auto-reload when connection is restored
+    // Auto-rechargement lorsque la connexion est rétablie
     window.addEventListener('online', () => {
-      console.log('Connection restored!');
+      console.log('Connexion rétablie !');
       setTimeout(() => {
         window.location.reload();
       }, 1000);
     });
 
-    // Check connection status
+    // Vérification du statut de connexion au chargement
     window.addEventListener('load', () => {
       if (navigator.onLine) {
         window.location.reload();
       }
     });
 
-    // Periodic connection check
+    // Vérification périodique de la connexion
     setInterval(() => {
       if (navigator.onLine) {
         window.location.reload();

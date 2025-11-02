@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { Product } from '../../types/product';
+import { toastWishlistActions } from '../../utils/toastUtils';
 
 interface WishlistState {
   items: Product[];
@@ -31,11 +32,16 @@ const wishlistSlice = createSlice({
       const exists = state.items.find(item => item.id === action.payload.id);
       if (!exists) {
         state.items.push(action.payload);
+        toastWishlistActions.added(action.payload.title);
       }
     },
     
     removeFromWishlist: (state, action: PayloadAction<number>) => {
+      const removedItem = state.items.find(item => item.id === action.payload);
       state.items = state.items.filter(item => item.id !== action.payload);
+      if (removedItem) {
+        toastWishlistActions.removed(removedItem.title);
+      }
     },
     
     clearWishlist: (state) => {
@@ -46,8 +52,10 @@ const wishlistSlice = createSlice({
       const index = state.items.findIndex(item => item.id === action.payload.id);
       if (index >= 0) {
         state.items.splice(index, 1);
+        toastWishlistActions.removed(action.payload.title);
       } else {
         state.items.push(action.payload);
+        toastWishlistActions.added(action.payload.title);
       }
     },
   },

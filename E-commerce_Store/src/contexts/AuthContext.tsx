@@ -15,6 +15,7 @@ interface User {
   id: string;
   email: string;
   name: string;
+  role?: string;
   phone?: string;
   address?: {
     street?: string;
@@ -30,7 +31,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<User>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<void>;
@@ -75,84 +76,68 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<void> => {
+  const login = async (email: string, password: string): Promise<User> => {
     try {
-  const response = await api.post(`${API_URL}/client-auth/login`, {
+      const response = await api.post(`${API_URL}/auth/login`, {
         email,
         password,
       });
 
-      if (response.data.success) {
-        const userData: User = {
-          id: response.data.client.id,
-          name: response.data.client.name,
-          email: response.data.client.email,
-          phone: response.data.client.phone,
-          address: response.data.client.address,
-          avatar: response.data.client.avatar,
-          emailVerified: response.data.client.emailVerified,
-          token: response.data.token,
-        };
+      const userData: User = {
+        id: response.data.user.id || response.data.user._id,
+        name: `${response.data.user.firstName} ${response.data.user.lastName}`,
+        email: response.data.user.email,
+        role: response.data.user.role,
+        phone: response.data.user.phone,
+        address: response.data.user.address,
+        avatar: response.data.user.avatar,
+        emailVerified: response.data.user.isEmailVerified,
+        token: response.data.token,
+      };
 
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', response.data.token);
         
-        // Set axios default header
-  // Authorization sera ajouté automatiquement par l'interceptor via localStorage
+      // Sync cart from backend
+      dispatch(fetchCart());
         
-        // Sync cart from backend
-        dispatch(fetchCart());
-        
-        showSuccess('Login successful!');
-      } else {
-        throw new Error(response.data.message || 'Login failed');
-      }
+      showSuccess('Connexion réussie !');
+      
+      return userData;
     } catch (error: unknown) {
       console.error('Login failed:', error);
       const axiosError = error as AxiosError<ApiError>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Invalid email or password';
+      
+      // Extract error message from API response
+      const errorMessage = axiosError.response?.data?.message || 'Login failed';
+      
+      // Show error notification with the message from backend (includes "You are blocked from admin device")
       showError(errorMessage);
+      
       throw new Error(errorMessage);
     }
   };
 
   const register = async (name: string, email: string, password: string): Promise<void> => {
     try {
-  const response = await api.post(`${API_URL}/client-auth/register`, {
-        name,
+      // Séparer le prénom et nom
+      const nameParts = name.trim().split(' ');
+      const firstName = nameParts[0] || name;
+      const lastName = nameParts.slice(1).join(' ') || nameParts[0];
+
+      const response = await api.post(`${API_URL}/auth/register`, {
+        firstName,
+        lastName,
         email,
         password,
       });
 
-      if (response.data.success) {
-        const userData: User = {
-          id: response.data.client.id,
-          name: response.data.client.name,
-          email: response.data.client.email,
-          phone: response.data.client.phone,
-          address: response.data.client.address,
-          avatar: response.data.client.avatar,
-          emailVerified: response.data.client.emailVerified,
-          token: response.data.token,
-        };
-
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
-        
-        // Set axios default header
-  // Authorization sera ajouté automatiquement par l'interceptor via localStorage
-        
-        // Sync cart from backend
-        dispatch(fetchCart());
-        
-        showSuccess('Registration successful! Welcome!');
-      } else {
-        throw new Error(response.data.message || 'Registration failed');
-      }
+      showSuccess(response.data.message || 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
     } catch (error: unknown) {
       console.error('Registration failed:', error);
       const axiosError = error as AxiosError<ApiError>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Registration failed';
+      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Erreur lors de l\'inscription';
       showError(errorMessage);
       throw new Error(errorMessage);
     }
@@ -161,37 +146,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('user');
-  // L'interceptor lit depuis localStorage, retirer l'utilisateur suffit
+    localStorage.removeItem('token');
+    showSuccess('Déconnexion réussie!');
   };
 
   const updateProfile = async (data: Partial<User>): Promise<void> => {
     try {
-  const response = await api.put(`${API_URL}/client-auth/profile`, {
-        name: data.name,
+      const response = await api.put(`${API_URL}/users/profile`, {
         phone: data.phone,
         address: data.address,
       });
 
-      if (response.data.success) {
-        const updatedUser: User = {
-          ...user!,
-          name: response.data.client.name,
-          email: response.data.client.email,
-          phone: response.data.client.phone,
-          address: response.data.client.address,
-          avatar: response.data.client.avatar,
-          emailVerified: response.data.client.emailVerified,
-        };
+      const updatedUser: User = {
+        ...user!,
+        phone: response.data.user.phone,
+        address: response.data.user.address,
+      };
 
-        setUser(updatedUser);
-        localStorage.setItem('user', JSON.stringify(updatedUser));
-      } else {
-        throw new Error(response.data.message || 'Profile update failed');
-      }
+      setUser(updatedUser);
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      showSuccess('Profil mis à jour!');
     } catch (error: unknown) {
       console.error('Update profile failed:', error);
       const axiosError = error as AxiosError<ApiError>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Profile update failed';
+      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Erreur lors de la mise à jour du profil';
+      showError(errorMessage);
       throw new Error(errorMessage);
     }
   };

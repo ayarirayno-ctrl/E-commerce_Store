@@ -24,14 +24,56 @@ export interface Address {
   country: string;
 }
 
+export interface ShippingAddress {
+  firstName: string;
+  lastName: string;
+  street: string;
+  city: string;
+  state?: string;
+  postalCode: string;
+  zipCode?: string;
+  country: string;
+  phone: string;
+}
+
+export interface OrderItem {
+  product: string;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
+
 export interface Order {
   id: string;
+  _id?: string;
+  orderNumber?: string;
   userId: number;
-  items: import('./cart').CartItem[];
+  user?: string;
+  items: OrderItem[];
+  shippingAddress: ShippingAddress;
+  billingAddress?: ShippingAddress;
+  paymentMethod?: string;
+  paymentStatus?: string;
   total: number;
+  totalPrice?: number;
+  subtotal?: number;
+  itemsPrice?: number;
+  shippingCost?: number;
+  shippingPrice?: number;
+  tax?: number;
+  taxPrice?: number;
+  discount?: number;
   status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
+  orderStatus?: string;
+  trackingNumber?: string;
+  isPaid?: boolean;
+  paidAt?: string;
+  isDelivered?: boolean;
+  deliveredAt?: string;
+  notes?: string;
   createdAt: string;
-  shippingAddress: Address;
+  updatedAt?: string;
 }
 
 export interface Notification {

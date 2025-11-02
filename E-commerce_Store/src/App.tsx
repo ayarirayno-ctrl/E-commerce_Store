@@ -10,14 +10,23 @@ import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import CartSidebar from './components/cart/CartSidebar';
+import ChatWidget from './components/chat/ChatWidget';
 import ErrorBoundary from './components/common/ErrorBoundary';
 import NotificationSystem from './components/common/NotificationSystem';
-import Loading from './components/ui/Loading';
+import SkipToContent from './components/common/SkipToContent';
+import { AriaLiveRegion } from './components/common/AriaLiveRegion';
+
+// Import mobile & responsive styles
+import './styles/mobile-responsive.css';
+import ToastProvider from './components/common/ToastProvider';
+import { LoadingAnimation } from './components/common/LoadingAnimation';
 import PrivateRoute from './components/common/PrivateRoute';
+import PrivateAdminRoute from './components/admin/PrivateAdminRoute';
 import { InstallPrompt } from './components/pwa/InstallPrompt';
 import { UpdateNotification } from './components/pwa/UpdateNotification';
 import { OfflineIndicator, OnlineIndicator } from './components/pwa/OfflineIndicator';
 import { useServiceWorker } from './hooks/useServiceWorker';
+import { ProductComparator, CompareFloatingBar } from './components/compare/ProductComparator';
 import './styles/globals.css';
 
 // Lazy load pages for better performance
@@ -34,6 +43,11 @@ const ContactPage = lazy(() => import('./pages/ContactPage'));
 const OrdersPage = lazy(() => import('./pages/OrdersPage'));
 const OrderDetailPage = lazy(() => import('./pages/OrderDetailPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
+const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage'));
+const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
+const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
+const PaymentSuccessPage = lazy(() => import('./pages/PaymentSuccessPage'));
+const PaymentCancelPage = lazy(() => import('./pages/PaymentCancelPage'));
 
 // Admin pages
 const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
@@ -86,9 +100,15 @@ function AppContent() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors">
+      <SkipToContent />
+      <AriaLiveRegion />
       <Header />
-      <main className="flex-1">
-        <Suspense fallback={<Loading size="lg" text="Loading page..." />}>
+      <main className="flex-1" id="main-content">
+        <Suspense fallback={
+          <div className="min-h-screen flex items-center justify-center">
+            <LoadingAnimation size="lg" text="Loading page..." variant="bounce" />
+          </div>
+        }>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
@@ -99,6 +119,12 @@ function AppContent() {
           <Route path="/wishlist" element={<WishlistPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/cancel" element={<PaymentCancelPage />} />
           <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/orders" element={<PrivateRoute><OrdersPage /></PrivateRoute>} />
@@ -110,7 +136,7 @@ function AppContent() {
           
           {/* Admin routes */}
           <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin" element={<PrivateAdminRoute><AdminLayout /></PrivateAdminRoute>}>
             <Route index element={<AdminDashboard />} />
             <Route path="products" element={<AdminProductsPage />} />
             <Route path="orders" element={<AdminOrdersPage />} />
@@ -140,6 +166,13 @@ function AppContent() {
     {needsUpdate && <UpdateNotification onUpdate={updateServiceWorker} />}
     <OfflineIndicator />
     <OnlineIndicator />
+    
+    {/* Product Comparison */}
+    <ProductComparator />
+    <CompareFloatingBar />
+    
+    {/* Live Chat Support */}
+    <ChatWidget />
   </div>
   );
 }
@@ -153,6 +186,7 @@ function App() {
           <AuthProvider>
             <Router>
               <AppContent />
+              <ToastProvider />
             </Router>
           </AuthProvider>
         </ThemeProvider>

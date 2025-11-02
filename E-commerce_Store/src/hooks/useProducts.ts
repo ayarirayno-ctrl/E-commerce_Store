@@ -23,7 +23,7 @@ export const useProducts = () => {
 
   // Fetch products on mount
   useEffect(() => {
-    dispatch(fetchProductsAsync());
+    dispatch(fetchProductsAsync({}));
     dispatch(fetchCategoriesAsync());
     dispatch(fetchBrandsAsync());
   }, [dispatch]);
@@ -60,7 +60,7 @@ export const useProducts = () => {
 
   const clearAllFilters = useCallback(() => {
     dispatch(clearFilters());
-    dispatch(fetchProductsAsync());
+    dispatch(fetchProductsAsync({}));
   }, [dispatch]);
 
   const refreshProducts = useCallback(() => {

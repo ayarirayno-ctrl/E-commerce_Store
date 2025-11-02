@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useProducts } from '../hooks/useProducts';
 import { useRecentSearches } from '../hooks/useLocalStorage';
 import ProductCard from '../components/product/ProductCard';
-import Loading from '../components/ui/Loading';
 import Button from '../components/ui/Button';
-import SEO from '../components/common/SEO';
+import EnhancedSEO from '../components/common/EnhancedSEO';
+import { LoadingAnimation } from '../components/common/LoadingAnimation';
+import { generateBreadcrumbSchema, generateKeywords } from '../utils/seoUtils';
+import { generateCategoryMetaDescription } from '../utils/seoMetaUtils';
 import { Search, Filter, X } from 'lucide-react';
 import { formatPrice } from '../utils/formatters';
 
@@ -147,10 +150,29 @@ const ProductsPage: React.FC = () => {
     return 'All Products';
   };
 
+  // Get page description based on current filters
+  const getPageDescription = () => {
+    if (filters.category) {
+      const categoryBrands = [...new Set(products.map(p => p.brand).filter(Boolean))];
+      return generateCategoryMetaDescription(
+        filters.category,
+        products.length,
+        categoryBrands as string[]
+      );
+    }
+    if (filters.search) {
+      return `Trouvez les meilleurs résultats pour "${filters.search}". ${products.length} produits disponibles avec livraison rapide.`;
+    }
+    if (filters.brand) {
+      return `Découvrez tous les produits ${filters.brand}. ${products.length} articles en stock avec garantie et livraison gratuite.`;
+    }
+    return `Parcourez notre sélection complète de ${products.length} produits de qualité. Électronique, smartphones, laptops et accessoires aux meilleurs prix.`;
+  };
+
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loading size="lg" text="Loading products..." />
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <LoadingAnimation size="lg" text="Loading products..." variant="bounce" />
       </div>
     );
   }
@@ -173,11 +195,17 @@ const ProductsPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEO 
-        title={`${getPageTitle()} - Modern Store`}
-        description={`Browse our collection of ${products.length} quality products. Find the best deals on electronics, smartphones, laptops, and accessories.`}
-        keywords={`products, electronics, ${filters.category || 'all categories'}, online shopping, best deals`}
+      <EnhancedSEO 
+        title={`${getPageTitle()} - E-commerce Family's`}
+        description={getPageDescription()}
+        keywords={generateKeywords(`products electronics ${filters.category || 'all categories'} ${filters.brand || ''} online shopping best deals smartphones laptops accessories`)}
+        url={`https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products${filters.category ? `?category=${filters.category}` : ''}`}
         type="website"
+        structuredData={generateBreadcrumbSchema([
+          { name: 'Home', url: 'https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/' },
+          { name: 'Products', url: 'https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products' },
+          ...(filters.category ? [{ name: filters.category, url: `https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products?category=${filters.category}` }] : [])
+        ])}
       />
       
       <div className="container-custom py-8">
@@ -422,11 +450,27 @@ const ProductsPage: React.FC = () => {
 
             {/* Products */}
             {sortedProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {sortedProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
+              <motion.div 
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ staggerChildren: 0.1 }}
+              >
+                <AnimatePresence mode="popLayout">
+                  {sortedProducts.map((product, index) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ delay: index * 0.05, duration: 0.3 }}
+                      layout
+                    >
+                      <ProductCard product={product} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             ) : (
               <div className="text-center py-12">
                 <div className="text-gray-400 mb-4">

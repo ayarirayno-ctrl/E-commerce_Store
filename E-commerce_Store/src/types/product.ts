@@ -3,6 +3,16 @@
  * Based on DummyJSON API structure
  */
 
+export interface ProductVariant {
+  id: string;
+  color?: string;
+  colorHex?: string;
+  size?: string;
+  stock: number;
+  price?: number; // Optional price override
+  sku: string;
+}
+
 export interface Product {
   id: number;
   title: string;
@@ -15,6 +25,9 @@ export interface Product {
   category: string;
   thumbnail: string;
   images: string[];
+  variants?: ProductVariant[]; // Optional product variants
+  availableColors?: string[];   // Available color options
+  availableSizes?: string[];    // Available size options
 }
 
 export interface ProductFilters {

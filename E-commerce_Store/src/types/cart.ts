@@ -13,6 +13,14 @@ export interface CartItem {
   };
   quantity: number;
   totalPrice: number;
+  // Variant information
+  selectedVariant?: {
+    id: string;
+    color?: string;
+    colorHex?: string;
+    size?: string;
+    sku: string;
+  };
 }
 
 export interface CartState {

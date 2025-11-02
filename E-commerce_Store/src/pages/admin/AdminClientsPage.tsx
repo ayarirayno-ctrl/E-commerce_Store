@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Search, Eye, Mail, Phone, MapPin, ShoppingBag, Ban, CheckCircle } from 'lucide-react';
+import { Search, Eye, Mail, Phone, MapPin, ShoppingBag, Ban, CheckCircle, AlertTriangle } from 'lucide-react';
 import Input from '../../components/ui/Input';
 import Modal from '../../components/ui/Modal';
 
@@ -26,6 +26,7 @@ interface Client {
 
 const AdminClientsPage: React.FC = () => {
   const [clients, setClients] = useState<Client[]>([]);
+  const [blockedClients, setBlockedClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'blocked'>('all');
@@ -34,18 +35,24 @@ const AdminClientsPage: React.FC = () => {
 
   useEffect(() => {
     fetchClients();
+    fetchBlockedClients();
   }, []);
 
   const fetchClients = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch('http://localhost:5000/api/clients', {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/admin/clients', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
       });
       const data = await response.json();
-      setClients(data.clients || []);
+      
+      if (data.success) {
+        setClients(data.clients || []);
+      } else {
+        console.error('Erreur:', data.message);
+      }
     } catch (error) {
       console.error('Error fetching clients:', error);
     } finally {
@@ -53,10 +60,30 @@ const AdminClientsPage: React.FC = () => {
     }
   };
 
+  const fetchBlockedClients = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/admin/clients/blocked', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      
+      if (data.success) {
+        setBlockedClients(data.clients || []);
+      } else {
+        console.error('Erreur:', data.message);
+      }
+    } catch (error) {
+      console.error('Error fetching blocked clients:', error);
+    }
+  };
+
   const toggleBlockClient = async (clientId: string, currentStatus: boolean) => {
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch(`http://localhost:5000/api/clients/${clientId}/block`, {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`http://localhost:5000/api/admin/clients/${clientId}/block`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -65,8 +92,11 @@ const AdminClientsPage: React.FC = () => {
         body: JSON.stringify({ isBlocked: !currentStatus }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      
+      if (data.success) {
         fetchClients();
+        fetchBlockedClients(); // Refresh blocked clients list
         if (selectedClient?._id === clientId) {
           setSelectedClient({ ...selectedClient, isBlocked: !currentStatus });
         }
@@ -316,6 +346,122 @@ const AdminClientsPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Blocked Clients Section */}
+      {blockedClients.length > 0 && (
+        <div className="mt-8">
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <AlertTriangle className="w-6 h-6 mr-2 text-red-500" />
+              Clients Bloqués ({blockedClients.length})
+            </h2>
+          </div>
+          
+          <div className="bg-red-50 border-2 border-red-200 rounded-lg shadow overflow-hidden">
+            <table className="min-w-full divide-y divide-red-200">
+              <thead className="bg-red-100">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-red-800 uppercase tracking-wider">
+                    Client
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-red-800 uppercase tracking-wider">
+                    Contact
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-red-800 uppercase tracking-wider">
+                    Date blocage
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-red-800 uppercase tracking-wider">
+                    Commandes
+                  </th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-red-800 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-red-200">
+                {blockedClients.map((client) => (
+                  <tr key={client._id} className="hover:bg-red-50">
+                    <td className="px-6 py-4">
+                      <div className="flex items-center">
+                        <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                          <span className="text-red-700 font-semibold">
+                            {client.firstName[0]}{client.lastName[0]}
+                          </span>
+                        </div>
+                        <div className="ml-3">
+                          <div className="text-sm font-medium text-gray-900">
+                            {client.firstName} {client.lastName}
+                          </div>
+                          <div className="text-sm text-gray-500">{client.email}</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="space-y-1">
+                        <div className="flex items-center text-sm text-gray-900">
+                          <Mail className="w-4 h-4 mr-2 text-gray-400" />
+                          {client.email}
+                        </div>
+                        {client.phone && (
+                          <div className="flex items-center text-sm text-gray-500">
+                            <Phone className="w-4 h-4 mr-2 text-gray-400" />
+                            {client.phone}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">
+                        {new Date(client.createdAt).toLocaleDateString('fr-FR')}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <ShoppingBag className="w-4 h-4 mr-2 text-gray-400" />
+                        <span className="text-sm font-medium text-gray-900">
+                          {client.totalOrders || 0}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                      <button
+                        onClick={() => {
+                          setSelectedClient(client);
+                          setIsDetailModalOpen(true);
+                        }}
+                        className="text-primary-600 hover:text-primary-900 mr-4"
+                      >
+                        <Eye className="w-4 h-4 inline mr-1" />
+                        Voir
+                      </button>
+                      <button
+                        onClick={() => toggleBlockClient(client._id, client.isBlocked)}
+                        className="text-green-600 hover:text-green-900"
+                      >
+                        <CheckCircle className="w-4 h-4 inline mr-1" />
+                        Débloquer
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          
+          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex items-start">
+              <AlertTriangle className="w-5 h-5 text-yellow-600 mr-3 mt-0.5" />
+              <div>
+                <p className="text-sm font-medium text-yellow-800">Information importante</p>
+                <p className="text-sm text-yellow-700 mt-1">
+                  Les clients bloqués ne peuvent pas se connecter à leur compte. Ils recevront le message : 
+                  <span className="font-semibold"> &ldquo;You are blocked from admin device. Please contact support.&rdquo;</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Client Detail Modal */}
       <Modal

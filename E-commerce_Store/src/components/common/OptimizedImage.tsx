@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { cn } from '../../utils/cn';
 
 interface OptimizedImageProps {
@@ -17,6 +17,7 @@ interface OptimizedImageProps {
  * Optimized Image Component
  * Features:
  * - Lazy loading with Intersection Observer
+ * - WebP format with automatic fallback
  * - Placeholder while loading
  * - Error fallback
  * - Progressive image loading
@@ -35,12 +36,41 @@ const OptimizedImage = ({
 }: OptimizedImageProps) => {
   const [imageSrc, setImageSrc] = useState<string>(placeholder);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [supportsWebP, setSupportsWebP] = useState<boolean | null>(null);
   const imgRef = useRef<HTMLImageElement>(null);
 
+  // Check WebP support on mount
   useEffect(() => {
+    const checkWebPSupport = () => {
+      const canvas = document.createElement('canvas');
+      if (canvas.getContext && canvas.getContext('2d')) {
+        const result = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+        setSupportsWebP(result);
+      } else {
+        setSupportsWebP(false);
+      }
+    };
+    
+    checkWebPSupport();
+  }, []);
+
+  // Convert to WebP format if supported
+  const getOptimizedUrl = useCallback((url: string): string => {
+    if (supportsWebP && url.includes('unsplash.com')) {
+      const urlObj = new URL(url);
+      urlObj.searchParams.set('fm', 'webp');
+      return urlObj.toString();
+    }
+    return url;
+  }, [supportsWebP]);
+
+  useEffect(() => {
+    // Wait for WebP support check
+    if (supportsWebP === null) return;
+
     // If eager loading, load immediately
     if (loading === 'eager') {
-      setImageSrc(src);
+      setImageSrc(getOptimizedUrl(src));
       return;
     }
 
@@ -50,7 +80,7 @@ const OptimizedImage = ({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setImageSrc(src);
+            setImageSrc(getOptimizedUrl(src));
             if (imgElement) {
               observer.unobserve(imgElement);
             }
@@ -72,7 +102,7 @@ const OptimizedImage = ({
         observer.unobserve(imgElement);
       }
     };
-  }, [src, loading]);
+  }, [src, loading, supportsWebP, getOptimizedUrl]);
 
   const handleLoad = () => {
     setIsLoaded(true);

@@ -2,11 +2,29 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/sitemap.xml
 
-# Disallow admin pages from search engines
+# Disallow admin pages and private areas from search engines
 Disallow: /admin/
-Disallow: /checkout
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /profile/
+Disallow: /orders/
 
-# Crawl delay
-Crawl-delay: 10
+# Disallow search results with query parameters
+Disallow: /*?*search=*
+Disallow: /*?*sort=*
+Disallow: /*?*filter=*
+
+# Allow specific crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawl delay (in seconds)
+Crawl-delay: 1

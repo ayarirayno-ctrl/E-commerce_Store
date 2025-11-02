@@ -7,11 +7,8 @@ import { formatPrice } from '../utils/formatters';
 import { isValidEmail, isRequired } from '../utils/validators';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import Modal from '../components/ui/Modal';
 import { PromoCodeInput, AppliedPromoCode } from '../components/promo/PromoCodeInput';
-import { CreditCard, Lock, CheckCircle } from 'lucide-react';
-import { orderService } from '../services/orderService';
-import type { CreateOrderData } from '../services/orderService';
+import { CreditCard, Lock, ArrowRight, CheckCircle } from 'lucide-react';
 
 interface FormData {
   firstName: string;
@@ -35,11 +32,9 @@ interface FormErrors {
 
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
-  const { items, totalPrice, clearCartItems } = useCart();
-  const { showSuccess, showError } = useNotification();
+  const { items, totalPrice } = useCart();
+  const { showError } = useNotification();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [orderNumber, setOrderNumber] = useState('');
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
     lastName: '',
@@ -77,7 +72,7 @@ const CheckoutPage: React.FC = () => {
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
 
-    // Required fields
+    // Required fields (only shipping info, not payment - Stripe handles that)
     if (!isRequired(formData.firstName)) newErrors.firstName = 'First name is required';
     if (!isRequired(formData.lastName)) newErrors.lastName = 'Last name is required';
     if (!isRequired(formData.email)) {
@@ -90,10 +85,7 @@ const CheckoutPage: React.FC = () => {
     if (!isRequired(formData.city)) newErrors.city = 'City is required';
     if (!isRequired(formData.state)) newErrors.state = 'State is required';
     if (!isRequired(formData.zipCode)) newErrors.zipCode = 'ZIP code is required';
-    if (!isRequired(formData.cardNumber)) newErrors.cardNumber = 'Card number is required';
-    if (!isRequired(formData.expiryDate)) newErrors.expiryDate = 'Expiry date is required';
-    if (!isRequired(formData.cvv)) newErrors.cvv = 'CVV is required';
-    if (!isRequired(formData.cardName)) newErrors.cardName = 'Cardholder name is required';
+    // Card fields are NOT required here - Stripe Checkout will handle payment
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -109,39 +101,85 @@ const CheckoutPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Prepare order data
-      const orderData: CreateOrderData = {
+      // Prepare checkout data for Stripe
+      const checkoutData = {
+        items: items.map(item => ({
+          product: item.product.id.toString(),
+          name: item.product.title,
+          description: item.product.title,
+          image: item.product.thumbnail,
+          price: item.product.price,
+          quantity: item.quantity
+        })),
         shippingAddress: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           street: formData.address,
           city: formData.city,
-          state: formData.state,
-          zipCode: formData.zipCode,
+          postalCode: formData.zipCode,
           country: formData.country,
+          phone: formData.phone
         },
-        paymentMethod: 'credit_card', // Can be extended with actual payment gateway
-        notes: `Customer: ${formData.firstName} ${formData.lastName}, Email: ${formData.email}, Phone: ${formData.phone}`,
+        billingAddress: {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          street: formData.address,
+          city: formData.city,
+          postalCode: formData.zipCode,
+          country: formData.country
+        },
+        email: formData.email,
+        promoCode: appliedCode ? {
+          code: appliedCode.code,
+          discount: appliedCode.discountAmount,
+          discountType: appliedCode.discountType
+        } : undefined
       };
 
-      // Create order via API
-      const order = await orderService.createOrder(orderData);
+      // Create Stripe Checkout Session
+      const token = localStorage.getItem('token');
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/stripe/create-checkout-session`,
+        {
+          method: 'POST',
+          headers,
+          body: JSON.stringify(checkoutData)
+        }
+      );
+
+      console.log('Response status:', response.status);
+      console.log('Response URL:', response.url);
+
+      if (!response.ok) {
+        const text = await response.text();
+        console.error('Error response:', text);
+        
+        try {
+          const errorData = JSON.parse(text);
+          throw new Error(errorData.message || 'Failed to create checkout session');
+        } catch (parseError) {
+          throw new Error(`Server error: ${response.status} - ${text.substring(0, 200)}`);
+        }
+      }
+
+      const { url } = await response.json();
       
-      setOrderNumber(order.orderNumber);
-      setShowSuccessModal(true);
-      showSuccess(`Order ${order.orderNumber} placed successfully!`);
+      // Redirect to Stripe Checkout
+      window.location.href = url;
     } catch (error) {
-      console.error('Order creation failed:', error);
-      const errorMsg = error instanceof Error ? error.message : 'Failed to create order. Please try again.';
+      console.error('Checkout failed:', error);
+      const errorMsg = error instanceof Error ? error.message : 'Failed to proceed to payment. Please try again.';
       setErrors({ submit: errorMsg });
       showError(errorMsg);
-    } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const handleOrderSuccess = () => {
-    clearCartItems();
-    setShowSuccessModal(false);
-    navigate('/');
   };
 
   if (items.length === 0) {
@@ -256,60 +294,40 @@ const CheckoutPage: React.FC = () => {
               </div>
 
               {/* Payment Information */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h2 className="text-lg font-semibold text-gray-900 mb-4">
-                  Payment Information
-                </h2>
-                
-                <Input
-                  label="Cardholder Name"
-                  name="cardName"
-                  value={formData.cardName}
-                  onChange={handleInputChange}
-                  error={errors.cardName}
-                  required
-                />
-                
-                <Input
-                  label="Card Number"
-                  name="cardNumber"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  error={errors.cardNumber}
-                  placeholder="1234 5678 9012 3456"
-                  leftIcon={<CreditCard className="h-4 w-4" />}
-                  required
-                  className="mt-4"
-                />
-                
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                  <Input
-                    label="Expiry Date"
-                    name="expiryDate"
-                    value={formData.expiryDate}
-                    onChange={handleInputChange}
-                    error={errors.expiryDate}
-                    placeholder="MM/YY"
-                    required
-                  />
-                  <Input
-                    label="CVV"
-                    name="cvv"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    error={errors.cvv}
-                    placeholder="123"
-                    required
-                  />
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-sm border border-blue-200 p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="bg-blue-100 rounded-full p-2">
+                    <CreditCard className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h2 className="text-lg font-semibold text-gray-900 mb-1">
+                      Secure Payment with Stripe
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      You&apos;ll be redirected to Stripe&apos;s secure payment page
+                    </p>
+                  </div>
                 </div>
                 
-                <div className="mt-4 p-4 bg-green-50 rounded-lg">
-                  <div className="flex items-center">
-                    <Lock className="h-5 w-5 text-green-600 mr-2" />
-                    <span className="text-sm text-green-800">
-                      Your payment information is secure and encrypted
-                    </span>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-sm text-gray-700">
+                    <Lock className="h-4 w-4 text-green-600" />
+                    <span>256-bit SSL encryption</span>
                   </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <span>PCI-DSS compliant</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-gray-700">
+                    <CheckCircle className="h-4 w-4 text-green-600" />
+                    <span>Your card details are never stored on our servers</span>
+                  </div>
+                </div>
+
+                <div className="mt-4 p-3 bg-white rounded-lg border border-blue-200">
+                  <p className="text-xs text-gray-600 text-center">
+                    <strong>Next step:</strong> Click &quot;Continue to Payment&quot; below to securely enter your card details on Stripe&apos;s checkout page
+                  </p>
                 </div>
               </div>
             </div>
@@ -390,71 +408,36 @@ const CheckoutPage: React.FC = () => {
 
                 <Button
                   type="submit"
-                  className="w-full mt-6"
+                  className="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700"
                   size="lg"
                   loading={isSubmitting}
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? 'Processing...' : `Place Order - ${formatPrice(finalTotal)}`}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Redirecting to Stripe...
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      Continue to Payment
+                      <ArrowRight className="h-5 w-5" />
+                      <span className="font-bold">{formatPrice(finalTotal)}</span>
+                    </span>
+                  )}
                 </Button>
+                
+                <p className="text-xs text-gray-500 text-center mt-3">
+                  By clicking &quot;Continue to Payment&quot;, you&apos;ll be securely redirected to Stripe to complete your purchase
+                </p>
               </div>
             </div>
           </form>
         </div>
       </div>
-
-      {/* Success Modal */}
-      <Modal
-        isOpen={showSuccessModal}
-        onClose={handleOrderSuccess}
-        title="Order Placed Successfully!"
-        size="md"
-      >
-        <div className="text-center py-6">
-          <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
-            Thank you for your order!
-          </h3>
-          <div className="bg-gray-50 rounded-lg p-4 mb-4">
-            <p className="text-sm text-gray-600 mb-1">Order Number</p>
-            <p className="text-2xl font-bold text-primary-600">{orderNumber}</p>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Your order has been placed successfully. You will receive a confirmation email at{' '}
-            <span className="font-semibold">{formData.email}</span> shortly.
-          </p>
-          <div className="text-left bg-white border border-gray-200 rounded-lg p-4 mb-6 text-sm">
-            <h4 className="font-semibold text-gray-900 mb-2">Order Summary</h4>
-            <div className="space-y-1 text-gray-600">
-              <div className="flex justify-between">
-                <span>Items ({items.length})</span>
-                <span>{formatPrice(subtotal)}</span>
-              </div>
-              {appliedCode && discountAmount > 0 && (
-                <div className="flex justify-between text-green-600">
-                  <span>Discount ({appliedCode.code})</span>
-                  <span>-{formatPrice(discountAmount)}</span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span>Shipping</span>
-                <span>{shippingCost === 0 ? 'FREE' : formatPrice(shippingCost)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Tax</span>
-                <span>{formatPrice(taxAmount)}</span>
-              </div>
-              <div className="flex justify-between font-semibold text-gray-900 pt-2 border-t">
-                <span>Total</span>
-                <span>{formatPrice(finalTotal)}</span>
-              </div>
-            </div>
-          </div>
-          <Button onClick={handleOrderSuccess} className="w-full">
-            Continue Shopping
-          </Button>
-        </div>
-      </Modal>
     </div>
   );
 };

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Connexion API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover { background: #45a049; }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Connexion API Backend</h1>
+        <p>Ce fichier teste la connexion entre votre navigateur et l'API backend.</p>
+        
+        <h3>Identifiants Admin:</h3>
+        <input type="email" id="email" value="ayarirayen539@gmail.com" placeholder="Email">
+        <input type="password" id="password" value="admin123" placeholder="Password">
+        
+        <div>
+            <button onclick="testHealth()">1️⃣ Test Backend Health</button>
+            <button onclick="testLogin()">2️⃣ Test Login</button>
+            <button onclick="testCORS()">3️⃣ Test CORS</button>
+            <button onclick="clearResult()">🗑️ Effacer</button>
+        </div>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const resultDiv = document.getElementById('result');
+
+        function showResult(message, type = 'info') {
+            resultDiv.className = type;
+            resultDiv.textContent = message;
+        }
+
+        function clearResult() {
+            resultDiv.className = '';
+            resultDiv.textContent = '';
+        }
+
+        async function testHealth() {
+            showResult('⏳ Test en cours...', 'info');
+            try {
+                const response = await fetch(`${API_URL}/health`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                showResult(
+                    `✅ BACKEND FONCTIONNE!\n\n` +
+                    `Status: ${response.status}\n` +
+                    `Message: ${data.message}\n` +
+                    `Environment: ${data.environment}\n` +
+                    `Timestamp: ${data.timestamp}`,
+                    'success'
+                );
+            } catch (error) {
+                showResult(
+                    `❌ ERREUR BACKEND\n\n` +
+                    `Type: ${error.name}\n` +
+                    `Message: ${error.message}\n\n` +
+                    `SOLUTIONS:\n` +
+                    `1. Vérifiez que le backend est démarré (port 5000)\n` +
+                    `2. Videz le cache du navigateur (Ctrl+Shift+Delete)\n` +
+                    `3. Redémarrez les serveurs avec START.bat`,
+                    'error'
+                );
+            }
+        }
+
+        async function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            showResult('⏳ Test de connexion...', 'info');
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ CONNEXION RÉUSSIE!\n\n` +
+                        `Utilisateur: ${data.user.firstName} ${data.user.lastName}\n` +
+                        `Email: ${data.user.email}\n` +
+                        `Role: ${data.user.role}\n` +
+                        `Token: ${data.token.substring(0, 30)}...\n\n` +
+                        `🎉 L'API fonctionne parfaitement!\n` +
+                        `Vous pouvez maintenant utiliser l'application.`,
+                        'success'
+                    );
+                } else {
+                    showResult(
+                        `❌ CONNEXION ÉCHOUÉE\n\n` +
+                        `Status: ${response.status}\n` +
+                        `Message: ${data.message}\n\n` +
+                        `Vérifiez vos identifiants.`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult(
+                    `❌ ERREUR NETWORK\n\n` +
+                    `Type: ${error.name}\n` +
+                    `Message: ${error.message}\n\n` +
+                    `CAUSE PROBABLE:\n` +
+                    `- Le backend n'est pas démarré\n` +
+                    `- Problème CORS\n` +
+                    `- Cache du navigateur\n\n` +
+                    `SOLUTIONS:\n` +
+                    `1. Redémarrez: taskkill /F /IM node.exe && START.bat\n` +
+                    `2. Videz le cache: Ctrl+Shift+Delete\n` +
+                    `3. Rechargez: Ctrl+F5`,
+                    'error'
+                );
+            }
+        }
+
+        async function testCORS() {
+            showResult('⏳ Test CORS...', 'info');
+            try {
+                const response = await fetch(`${API_URL}/health`, {
+                    method: 'OPTIONS'
+                });
+                
+                const headers = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers')
+                };
+                
+                showResult(
+                    `✅ CORS CONFIGURÉ\n\n` +
+                    `Origin: ${headers['Access-Control-Allow-Origin'] || 'Non spécifié'}\n` +
+                    `Methods: ${headers['Access-Control-Allow-Methods'] || 'Non spécifié'}\n` +
+                    `Headers: ${headers['Access-Control-Allow-Headers'] || 'Non spécifié'}\n\n` +
+                    `✅ Le navigateur peut communiquer avec l'API`,
+                    'success'
+                );
+            } catch (error) {
+                showResult(
+                    `❌ ERREUR CORS\n\n` +
+                    `Message: ${error.message}\n\n` +
+                    `Le backend n'accepte pas les requêtes de cette origine.\n` +
+                    `Vérifiez FRONTEND_URL dans backend/.env`,
+                    'error'
+                );
+            }
+        }
+
+        // Auto-test au chargement
+        window.addEventListener('load', () => {
+            showResult(
+                `📋 INSTRUCTIONS:\n\n` +
+                `1. Cliquez sur "Test Backend Health" pour vérifier le backend\n` +
+                `2. Cliquez sur "Test Login" pour tester la connexion\n` +
+                `3. Si ça fonctionne ici, le problème vient du cache de votre navigateur\n\n` +
+                `💡 SOLUTIONS au problème "Network Error":\n` +
+                `- Videz le cache: Ctrl+Shift+Delete\n` +
+                `- Rechargez la page: Ctrl+F5\n` +
+                `- Redémarrez les serveurs: START.bat`,
+                'info'
+            );
+        });
+    </script>
+</body>
+</html>

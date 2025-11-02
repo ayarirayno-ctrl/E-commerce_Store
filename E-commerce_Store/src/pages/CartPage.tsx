@@ -1,16 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { usePromoCodes } from '../hooks/usePromoCodes';
+import { useAbandonedCart } from '../hooks/useAbandonedCart';
 import { formatPrice } from '../utils/formatters';
 import CartItem from '../components/cart/CartItem';
 import Button from '../components/ui/Button';
+import AbandonedCartModal from '../components/cart/AbandonedCartModal';
 import { PromoCodeInput, AppliedPromoCode } from '../components/promo/PromoCodeInput';
 import { ShoppingBag, ArrowLeft } from 'lucide-react';
 
 const CartPage: React.FC = () => {
+  const navigate = useNavigate();
   const { items, totalItems, totalPrice, clearCartItems } = useCart();
-  const { appliedCode, discountAmount, getFinalTotal } = usePromoCodes();
+  const { appliedCode, discountAmount, getFinalTotal, validateAndApply } = usePromoCodes();
+  const { getUserAbandonedCarts, markCartAsRecovered } = useAbandonedCart();
+  const [showAbandonedCartModal, setShowAbandonedCartModal] = useState(false);
+  const [selectedAbandonedCart, setSelectedAbandonedCart] = useState<import('../types/abandonedCart').AbandonedCart | null>(null);
+
+  // Check for abandoned carts on mount
+  useEffect(() => {
+    const abandonedCarts = getUserAbandonedCarts();
+    if (abandonedCarts.length > 0 && items.length === 0) {
+      // Show modal for most recent abandoned cart
+      setSelectedAbandonedCart(abandonedCarts[0]);
+      setShowAbandonedCartModal(true);
+    }
+  }, [getUserAbandonedCarts, items.length]);
+
+  const handleRecoverCart = (promoCode?: string) => {
+    if (selectedAbandonedCart) {
+      markCartAsRecovered(selectedAbandonedCart.id);
+      
+      // Apply promo code if available
+      if (promoCode) {
+        validateAndApply(promoCode);
+      }
+      
+      // Navigate to checkout
+      navigate('/checkout');
+    }
+  };
 
   const shippingCost = totalPrice >= 50 ? 0 : 9.99;
   const taxRate = 0.08;
@@ -162,15 +192,22 @@ const CartPage: React.FC = () => {
               </div>
             </div>
           </div>
-        </div>
       </div>
+    </div>
+
+      {/* Abandoned Cart Modal */}
+      {showAbandonedCartModal && selectedAbandonedCart && (
+        <AbandonedCartModal
+          cart={selectedAbandonedCart}
+          onClose={() => setShowAbandonedCartModal(false)}
+          onRecover={handleRecoverCart}
+        />
+      )}
     </div>
   );
 };
 
 export default CartPage;
-
-
 
 
 

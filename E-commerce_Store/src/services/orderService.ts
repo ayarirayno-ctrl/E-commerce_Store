@@ -1,101 +1,58 @@
-import api from '../lib/api';
-import { AxiosError } from 'axios';
+import axios from 'axios';
+import type { Order, OrderItem, ShippingAddress } from '../types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-// Types
-export interface OrderItem {
-  product: string;
-  name: string;
-  price: number;
-  quantity: number;
-  image?: string;
-}
-
-export interface Address {
-  street: string;
-  city: string;
-  state: string;
-  zipCode: string;
-  country: string;
-}
-
 export interface CreateOrderData {
-  shippingAddress: Address;
-  billingAddress?: Address;
-  paymentMethod: string;
-  notes?: string;
-}
-
-export interface Order {
-  _id: string;
-  orderNumber: string;
   items: OrderItem[];
-  shippingAddress: Address;
-  billingAddress: Address;
-  paymentMethod: string;
-  paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
-  orderStatus: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  subtotal: number;
-  tax: number;
-  shippingCost: number;
-  discount: number;
-  total: number;
-  notes?: string;
-  createdAt: string;
-  updatedAt?: string;
-  cancelledAt?: string;
-  cancellationReason?: string;
-}
-
-export interface OrdersResponse {
-  success: boolean;
-  orders: Order[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    pages: number;
+  shippingAddress: ShippingAddress;
+  paymentMethod: 'card' | 'paypal' | 'cod';
+  itemsPrice: number;
+  shippingPrice: number;
+  taxPrice: number;
+  totalPrice: number;
+  promoCode?: {
+    code: string;
+    discount: number;
+    discountType: string;
   };
 }
 
-export interface OrderResponse {
-  success: boolean;
-  order: Order;
-  message?: string;
-}
-
 class OrderService {
+  private getAuthHeader() {
+    const token = localStorage.getItem('token');
+    return { Authorization: `Bearer ${token}` };
+  }
+
   // Create new order
   async createOrder(orderData: CreateOrderData): Promise<Order> {
     try {
-      const response = await api.post<OrderResponse>(
-        `${API_URL}/client-orders`,
-        orderData
+      const response = await axios.post<{ order: Order }>(
+        `${API_URL}/orders`,
+        orderData,
+        { headers: this.getAuthHeader() }
       );
       return response.data.order;
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message?: string }>;
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        axiosError.response?.data?.message || 'Failed to create order'
+        err.response?.data?.message || 'Erreur lors de la création de la commande'
       );
     }
   }
 
   // Get all orders for current user
-  async getMyOrders(page = 1, limit = 10): Promise<OrdersResponse> {
+  async getMyOrders(page = 1, limit = 10): Promise<{ orders: Order[], pagination: { pages: number, total: number } }> {
     try {
-      const response = await api.get<OrdersResponse>(
-        `${API_URL}/client-orders`,
-        {
-          params: { page, limit },
-        }
+      const response = await axios.get<{ orders: Order[], pagination: { pages: number, total: number } }>(
+        `${API_URL}/orders/my-orders?page=${page}&limit=${limit}`,
+        { headers: this.getAuthHeader() }
       );
       return response.data;
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message?: string }>;
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        axiosError.response?.data?.message || 'Failed to fetch orders'
+        err.response?.data?.message || 'Erreur lors de la récupération des commandes'
       );
     }
   }
@@ -103,30 +60,32 @@ class OrderService {
   // Get single order by ID
   async getOrderById(orderId: string): Promise<Order> {
     try {
-      const response = await api.get<OrderResponse>(
-        `${API_URL}/client-orders/${orderId}`
+      const response = await axios.get<{ order: Order }>(
+        `${API_URL}/orders/${orderId}`,
+        { headers: this.getAuthHeader() }
       );
       return response.data.order;
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message?: string }>;
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        axiosError.response?.data?.message || 'Failed to fetch order details'
+        err.response?.data?.message || 'Erreur lors de la récupération de la commande'
       );
     }
   }
 
   // Cancel order
-  async cancelOrder(orderId: string, reason?: string): Promise<Order> {
+  async cancelOrder(orderId: string): Promise<Order> {
     try {
-      const response = await api.put<OrderResponse>(
-        `${API_URL}/client-orders/${orderId}/cancel`,
-        { reason }
+      const response = await axios.put<{ order: Order }>(
+        `${API_URL}/orders/${orderId}/cancel`,
+        {},
+        { headers: this.getAuthHeader() }
       );
       return response.data.order;
-    } catch (error) {
-      const axiosError = error as AxiosError<{ message?: string }>;
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       throw new Error(
-        axiosError.response?.data?.message || 'Failed to cancel order'
+        err.response?.data?.message || 'Erreur lors de l\'annulation de la commande'
       );
     }
   }

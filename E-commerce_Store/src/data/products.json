@@ -14,6 +14,46 @@
       "images": [
         "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "1-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 36,
+          "price": 989.9,
+          "sku": "P1-BLA-OS"
+        },
+        {
+          "id": "1-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 18,
+          "price": 1046.05,
+          "sku": "P1-WHI-OS"
+        },
+        {
+          "id": "1-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 31,
+          "price": 988.52,
+          "sku": "P1-BLU-OS"
+        },
+        {
+          "id": "1-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 6,
+          "price": 967.29,
+          "sku": "P1-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
       ]
     },
     {
@@ -30,6 +70,46 @@
       "images": [
         "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "2-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 40,
+          "price": 938.62,
+          "sku": "P2-BLA-OS"
+        },
+        {
+          "id": "2-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 14,
+          "price": 927.61,
+          "sku": "P2-WHI-OS"
+        },
+        {
+          "id": "2-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 4,
+          "price": 873.99,
+          "sku": "P2-BLU-OS"
+        },
+        {
+          "id": "2-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 49,
+          "price": 863.89,
+          "sku": "P2-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
       ]
     },
     {
@@ -46,6 +126,46 @@
       "images": [
         "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "3-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 23,
+          "price": 1033.34,
+          "sku": "P3-BLA-OS"
+        },
+        {
+          "id": "3-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 14,
+          "price": 1014.4,
+          "sku": "P3-WHI-OS"
+        },
+        {
+          "id": "3-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 2,
+          "price": 966.55,
+          "sku": "P3-BLU-OS"
+        },
+        {
+          "id": "3-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 5,
+          "price": 1047.56,
+          "sku": "P3-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
       ]
     },
     {
@@ -62,6 +182,46 @@
       "images": [
         "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "4-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 40,
+          "price": 811.62,
+          "sku": "P4-BLA-OS"
+        },
+        {
+          "id": "4-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 11,
+          "price": 834.09,
+          "sku": "P4-WHI-OS"
+        },
+        {
+          "id": "4-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 39,
+          "price": 830.7,
+          "sku": "P4-BLU-OS"
+        },
+        {
+          "id": "4-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 25,
+          "price": 819.52,
+          "sku": "P4-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
       ]
     },
     {
@@ -78,6 +238,37 @@
       "images": [
         "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "5-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 0,
+          "price": 2453.26,
+          "sku": "P5-SIL-OS"
+        },
+        {
+          "id": "5-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 4,
+          "price": 2613.11,
+          "sku": "P5-SPA-OS"
+        },
+        {
+          "id": "5-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 20,
+          "price": 2590.65,
+          "sku": "P5-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
       ]
     },
     {
@@ -94,6 +285,37 @@
       "images": [
         "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
         "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "6-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 34,
+          "price": 1981.84,
+          "sku": "P6-SIL-OS"
+        },
+        {
+          "id": "6-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 17,
+          "price": 1987.1,
+          "sku": "P6-SPA-OS"
+        },
+        {
+          "id": "6-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 49,
+          "price": 1984.72,
+          "sku": "P6-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
       ]
     },
     {
@@ -106,10 +328,41 @@
       "stock": 35,
       "brand": "HP",
       "category": "laptops",
-      "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "7-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 37,
+          "price": 1274.32,
+          "sku": "P7-SIL-OS"
+        },
+        {
+          "id": "7-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 32,
+          "price": 1254.91,
+          "sku": "P7-SPA-OS"
+        },
+        {
+          "id": "7-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 27,
+          "price": 1318.02,
+          "sku": "P7-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
       ]
     },
     {
@@ -122,10 +375,41 @@
       "stock": 30,
       "brand": "Lenovo",
       "category": "laptops",
-      "thumbnail": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "8-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 32,
+          "price": 1587.4,
+          "sku": "P8-SIL-OS"
+        },
+        {
+          "id": "8-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 40,
+          "price": 1556.79,
+          "sku": "P8-SPA-OS"
+        },
+        {
+          "id": "8-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 12,
+          "price": 1611.11,
+          "sku": "P8-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
       ]
     },
     {
@@ -138,10 +422,10 @@
       "stock": 100,
       "brand": "Chanel",
       "category": "fragrances",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -154,10 +438,10 @@
       "stock": 80,
       "brand": "Dior",
       "category": "fragrances",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -170,10 +454,10 @@
       "stock": 60,
       "brand": "Tom Ford",
       "category": "fragrances",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -186,10 +470,10 @@
       "stock": 200,
       "brand": "CeraVe",
       "category": "skincare",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -202,10 +486,10 @@
       "stock": 150,
       "brand": "The Ordinary",
       "category": "skincare",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -218,10 +502,10 @@
       "stock": 25,
       "brand": "La Mer",
       "category": "skincare",
-      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -234,10 +518,10 @@
       "stock": 500,
       "brand": "Bob's Red Mill",
       "category": "groceries",
-      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -250,10 +534,10 @@
       "stock": 300,
       "brand": "California Olive Ranch",
       "category": "groceries",
-      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -266,10 +550,10 @@
       "stock": 200,
       "brand": "Manuka Health",
       "category": "groceries",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -282,10 +566,10 @@
       "stock": 80,
       "brand": "Artisan Home",
       "category": "home-decoration",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -298,10 +582,10 @@
       "stock": 120,
       "brand": "Bright Ideas",
       "category": "home-decoration",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -314,10 +598,10 @@
       "stock": 90,
       "brand": "Cozy Home",
       "category": "home-decoration",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1487015307662-6ce6210680f1?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1487015307662-6ce6210680f1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1487015307662-6ce6210680f1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -330,10 +614,10 @@
       "stock": 15,
       "brand": "Comfort Living",
       "category": "furniture",
-      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -346,10 +630,10 @@
       "stock": 20,
       "brand": "Elegant Dining",
       "category": "furniture",
-      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1540574163026-643ea20ade25?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -362,10 +646,10 @@
       "stock": 50,
       "brand": "WorkPro",
       "category": "furniture",
-      "thumbnail": "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -378,10 +662,251 @@
       "stock": 200,
       "brand": "Comfort Wear",
       "category": "tops",
-      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "24-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 20,
+          "price": 25.28,
+          "sku": "P24-BLA-XS"
+        },
+        {
+          "id": "24-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 49,
+          "price": 25.46,
+          "sku": "P24-BLA-S"
+        },
+        {
+          "id": "24-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 31,
+          "price": 25.99,
+          "sku": "P24-BLA-M"
+        },
+        {
+          "id": "24-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 37,
+          "price": 25.27,
+          "sku": "P24-BLA-L"
+        },
+        {
+          "id": "24-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 37,
+          "price": 24.22,
+          "sku": "P24-BLA-XL"
+        },
+        {
+          "id": "24-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 23,
+          "price": 24.39,
+          "sku": "P24-WHI-XS"
+        },
+        {
+          "id": "24-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 5,
+          "price": 24.72,
+          "sku": "P24-WHI-S"
+        },
+        {
+          "id": "24-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 26,
+          "price": 25.78,
+          "sku": "P24-WHI-M"
+        },
+        {
+          "id": "24-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 8,
+          "price": 26.16,
+          "sku": "P24-WHI-L"
+        },
+        {
+          "id": "24-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 45,
+          "price": 25.1,
+          "sku": "P24-WHI-XL"
+        },
+        {
+          "id": "24-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 39,
+          "price": 26.03,
+          "sku": "P24-NAV-XS"
+        },
+        {
+          "id": "24-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 24,
+          "price": 24.38,
+          "sku": "P24-NAV-S"
+        },
+        {
+          "id": "24-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 9,
+          "price": 25.92,
+          "sku": "P24-NAV-M"
+        },
+        {
+          "id": "24-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 17,
+          "price": 24.04,
+          "sku": "P24-NAV-L"
+        },
+        {
+          "id": "24-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 12,
+          "price": 24.25,
+          "sku": "P24-NAV-XL"
+        },
+        {
+          "id": "24-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 27,
+          "price": 25.96,
+          "sku": "P24-GRA-XS"
+        },
+        {
+          "id": "24-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 31,
+          "price": 25.34,
+          "sku": "P24-GRA-S"
+        },
+        {
+          "id": "24-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 4,
+          "price": 25.62,
+          "sku": "P24-GRA-M"
+        },
+        {
+          "id": "24-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 21,
+          "price": 25.28,
+          "sku": "P24-GRA-L"
+        },
+        {
+          "id": "24-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 47,
+          "price": 26.23,
+          "sku": "P24-GRA-XL"
+        },
+        {
+          "id": "24-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 25,
+          "price": 24.22,
+          "sku": "P24-RED-XS"
+        },
+        {
+          "id": "24-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 31,
+          "price": 24.42,
+          "sku": "P24-RED-S"
+        },
+        {
+          "id": "24-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 38,
+          "price": 25.16,
+          "sku": "P24-RED-M"
+        },
+        {
+          "id": "24-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 8,
+          "price": 24.81,
+          "sku": "P24-RED-L"
+        },
+        {
+          "id": "24-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 45,
+          "price": 25.56,
+          "sku": "P24-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -394,10 +919,251 @@
       "stock": 150,
       "brand": "Classic Style",
       "category": "tops",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "25-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 5,
+          "price": 45.26,
+          "sku": "P25-BLA-XS"
+        },
+        {
+          "id": "25-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 32,
+          "price": 44.06,
+          "sku": "P25-BLA-S"
+        },
+        {
+          "id": "25-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 22,
+          "price": 45.33,
+          "sku": "P25-BLA-M"
+        },
+        {
+          "id": "25-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 41,
+          "price": 44.57,
+          "sku": "P25-BLA-L"
+        },
+        {
+          "id": "25-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 24,
+          "price": 43.33,
+          "sku": "P25-BLA-XL"
+        },
+        {
+          "id": "25-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 17,
+          "price": 44.75,
+          "sku": "P25-WHI-XS"
+        },
+        {
+          "id": "25-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 48,
+          "price": 45.75,
+          "sku": "P25-WHI-S"
+        },
+        {
+          "id": "25-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 13,
+          "price": 43.85,
+          "sku": "P25-WHI-M"
+        },
+        {
+          "id": "25-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 37,
+          "price": 43.15,
+          "sku": "P25-WHI-L"
+        },
+        {
+          "id": "25-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 6,
+          "price": 42.97,
+          "sku": "P25-WHI-XL"
+        },
+        {
+          "id": "25-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 24,
+          "price": 44.81,
+          "sku": "P25-NAV-XS"
+        },
+        {
+          "id": "25-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 24,
+          "price": 43.16,
+          "sku": "P25-NAV-S"
+        },
+        {
+          "id": "25-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 14,
+          "price": 46.35,
+          "sku": "P25-NAV-M"
+        },
+        {
+          "id": "25-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 4,
+          "price": 43.61,
+          "sku": "P25-NAV-L"
+        },
+        {
+          "id": "25-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 31,
+          "price": 44.41,
+          "sku": "P25-NAV-XL"
+        },
+        {
+          "id": "25-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 35,
+          "price": 47.18,
+          "sku": "P25-GRA-XS"
+        },
+        {
+          "id": "25-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 13,
+          "price": 44.94,
+          "sku": "P25-GRA-S"
+        },
+        {
+          "id": "25-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 41,
+          "price": 44.24,
+          "sku": "P25-GRA-M"
+        },
+        {
+          "id": "25-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 2,
+          "price": 43.82,
+          "sku": "P25-GRA-L"
+        },
+        {
+          "id": "25-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 5,
+          "price": 44.68,
+          "sku": "P25-GRA-XL"
+        },
+        {
+          "id": "25-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 15,
+          "price": 47.14,
+          "sku": "P25-RED-XS"
+        },
+        {
+          "id": "25-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 31,
+          "price": 43.59,
+          "sku": "P25-RED-S"
+        },
+        {
+          "id": "25-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 3,
+          "price": 45.91,
+          "sku": "P25-RED-M"
+        },
+        {
+          "id": "25-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 27,
+          "price": 46.03,
+          "sku": "P25-RED-L"
+        },
+        {
+          "id": "25-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 23,
+          "price": 46.22,
+          "sku": "P25-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -410,10 +1176,251 @@
       "stock": 100,
       "brand": "Cozy Wear",
       "category": "tops",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "26-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 50,
+          "price": 63.59,
+          "sku": "P26-BLA-XS"
+        },
+        {
+          "id": "26-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 14,
+          "price": 63.31,
+          "sku": "P26-BLA-S"
+        },
+        {
+          "id": "26-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 49,
+          "price": 62.26,
+          "sku": "P26-BLA-M"
+        },
+        {
+          "id": "26-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 21,
+          "price": 64.2,
+          "sku": "P26-BLA-L"
+        },
+        {
+          "id": "26-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 45,
+          "price": 68.12,
+          "sku": "P26-BLA-XL"
+        },
+        {
+          "id": "26-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 7,
+          "price": 64.63,
+          "sku": "P26-WHI-XS"
+        },
+        {
+          "id": "26-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 27,
+          "price": 62.18,
+          "sku": "P26-WHI-S"
+        },
+        {
+          "id": "26-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 3,
+          "price": 64.9,
+          "sku": "P26-WHI-M"
+        },
+        {
+          "id": "26-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 30,
+          "price": 63.85,
+          "sku": "P26-WHI-L"
+        },
+        {
+          "id": "26-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 17,
+          "price": 63.11,
+          "sku": "P26-WHI-XL"
+        },
+        {
+          "id": "26-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 46,
+          "price": 67.35,
+          "sku": "P26-NAV-XS"
+        },
+        {
+          "id": "26-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 28,
+          "price": 66.63,
+          "sku": "P26-NAV-S"
+        },
+        {
+          "id": "26-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 27,
+          "price": 62.51,
+          "sku": "P26-NAV-M"
+        },
+        {
+          "id": "26-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 1,
+          "price": 64.82,
+          "sku": "P26-NAV-L"
+        },
+        {
+          "id": "26-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 6,
+          "price": 68.17,
+          "sku": "P26-NAV-XL"
+        },
+        {
+          "id": "26-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 1,
+          "price": 64.99,
+          "sku": "P26-GRA-XS"
+        },
+        {
+          "id": "26-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 47,
+          "price": 62.72,
+          "sku": "P26-GRA-S"
+        },
+        {
+          "id": "26-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 22,
+          "price": 63.59,
+          "sku": "P26-GRA-M"
+        },
+        {
+          "id": "26-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 5,
+          "price": 68.07,
+          "sku": "P26-GRA-L"
+        },
+        {
+          "id": "26-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 8,
+          "price": 67.2,
+          "sku": "P26-GRA-XL"
+        },
+        {
+          "id": "26-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 39,
+          "price": 67.22,
+          "sku": "P26-RED-XS"
+        },
+        {
+          "id": "26-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 13,
+          "price": 67.35,
+          "sku": "P26-RED-S"
+        },
+        {
+          "id": "26-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 48,
+          "price": 65.35,
+          "sku": "P26-RED-M"
+        },
+        {
+          "id": "26-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 35,
+          "price": 62.86,
+          "sku": "P26-RED-L"
+        },
+        {
+          "id": "26-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 16,
+          "price": 62.36,
+          "sku": "P26-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -426,10 +1433,251 @@
       "stock": 80,
       "brand": "Fashion Forward",
       "category": "womens-dresses",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "27-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 34,
+          "price": 54.71,
+          "sku": "P27-BLA-XS"
+        },
+        {
+          "id": "27-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 33,
+          "price": 53.23,
+          "sku": "P27-BLA-S"
+        },
+        {
+          "id": "27-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 31,
+          "price": 56.51,
+          "sku": "P27-BLA-M"
+        },
+        {
+          "id": "27-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 40,
+          "price": 53.54,
+          "sku": "P27-BLA-L"
+        },
+        {
+          "id": "27-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 21,
+          "price": 52.29,
+          "sku": "P27-BLA-XL"
+        },
+        {
+          "id": "27-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 14,
+          "price": 52.73,
+          "sku": "P27-WHI-XS"
+        },
+        {
+          "id": "27-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 37,
+          "price": 52.68,
+          "sku": "P27-WHI-S"
+        },
+        {
+          "id": "27-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 43,
+          "price": 56.23,
+          "sku": "P27-WHI-M"
+        },
+        {
+          "id": "27-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 43,
+          "price": 54.61,
+          "sku": "P27-WHI-L"
+        },
+        {
+          "id": "27-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 42,
+          "price": 54.57,
+          "sku": "P27-WHI-XL"
+        },
+        {
+          "id": "27-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 3,
+          "price": 52.88,
+          "sku": "P27-NAV-XS"
+        },
+        {
+          "id": "27-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 16,
+          "price": 56.44,
+          "sku": "P27-NAV-S"
+        },
+        {
+          "id": "27-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 10,
+          "price": 54.6,
+          "sku": "P27-NAV-M"
+        },
+        {
+          "id": "27-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 18,
+          "price": 57.41,
+          "sku": "P27-NAV-L"
+        },
+        {
+          "id": "27-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 23,
+          "price": 53.31,
+          "sku": "P27-NAV-XL"
+        },
+        {
+          "id": "27-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 9,
+          "price": 52.64,
+          "sku": "P27-GRA-XS"
+        },
+        {
+          "id": "27-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 0,
+          "price": 54.51,
+          "sku": "P27-GRA-S"
+        },
+        {
+          "id": "27-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 35,
+          "price": 53.74,
+          "sku": "P27-GRA-M"
+        },
+        {
+          "id": "27-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 40,
+          "price": 57.1,
+          "sku": "P27-GRA-L"
+        },
+        {
+          "id": "27-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 48,
+          "price": 52.33,
+          "sku": "P27-GRA-XL"
+        },
+        {
+          "id": "27-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 36,
+          "price": 56.06,
+          "sku": "P27-RED-XS"
+        },
+        {
+          "id": "27-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 2,
+          "price": 56.93,
+          "sku": "P27-RED-S"
+        },
+        {
+          "id": "27-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 20,
+          "price": 57.69,
+          "sku": "P27-RED-M"
+        },
+        {
+          "id": "27-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 47,
+          "price": 53.5,
+          "sku": "P27-RED-L"
+        },
+        {
+          "id": "27-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 1,
+          "price": 54.97,
+          "sku": "P27-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -442,10 +1690,251 @@
       "stock": 40,
       "brand": "Elegant Style",
       "category": "womens-dresses",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "28-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 8,
+          "price": 125.54,
+          "sku": "P28-BLA-XS"
+        },
+        {
+          "id": "28-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 25,
+          "price": 124.17,
+          "sku": "P28-BLA-S"
+        },
+        {
+          "id": "28-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 1,
+          "price": 114.83,
+          "sku": "P28-BLA-M"
+        },
+        {
+          "id": "28-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 17,
+          "price": 122.95,
+          "sku": "P28-BLA-L"
+        },
+        {
+          "id": "28-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 22,
+          "price": 124.44,
+          "sku": "P28-BLA-XL"
+        },
+        {
+          "id": "28-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 42,
+          "price": 115.48,
+          "sku": "P28-WHI-XS"
+        },
+        {
+          "id": "28-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 49,
+          "price": 114.98,
+          "sku": "P28-WHI-S"
+        },
+        {
+          "id": "28-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 5,
+          "price": 123.8,
+          "sku": "P28-WHI-M"
+        },
+        {
+          "id": "28-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 9,
+          "price": 122.46,
+          "sku": "P28-WHI-L"
+        },
+        {
+          "id": "28-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 50,
+          "price": 122,
+          "sku": "P28-WHI-XL"
+        },
+        {
+          "id": "28-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 17,
+          "price": 114.14,
+          "sku": "P28-NAV-XS"
+        },
+        {
+          "id": "28-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 40,
+          "price": 115.08,
+          "sku": "P28-NAV-S"
+        },
+        {
+          "id": "28-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 27,
+          "price": 124.15,
+          "sku": "P28-NAV-M"
+        },
+        {
+          "id": "28-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 40,
+          "price": 120.16,
+          "sku": "P28-NAV-L"
+        },
+        {
+          "id": "28-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 44,
+          "price": 118.26,
+          "sku": "P28-NAV-XL"
+        },
+        {
+          "id": "28-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 0,
+          "price": 116.39,
+          "sku": "P28-GRA-XS"
+        },
+        {
+          "id": "28-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 47,
+          "price": 119.04,
+          "sku": "P28-GRA-S"
+        },
+        {
+          "id": "28-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 23,
+          "price": 116.34,
+          "sku": "P28-GRA-M"
+        },
+        {
+          "id": "28-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 42,
+          "price": 122.62,
+          "sku": "P28-GRA-L"
+        },
+        {
+          "id": "28-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 41,
+          "price": 123.13,
+          "sku": "P28-GRA-XL"
+        },
+        {
+          "id": "28-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 33,
+          "price": 114.18,
+          "sku": "P28-RED-XS"
+        },
+        {
+          "id": "28-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 45,
+          "price": 116.24,
+          "sku": "P28-RED-S"
+        },
+        {
+          "id": "28-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 7,
+          "price": 118.86,
+          "sku": "P28-RED-M"
+        },
+        {
+          "id": "28-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 42,
+          "price": 123.89,
+          "sku": "P28-RED-L"
+        },
+        {
+          "id": "28-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 24,
+          "price": 123.12,
+          "sku": "P28-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -458,10 +1947,251 @@
       "stock": 60,
       "brand": "Beach Style",
       "category": "womens-dresses",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "29-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 2,
+          "price": 71.5,
+          "sku": "P29-BLA-XS"
+        },
+        {
+          "id": "29-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 31,
+          "price": 75.66,
+          "sku": "P29-BLA-S"
+        },
+        {
+          "id": "29-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 15,
+          "price": 76.11,
+          "sku": "P29-BLA-M"
+        },
+        {
+          "id": "29-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 9,
+          "price": 71.54,
+          "sku": "P29-BLA-L"
+        },
+        {
+          "id": "29-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 30,
+          "price": 73.57,
+          "sku": "P29-BLA-XL"
+        },
+        {
+          "id": "29-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 23,
+          "price": 73.85,
+          "sku": "P29-WHI-XS"
+        },
+        {
+          "id": "29-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 20,
+          "price": 74.21,
+          "sku": "P29-WHI-S"
+        },
+        {
+          "id": "29-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 24,
+          "price": 73.1,
+          "sku": "P29-WHI-M"
+        },
+        {
+          "id": "29-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 48,
+          "price": 73.36,
+          "sku": "P29-WHI-L"
+        },
+        {
+          "id": "29-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 1,
+          "price": 77.57,
+          "sku": "P29-WHI-XL"
+        },
+        {
+          "id": "29-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 28,
+          "price": 74.06,
+          "sku": "P29-NAV-XS"
+        },
+        {
+          "id": "29-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 50,
+          "price": 72.78,
+          "sku": "P29-NAV-S"
+        },
+        {
+          "id": "29-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 32,
+          "price": 75.87,
+          "sku": "P29-NAV-M"
+        },
+        {
+          "id": "29-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 44,
+          "price": 76.73,
+          "sku": "P29-NAV-L"
+        },
+        {
+          "id": "29-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 3,
+          "price": 78.4,
+          "sku": "P29-NAV-XL"
+        },
+        {
+          "id": "29-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 30,
+          "price": 77.01,
+          "sku": "P29-GRA-XS"
+        },
+        {
+          "id": "29-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 37,
+          "price": 76.64,
+          "sku": "P29-GRA-S"
+        },
+        {
+          "id": "29-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 18,
+          "price": 75.07,
+          "sku": "P29-GRA-M"
+        },
+        {
+          "id": "29-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 8,
+          "price": 76.72,
+          "sku": "P29-GRA-L"
+        },
+        {
+          "id": "29-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 42,
+          "price": 74.58,
+          "sku": "P29-GRA-XL"
+        },
+        {
+          "id": "29-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 14,
+          "price": 74.54,
+          "sku": "P29-RED-XS"
+        },
+        {
+          "id": "29-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 24,
+          "price": 75.5,
+          "sku": "P29-RED-S"
+        },
+        {
+          "id": "29-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 34,
+          "price": 78.04,
+          "sku": "P29-RED-M"
+        },
+        {
+          "id": "29-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 15,
+          "price": 76.41,
+          "sku": "P29-RED-L"
+        },
+        {
+          "id": "29-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 14,
+          "price": 78.28,
+          "sku": "P29-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -474,10 +2204,215 @@
       "stock": 100,
       "brand": "SportMax",
       "category": "womens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "30-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 35,
+          "price": 121.36,
+          "sku": "P30-BLA-6"
+        },
+        {
+          "id": "30-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 23,
+          "price": 118.44,
+          "sku": "P30-BLA-7"
+        },
+        {
+          "id": "30-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 45,
+          "price": 116.93,
+          "sku": "P30-BLA-8"
+        },
+        {
+          "id": "30-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 44,
+          "price": 123.14,
+          "sku": "P30-BLA-9"
+        },
+        {
+          "id": "30-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 50,
+          "price": 126,
+          "sku": "P30-BLA-10"
+        },
+        {
+          "id": "30-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 15,
+          "price": 117.24,
+          "sku": "P30-BLA-11"
+        },
+        {
+          "id": "30-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 1,
+          "price": 123.97,
+          "sku": "P30-BLA-12"
+        },
+        {
+          "id": "30-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 19,
+          "price": 117.26,
+          "sku": "P30-WHI-6"
+        },
+        {
+          "id": "30-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 17,
+          "price": 118.82,
+          "sku": "P30-WHI-7"
+        },
+        {
+          "id": "30-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 42,
+          "price": 122.59,
+          "sku": "P30-WHI-8"
+        },
+        {
+          "id": "30-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 27,
+          "price": 120.96,
+          "sku": "P30-WHI-9"
+        },
+        {
+          "id": "30-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 10,
+          "price": 119.77,
+          "sku": "P30-WHI-10"
+        },
+        {
+          "id": "30-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 50,
+          "price": 122.56,
+          "sku": "P30-WHI-11"
+        },
+        {
+          "id": "30-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 36,
+          "price": 119.71,
+          "sku": "P30-WHI-12"
+        },
+        {
+          "id": "30-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 18,
+          "price": 125.08,
+          "sku": "P30-NAV-6"
+        },
+        {
+          "id": "30-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 4,
+          "price": 120.87,
+          "sku": "P30-NAV-7"
+        },
+        {
+          "id": "30-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 20,
+          "price": 125.11,
+          "sku": "P30-NAV-8"
+        },
+        {
+          "id": "30-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 50,
+          "price": 119.79,
+          "sku": "P30-NAV-9"
+        },
+        {
+          "id": "30-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 39,
+          "price": 124.31,
+          "sku": "P30-NAV-10"
+        },
+        {
+          "id": "30-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 38,
+          "price": 123.26,
+          "sku": "P30-NAV-11"
+        },
+        {
+          "id": "30-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 12,
+          "price": 119.06,
+          "sku": "P30-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -490,10 +2425,215 @@
       "stock": 70,
       "brand": "Elegant Steps",
       "category": "womens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1560343090-f0409e92791a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "31-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 41,
+          "price": 88.73,
+          "sku": "P31-BLA-6"
+        },
+        {
+          "id": "31-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 25,
+          "price": 83.8,
+          "sku": "P31-BLA-7"
+        },
+        {
+          "id": "31-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 10,
+          "price": 81.49,
+          "sku": "P31-BLA-8"
+        },
+        {
+          "id": "31-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 21,
+          "price": 81.72,
+          "sku": "P31-BLA-9"
+        },
+        {
+          "id": "31-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 43,
+          "price": 89.14,
+          "sku": "P31-BLA-10"
+        },
+        {
+          "id": "31-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 9,
+          "price": 88.12,
+          "sku": "P31-BLA-11"
+        },
+        {
+          "id": "31-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 21,
+          "price": 84.14,
+          "sku": "P31-BLA-12"
+        },
+        {
+          "id": "31-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 33,
+          "price": 88.78,
+          "sku": "P31-WHI-6"
+        },
+        {
+          "id": "31-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 15,
+          "price": 85.27,
+          "sku": "P31-WHI-7"
+        },
+        {
+          "id": "31-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 41,
+          "price": 85.9,
+          "sku": "P31-WHI-8"
+        },
+        {
+          "id": "31-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 33,
+          "price": 82.66,
+          "sku": "P31-WHI-9"
+        },
+        {
+          "id": "31-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 46,
+          "price": 89.23,
+          "sku": "P31-WHI-10"
+        },
+        {
+          "id": "31-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 40,
+          "price": 89.03,
+          "sku": "P31-WHI-11"
+        },
+        {
+          "id": "31-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 50,
+          "price": 87,
+          "sku": "P31-WHI-12"
+        },
+        {
+          "id": "31-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 30,
+          "price": 81.35,
+          "sku": "P31-NAV-6"
+        },
+        {
+          "id": "31-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 13,
+          "price": 84,
+          "sku": "P31-NAV-7"
+        },
+        {
+          "id": "31-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 13,
+          "price": 80.85,
+          "sku": "P31-NAV-8"
+        },
+        {
+          "id": "31-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 11,
+          "price": 87.6,
+          "sku": "P31-NAV-9"
+        },
+        {
+          "id": "31-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 7,
+          "price": 81.42,
+          "sku": "P31-NAV-10"
+        },
+        {
+          "id": "31-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 11,
+          "price": 82.79,
+          "sku": "P31-NAV-11"
+        },
+        {
+          "id": "31-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 9,
+          "price": 84.24,
+          "sku": "P31-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -506,10 +2646,215 @@
       "stock": 120,
       "brand": "Comfort Walk",
       "category": "womens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "32-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 11,
+          "price": 67.85,
+          "sku": "P32-BLA-6"
+        },
+        {
+          "id": "32-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 5,
+          "price": 65.85,
+          "sku": "P32-BLA-7"
+        },
+        {
+          "id": "32-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 22,
+          "price": 64.92,
+          "sku": "P32-BLA-8"
+        },
+        {
+          "id": "32-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 32,
+          "price": 68.04,
+          "sku": "P32-BLA-9"
+        },
+        {
+          "id": "32-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 23,
+          "price": 64.8,
+          "sku": "P32-BLA-10"
+        },
+        {
+          "id": "32-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 23,
+          "price": 62.04,
+          "sku": "P32-BLA-11"
+        },
+        {
+          "id": "32-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 9,
+          "price": 68.19,
+          "sku": "P32-BLA-12"
+        },
+        {
+          "id": "32-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 12,
+          "price": 63.98,
+          "sku": "P32-WHI-6"
+        },
+        {
+          "id": "32-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 34,
+          "price": 65.04,
+          "sku": "P32-WHI-7"
+        },
+        {
+          "id": "32-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 20,
+          "price": 62.49,
+          "sku": "P32-WHI-8"
+        },
+        {
+          "id": "32-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 39,
+          "price": 63.81,
+          "sku": "P32-WHI-9"
+        },
+        {
+          "id": "32-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 46,
+          "price": 65.76,
+          "sku": "P32-WHI-10"
+        },
+        {
+          "id": "32-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 34,
+          "price": 62.18,
+          "sku": "P32-WHI-11"
+        },
+        {
+          "id": "32-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 7,
+          "price": 63.79,
+          "sku": "P32-WHI-12"
+        },
+        {
+          "id": "32-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 21,
+          "price": 63,
+          "sku": "P32-NAV-6"
+        },
+        {
+          "id": "32-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 24,
+          "price": 63,
+          "sku": "P32-NAV-7"
+        },
+        {
+          "id": "32-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 23,
+          "price": 65.82,
+          "sku": "P32-NAV-8"
+        },
+        {
+          "id": "32-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 26,
+          "price": 62.32,
+          "sku": "P32-NAV-9"
+        },
+        {
+          "id": "32-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 12,
+          "price": 67.16,
+          "sku": "P32-NAV-10"
+        },
+        {
+          "id": "32-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 4,
+          "price": 64,
+          "sku": "P32-NAV-11"
+        },
+        {
+          "id": "32-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 24,
+          "price": 65.97,
+          "sku": "P32-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -522,10 +2867,251 @@
       "stock": 150,
       "brand": "Professional Wear",
       "category": "mens-shirts",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "33-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 45,
+          "price": 52.42,
+          "sku": "P33-BLA-XS"
+        },
+        {
+          "id": "33-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 28,
+          "price": 56.01,
+          "sku": "P33-BLA-S"
+        },
+        {
+          "id": "33-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 3,
+          "price": 54.47,
+          "sku": "P33-BLA-M"
+        },
+        {
+          "id": "33-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 48,
+          "price": 57.1,
+          "sku": "P33-BLA-L"
+        },
+        {
+          "id": "33-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 42,
+          "price": 52.84,
+          "sku": "P33-BLA-XL"
+        },
+        {
+          "id": "33-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 28,
+          "price": 56.62,
+          "sku": "P33-WHI-XS"
+        },
+        {
+          "id": "33-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 20,
+          "price": 53.55,
+          "sku": "P33-WHI-S"
+        },
+        {
+          "id": "33-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 42,
+          "price": 56.47,
+          "sku": "P33-WHI-M"
+        },
+        {
+          "id": "33-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 10,
+          "price": 55.86,
+          "sku": "P33-WHI-L"
+        },
+        {
+          "id": "33-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 28,
+          "price": 53.8,
+          "sku": "P33-WHI-XL"
+        },
+        {
+          "id": "33-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 30,
+          "price": 53.29,
+          "sku": "P33-NAV-XS"
+        },
+        {
+          "id": "33-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 23,
+          "price": 53.53,
+          "sku": "P33-NAV-S"
+        },
+        {
+          "id": "33-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 40,
+          "price": 57.18,
+          "sku": "P33-NAV-M"
+        },
+        {
+          "id": "33-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 30,
+          "price": 56.92,
+          "sku": "P33-NAV-L"
+        },
+        {
+          "id": "33-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 14,
+          "price": 52.26,
+          "sku": "P33-NAV-XL"
+        },
+        {
+          "id": "33-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 37,
+          "price": 55.79,
+          "sku": "P33-GRA-XS"
+        },
+        {
+          "id": "33-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 46,
+          "price": 53.01,
+          "sku": "P33-GRA-S"
+        },
+        {
+          "id": "33-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 43,
+          "price": 56.44,
+          "sku": "P33-GRA-M"
+        },
+        {
+          "id": "33-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 38,
+          "price": 53.61,
+          "sku": "P33-GRA-L"
+        },
+        {
+          "id": "33-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 19,
+          "price": 56.65,
+          "sku": "P33-GRA-XL"
+        },
+        {
+          "id": "33-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 37,
+          "price": 56.91,
+          "sku": "P33-RED-XS"
+        },
+        {
+          "id": "33-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 32,
+          "price": 54.46,
+          "sku": "P33-RED-S"
+        },
+        {
+          "id": "33-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 33,
+          "price": 56.58,
+          "sku": "P33-RED-M"
+        },
+        {
+          "id": "33-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 37,
+          "price": 52.58,
+          "sku": "P33-RED-L"
+        },
+        {
+          "id": "33-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 29,
+          "price": 54.96,
+          "sku": "P33-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -538,10 +3124,251 @@
       "stock": 120,
       "brand": "Casual Style",
       "category": "mens-shirts",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "34-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 17,
+          "price": 45.91,
+          "sku": "P34-BLA-XS"
+        },
+        {
+          "id": "34-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 16,
+          "price": 44.45,
+          "sku": "P34-BLA-S"
+        },
+        {
+          "id": "34-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 36,
+          "price": 46.32,
+          "sku": "P34-BLA-M"
+        },
+        {
+          "id": "34-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 35,
+          "price": 47.15,
+          "sku": "P34-BLA-L"
+        },
+        {
+          "id": "34-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 40,
+          "price": 43.67,
+          "sku": "P34-BLA-XL"
+        },
+        {
+          "id": "34-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 0,
+          "price": 43.86,
+          "sku": "P34-WHI-XS"
+        },
+        {
+          "id": "34-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 26,
+          "price": 44.25,
+          "sku": "P34-WHI-S"
+        },
+        {
+          "id": "34-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 3,
+          "price": 42.85,
+          "sku": "P34-WHI-M"
+        },
+        {
+          "id": "34-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 28,
+          "price": 44.61,
+          "sku": "P34-WHI-L"
+        },
+        {
+          "id": "34-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 9,
+          "price": 45.21,
+          "sku": "P34-WHI-XL"
+        },
+        {
+          "id": "34-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 43,
+          "price": 46.43,
+          "sku": "P34-NAV-XS"
+        },
+        {
+          "id": "34-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 13,
+          "price": 46.64,
+          "sku": "P34-NAV-S"
+        },
+        {
+          "id": "34-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 8,
+          "price": 43.84,
+          "sku": "P34-NAV-M"
+        },
+        {
+          "id": "34-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 33,
+          "price": 45.13,
+          "sku": "P34-NAV-L"
+        },
+        {
+          "id": "34-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 32,
+          "price": 44.03,
+          "sku": "P34-NAV-XL"
+        },
+        {
+          "id": "34-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 46,
+          "price": 45.26,
+          "sku": "P34-GRA-XS"
+        },
+        {
+          "id": "34-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 26,
+          "price": 42.95,
+          "sku": "P34-GRA-S"
+        },
+        {
+          "id": "34-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 9,
+          "price": 44.83,
+          "sku": "P34-GRA-M"
+        },
+        {
+          "id": "34-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 35,
+          "price": 46.16,
+          "sku": "P34-GRA-L"
+        },
+        {
+          "id": "34-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 13,
+          "price": 44.62,
+          "sku": "P34-GRA-XL"
+        },
+        {
+          "id": "34-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 14,
+          "price": 46.49,
+          "sku": "P34-RED-XS"
+        },
+        {
+          "id": "34-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 22,
+          "price": 46.9,
+          "sku": "P34-RED-S"
+        },
+        {
+          "id": "34-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 41,
+          "price": 43.69,
+          "sku": "P34-RED-M"
+        },
+        {
+          "id": "34-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 6,
+          "price": 44.41,
+          "sku": "P34-RED-L"
+        },
+        {
+          "id": "34-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 5,
+          "price": 43.36,
+          "sku": "P34-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -554,10 +3381,251 @@
       "stock": 90,
       "brand": "Classic Menswear",
       "category": "mens-shirts",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "35-Black-XS",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XS",
+          "stock": 29,
+          "price": 63.54,
+          "sku": "P35-BLA-XS"
+        },
+        {
+          "id": "35-Black-S",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 27,
+          "price": 62.77,
+          "sku": "P35-BLA-S"
+        },
+        {
+          "id": "35-Black-M",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 4,
+          "price": 62.26,
+          "sku": "P35-BLA-M"
+        },
+        {
+          "id": "35-Black-L",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 47,
+          "price": 64.07,
+          "sku": "P35-BLA-L"
+        },
+        {
+          "id": "35-Black-XL",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 29,
+          "price": 65.56,
+          "sku": "P35-BLA-XL"
+        },
+        {
+          "id": "35-White-XS",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XS",
+          "stock": 36,
+          "price": 66.53,
+          "sku": "P35-WHI-XS"
+        },
+        {
+          "id": "35-White-S",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "S",
+          "stock": 25,
+          "price": 62.68,
+          "sku": "P35-WHI-S"
+        },
+        {
+          "id": "35-White-M",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "M",
+          "stock": 48,
+          "price": 64.05,
+          "sku": "P35-WHI-M"
+        },
+        {
+          "id": "35-White-L",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "L",
+          "stock": 19,
+          "price": 62.63,
+          "sku": "P35-WHI-L"
+        },
+        {
+          "id": "35-White-XL",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "XL",
+          "stock": 35,
+          "price": 62.5,
+          "sku": "P35-WHI-XL"
+        },
+        {
+          "id": "35-Navy-XS",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XS",
+          "stock": 0,
+          "price": 66.96,
+          "sku": "P35-NAV-XS"
+        },
+        {
+          "id": "35-Navy-S",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "S",
+          "stock": 27,
+          "price": 63.2,
+          "sku": "P35-NAV-S"
+        },
+        {
+          "id": "35-Navy-M",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "M",
+          "stock": 48,
+          "price": 65.98,
+          "sku": "P35-NAV-M"
+        },
+        {
+          "id": "35-Navy-L",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "L",
+          "stock": 23,
+          "price": 66.17,
+          "sku": "P35-NAV-L"
+        },
+        {
+          "id": "35-Navy-XL",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "XL",
+          "stock": 32,
+          "price": 63.93,
+          "sku": "P35-NAV-XL"
+        },
+        {
+          "id": "35-Gray-XS",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XS",
+          "stock": 40,
+          "price": 63.75,
+          "sku": "P35-GRA-XS"
+        },
+        {
+          "id": "35-Gray-S",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "S",
+          "stock": 7,
+          "price": 64.12,
+          "sku": "P35-GRA-S"
+        },
+        {
+          "id": "35-Gray-M",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "M",
+          "stock": 39,
+          "price": 66.87,
+          "sku": "P35-GRA-M"
+        },
+        {
+          "id": "35-Gray-L",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "L",
+          "stock": 16,
+          "price": 63.39,
+          "sku": "P35-GRA-L"
+        },
+        {
+          "id": "35-Gray-XL",
+          "color": "Gray",
+          "colorHex": "#6B7280",
+          "size": "XL",
+          "stock": 20,
+          "price": 67.27,
+          "sku": "P35-GRA-XL"
+        },
+        {
+          "id": "35-Red-XS",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XS",
+          "stock": 50,
+          "price": 62.46,
+          "sku": "P35-RED-XS"
+        },
+        {
+          "id": "35-Red-S",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 22,
+          "price": 66.82,
+          "sku": "P35-RED-S"
+        },
+        {
+          "id": "35-Red-M",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 36,
+          "price": 65.85,
+          "sku": "P35-RED-M"
+        },
+        {
+          "id": "35-Red-L",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 10,
+          "price": 62.09,
+          "sku": "P35-RED-L"
+        },
+        {
+          "id": "35-Red-XL",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 23,
+          "price": 62.14,
+          "sku": "P35-RED-XL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy",
+        "Gray",
+        "Red"
+      ],
+      "availableSizes": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL"
       ]
     },
     {
@@ -570,10 +3638,215 @@
       "stock": 60,
       "brand": "Premium Leather",
       "category": "mens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1449505278894-297fdb3edbc1?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "36-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 44,
+          "price": 173.03,
+          "sku": "P36-BLA-6"
+        },
+        {
+          "id": "36-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 35,
+          "price": 178.22,
+          "sku": "P36-BLA-7"
+        },
+        {
+          "id": "36-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 5,
+          "price": 174.65,
+          "sku": "P36-BLA-8"
+        },
+        {
+          "id": "36-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 31,
+          "price": 184.11,
+          "sku": "P36-BLA-9"
+        },
+        {
+          "id": "36-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 5,
+          "price": 184.55,
+          "sku": "P36-BLA-10"
+        },
+        {
+          "id": "36-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 6,
+          "price": 172.07,
+          "sku": "P36-BLA-11"
+        },
+        {
+          "id": "36-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 36,
+          "price": 173.94,
+          "sku": "P36-BLA-12"
+        },
+        {
+          "id": "36-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 5,
+          "price": 182.7,
+          "sku": "P36-WHI-6"
+        },
+        {
+          "id": "36-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 9,
+          "price": 176,
+          "sku": "P36-WHI-7"
+        },
+        {
+          "id": "36-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 32,
+          "price": 171.06,
+          "sku": "P36-WHI-8"
+        },
+        {
+          "id": "36-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 20,
+          "price": 188.39,
+          "sku": "P36-WHI-9"
+        },
+        {
+          "id": "36-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 28,
+          "price": 187.16,
+          "sku": "P36-WHI-10"
+        },
+        {
+          "id": "36-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 27,
+          "price": 180.14,
+          "sku": "P36-WHI-11"
+        },
+        {
+          "id": "36-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 39,
+          "price": 182.06,
+          "sku": "P36-WHI-12"
+        },
+        {
+          "id": "36-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 33,
+          "price": 177.75,
+          "sku": "P36-NAV-6"
+        },
+        {
+          "id": "36-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 5,
+          "price": 185.59,
+          "sku": "P36-NAV-7"
+        },
+        {
+          "id": "36-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 28,
+          "price": 178.95,
+          "sku": "P36-NAV-8"
+        },
+        {
+          "id": "36-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 33,
+          "price": 186.87,
+          "sku": "P36-NAV-9"
+        },
+        {
+          "id": "36-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 17,
+          "price": 185.83,
+          "sku": "P36-NAV-10"
+        },
+        {
+          "id": "36-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 33,
+          "price": 182.95,
+          "sku": "P36-NAV-11"
+        },
+        {
+          "id": "36-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 20,
+          "price": 180.25,
+          "sku": "P36-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -586,10 +3859,215 @@
       "stock": 80,
       "brand": "SportPro",
       "category": "mens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "37-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 41,
+          "price": 144.54,
+          "sku": "P37-BLA-6"
+        },
+        {
+          "id": "37-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 26,
+          "price": 144.89,
+          "sku": "P37-BLA-7"
+        },
+        {
+          "id": "37-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 19,
+          "price": 142.4,
+          "sku": "P37-BLA-8"
+        },
+        {
+          "id": "37-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 16,
+          "price": 146.46,
+          "sku": "P37-BLA-9"
+        },
+        {
+          "id": "37-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 45,
+          "price": 145.82,
+          "sku": "P37-BLA-10"
+        },
+        {
+          "id": "37-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 15,
+          "price": 136.84,
+          "sku": "P37-BLA-11"
+        },
+        {
+          "id": "37-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 28,
+          "price": 146.03,
+          "sku": "P37-BLA-12"
+        },
+        {
+          "id": "37-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 11,
+          "price": 142.68,
+          "sku": "P37-WHI-6"
+        },
+        {
+          "id": "37-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 16,
+          "price": 145.82,
+          "sku": "P37-WHI-7"
+        },
+        {
+          "id": "37-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 33,
+          "price": 138.88,
+          "sku": "P37-WHI-8"
+        },
+        {
+          "id": "37-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 39,
+          "price": 146.39,
+          "sku": "P37-WHI-9"
+        },
+        {
+          "id": "37-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 15,
+          "price": 134.31,
+          "sku": "P37-WHI-10"
+        },
+        {
+          "id": "37-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 33,
+          "price": 145.59,
+          "sku": "P37-WHI-11"
+        },
+        {
+          "id": "37-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 50,
+          "price": 136.03,
+          "sku": "P37-WHI-12"
+        },
+        {
+          "id": "37-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 8,
+          "price": 135.44,
+          "sku": "P37-NAV-6"
+        },
+        {
+          "id": "37-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 11,
+          "price": 142.96,
+          "sku": "P37-NAV-7"
+        },
+        {
+          "id": "37-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 35,
+          "price": 140.02,
+          "sku": "P37-NAV-8"
+        },
+        {
+          "id": "37-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 31,
+          "price": 145.59,
+          "sku": "P37-NAV-9"
+        },
+        {
+          "id": "37-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 1,
+          "price": 146.31,
+          "sku": "P37-NAV-10"
+        },
+        {
+          "id": "37-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 26,
+          "price": 136.02,
+          "sku": "P37-NAV-11"
+        },
+        {
+          "id": "37-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 45,
+          "price": 147,
+          "sku": "P37-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -602,10 +4080,215 @@
       "stock": 100,
       "brand": "Comfort Walk",
       "category": "mens-shoes",
-      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "38-Black-6",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "6",
+          "stock": 45,
+          "price": 91.25,
+          "sku": "P38-BLA-6"
+        },
+        {
+          "id": "38-Black-7",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "7",
+          "stock": 42,
+          "price": 94.15,
+          "sku": "P38-BLA-7"
+        },
+        {
+          "id": "38-Black-8",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "8",
+          "stock": 48,
+          "price": 90.9,
+          "sku": "P38-BLA-8"
+        },
+        {
+          "id": "38-Black-9",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "9",
+          "stock": 48,
+          "price": 93.3,
+          "sku": "P38-BLA-9"
+        },
+        {
+          "id": "38-Black-10",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "10",
+          "stock": 40,
+          "price": 97.23,
+          "sku": "P38-BLA-10"
+        },
+        {
+          "id": "38-Black-11",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "11",
+          "stock": 35,
+          "price": 95.22,
+          "sku": "P38-BLA-11"
+        },
+        {
+          "id": "38-Black-12",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "12",
+          "stock": 0,
+          "price": 91.04,
+          "sku": "P38-BLA-12"
+        },
+        {
+          "id": "38-White-6",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "6",
+          "stock": 0,
+          "price": 93.86,
+          "sku": "P38-WHI-6"
+        },
+        {
+          "id": "38-White-7",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "7",
+          "stock": 39,
+          "price": 96.58,
+          "sku": "P38-WHI-7"
+        },
+        {
+          "id": "38-White-8",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "8",
+          "stock": 6,
+          "price": 93.54,
+          "sku": "P38-WHI-8"
+        },
+        {
+          "id": "38-White-9",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "9",
+          "stock": 47,
+          "price": 95.73,
+          "sku": "P38-WHI-9"
+        },
+        {
+          "id": "38-White-10",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "10",
+          "stock": 48,
+          "price": 94.87,
+          "sku": "P38-WHI-10"
+        },
+        {
+          "id": "38-White-11",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "11",
+          "stock": 23,
+          "price": 92.91,
+          "sku": "P38-WHI-11"
+        },
+        {
+          "id": "38-White-12",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "size": "12",
+          "stock": 45,
+          "price": 99.32,
+          "sku": "P38-WHI-12"
+        },
+        {
+          "id": "38-Navy-6",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "6",
+          "stock": 6,
+          "price": 90.72,
+          "sku": "P38-NAV-6"
+        },
+        {
+          "id": "38-Navy-7",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "7",
+          "stock": 26,
+          "price": 97.29,
+          "sku": "P38-NAV-7"
+        },
+        {
+          "id": "38-Navy-8",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "8",
+          "stock": 12,
+          "price": 95.67,
+          "sku": "P38-NAV-8"
+        },
+        {
+          "id": "38-Navy-9",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "9",
+          "stock": 26,
+          "price": 94.21,
+          "sku": "P38-NAV-9"
+        },
+        {
+          "id": "38-Navy-10",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "10",
+          "stock": 50,
+          "price": 91.92,
+          "sku": "P38-NAV-10"
+        },
+        {
+          "id": "38-Navy-11",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "11",
+          "stock": 5,
+          "price": 93.63,
+          "sku": "P38-NAV-11"
+        },
+        {
+          "id": "38-Navy-12",
+          "color": "Navy",
+          "colorHex": "#1E40AF",
+          "size": "12",
+          "stock": 27,
+          "price": 90.69,
+          "sku": "P38-NAV-12"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Navy"
+      ],
+      "availableSizes": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ]
     },
     {
@@ -618,10 +4301,10 @@
       "stock": 20,
       "brand": "Swiss Time",
       "category": "mens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -634,10 +4317,10 @@
       "stock": 75,
       "brand": "TechTime",
       "category": "mens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -650,10 +4333,10 @@
       "stock": 30,
       "brand": "AquaTime",
       "category": "mens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -666,10 +4349,10 @@
       "stock": 25,
       "brand": "Elegant Time",
       "category": "womens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -682,10 +4365,10 @@
       "stock": 100,
       "brand": "FitLife",
       "category": "womens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1533139142315-27d0e22bde5c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1533139142315-27d0e22bde5c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1533139142315-27d0e22bde5c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -698,10 +4381,10 @@
       "stock": 60,
       "brand": "Trendy Time",
       "category": "womens-watches",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1587836374360-5689e998c99c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1587836374360-5689e998c99c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1587836374360-5689e998c99c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -714,10 +4397,205 @@
       "stock": 40,
       "brand": "Luxury Bags",
       "category": "womens-bags",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "45-1",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 15,
+          "price": 798,
+          "sku": "WOMENS-BAGS-45-BLA-S"
+        },
+        {
+          "id": "45-2",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 13,
+          "price": 798,
+          "sku": "WOMENS-BAGS-45-BLA-M"
+        },
+        {
+          "id": "45-3",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 13,
+          "price": 803,
+          "sku": "WOMENS-BAGS-45-BLA-L"
+        },
+        {
+          "id": "45-4",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 15,
+          "price": 801,
+          "sku": "WOMENS-BAGS-45-BLA-XL"
+        },
+        {
+          "id": "45-5",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XXL",
+          "stock": 13,
+          "price": 797,
+          "sku": "WOMENS-BAGS-45-BLA-XXL"
+        },
+        {
+          "id": "45-6",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "S",
+          "stock": 17,
+          "price": 802,
+          "sku": "WOMENS-BAGS-45-BRO-S"
+        },
+        {
+          "id": "45-7",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "M",
+          "stock": 6,
+          "price": 800,
+          "sku": "WOMENS-BAGS-45-BRO-M"
+        },
+        {
+          "id": "45-8",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "L",
+          "stock": 19,
+          "price": 795,
+          "sku": "WOMENS-BAGS-45-BRO-L"
+        },
+        {
+          "id": "45-9",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XL",
+          "stock": 12,
+          "price": 797,
+          "sku": "WOMENS-BAGS-45-BRO-XL"
+        },
+        {
+          "id": "45-10",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XXL",
+          "stock": 7,
+          "price": 798,
+          "sku": "WOMENS-BAGS-45-BRO-XXL"
+        },
+        {
+          "id": "45-11",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "S",
+          "stock": 22,
+          "price": 803,
+          "sku": "WOMENS-BAGS-45-BEI-S"
+        },
+        {
+          "id": "45-12",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "M",
+          "stock": 15,
+          "price": 803,
+          "sku": "WOMENS-BAGS-45-BEI-M"
+        },
+        {
+          "id": "45-13",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "L",
+          "stock": 11,
+          "price": 798,
+          "sku": "WOMENS-BAGS-45-BEI-L"
+        },
+        {
+          "id": "45-14",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XL",
+          "stock": 16,
+          "price": 796,
+          "sku": "WOMENS-BAGS-45-BEI-XL"
+        },
+        {
+          "id": "45-15",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XXL",
+          "stock": 13,
+          "price": 799,
+          "sku": "WOMENS-BAGS-45-BEI-XXL"
+        },
+        {
+          "id": "45-16",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 21,
+          "price": 803,
+          "sku": "WOMENS-BAGS-45-RED-S"
+        },
+        {
+          "id": "45-17",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 22,
+          "price": 802,
+          "sku": "WOMENS-BAGS-45-RED-M"
+        },
+        {
+          "id": "45-18",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 5,
+          "price": 802,
+          "sku": "WOMENS-BAGS-45-RED-L"
+        },
+        {
+          "id": "45-19",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 21,
+          "price": 797,
+          "sku": "WOMENS-BAGS-45-RED-XL"
+        },
+        {
+          "id": "45-20",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XXL",
+          "stock": 6,
+          "price": 804,
+          "sku": "WOMENS-BAGS-45-RED-XXL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "Brown",
+        "Beige",
+        "Red"
+      ],
+      "availableSizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
       ]
     },
     {
@@ -730,10 +4608,205 @@
       "stock": 80,
       "brand": "Everyday Style",
       "category": "womens-bags",
-      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "46-1",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 19,
+          "price": 119,
+          "sku": "WOMENS-BAGS-46-BLA-S"
+        },
+        {
+          "id": "46-2",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 14,
+          "price": 121,
+          "sku": "WOMENS-BAGS-46-BLA-M"
+        },
+        {
+          "id": "46-3",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 17,
+          "price": 115,
+          "sku": "WOMENS-BAGS-46-BLA-L"
+        },
+        {
+          "id": "46-4",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 6,
+          "price": 122,
+          "sku": "WOMENS-BAGS-46-BLA-XL"
+        },
+        {
+          "id": "46-5",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XXL",
+          "stock": 24,
+          "price": 120,
+          "sku": "WOMENS-BAGS-46-BLA-XXL"
+        },
+        {
+          "id": "46-6",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "S",
+          "stock": 19,
+          "price": 123,
+          "sku": "WOMENS-BAGS-46-BRO-S"
+        },
+        {
+          "id": "46-7",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "M",
+          "stock": 11,
+          "price": 121,
+          "sku": "WOMENS-BAGS-46-BRO-M"
+        },
+        {
+          "id": "46-8",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "L",
+          "stock": 20,
+          "price": 116,
+          "sku": "WOMENS-BAGS-46-BRO-L"
+        },
+        {
+          "id": "46-9",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XL",
+          "stock": 17,
+          "price": 123,
+          "sku": "WOMENS-BAGS-46-BRO-XL"
+        },
+        {
+          "id": "46-10",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XXL",
+          "stock": 11,
+          "price": 123,
+          "sku": "WOMENS-BAGS-46-BRO-XXL"
+        },
+        {
+          "id": "46-11",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "S",
+          "stock": 21,
+          "price": 116,
+          "sku": "WOMENS-BAGS-46-BEI-S"
+        },
+        {
+          "id": "46-12",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "M",
+          "stock": 24,
+          "price": 116,
+          "sku": "WOMENS-BAGS-46-BEI-M"
+        },
+        {
+          "id": "46-13",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "L",
+          "stock": 23,
+          "price": 120,
+          "sku": "WOMENS-BAGS-46-BEI-L"
+        },
+        {
+          "id": "46-14",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XL",
+          "stock": 16,
+          "price": 115,
+          "sku": "WOMENS-BAGS-46-BEI-XL"
+        },
+        {
+          "id": "46-15",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XXL",
+          "stock": 17,
+          "price": 121,
+          "sku": "WOMENS-BAGS-46-BEI-XXL"
+        },
+        {
+          "id": "46-16",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 16,
+          "price": 116,
+          "sku": "WOMENS-BAGS-46-RED-S"
+        },
+        {
+          "id": "46-17",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 22,
+          "price": 124,
+          "sku": "WOMENS-BAGS-46-RED-M"
+        },
+        {
+          "id": "46-18",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 12,
+          "price": 119,
+          "sku": "WOMENS-BAGS-46-RED-L"
+        },
+        {
+          "id": "46-19",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 16,
+          "price": 118,
+          "sku": "WOMENS-BAGS-46-RED-XL"
+        },
+        {
+          "id": "46-20",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XXL",
+          "stock": 15,
+          "price": 122,
+          "sku": "WOMENS-BAGS-46-RED-XXL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "Brown",
+        "Beige",
+        "Red"
+      ],
+      "availableSizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
       ]
     },
     {
@@ -746,10 +4819,205 @@
       "stock": 70,
       "brand": "Practical Style",
       "category": "womens-bags",
-      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "47-1",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "S",
+          "stock": 19,
+          "price": 83,
+          "sku": "WOMENS-BAGS-47-BLA-S"
+        },
+        {
+          "id": "47-2",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "M",
+          "stock": 8,
+          "price": 87,
+          "sku": "WOMENS-BAGS-47-BLA-M"
+        },
+        {
+          "id": "47-3",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "L",
+          "stock": 23,
+          "price": 82,
+          "sku": "WOMENS-BAGS-47-BLA-L"
+        },
+        {
+          "id": "47-4",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XL",
+          "stock": 23,
+          "price": 83,
+          "sku": "WOMENS-BAGS-47-BLA-XL"
+        },
+        {
+          "id": "47-5",
+          "color": "Black",
+          "colorHex": "#000000",
+          "size": "XXL",
+          "stock": 20,
+          "price": 89,
+          "sku": "WOMENS-BAGS-47-BLA-XXL"
+        },
+        {
+          "id": "47-6",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "S",
+          "stock": 21,
+          "price": 81,
+          "sku": "WOMENS-BAGS-47-BRO-S"
+        },
+        {
+          "id": "47-7",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "M",
+          "stock": 17,
+          "price": 89,
+          "sku": "WOMENS-BAGS-47-BRO-M"
+        },
+        {
+          "id": "47-8",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "L",
+          "stock": 15,
+          "price": 87,
+          "sku": "WOMENS-BAGS-47-BRO-L"
+        },
+        {
+          "id": "47-9",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XL",
+          "stock": 12,
+          "price": 84,
+          "sku": "WOMENS-BAGS-47-BRO-XL"
+        },
+        {
+          "id": "47-10",
+          "color": "Brown",
+          "colorHex": "#92400E",
+          "size": "XXL",
+          "stock": 20,
+          "price": 88,
+          "sku": "WOMENS-BAGS-47-BRO-XXL"
+        },
+        {
+          "id": "47-11",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "S",
+          "stock": 15,
+          "price": 86,
+          "sku": "WOMENS-BAGS-47-BEI-S"
+        },
+        {
+          "id": "47-12",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "M",
+          "stock": 8,
+          "price": 81,
+          "sku": "WOMENS-BAGS-47-BEI-M"
+        },
+        {
+          "id": "47-13",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "L",
+          "stock": 21,
+          "price": 83,
+          "sku": "WOMENS-BAGS-47-BEI-L"
+        },
+        {
+          "id": "47-14",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XL",
+          "stock": 23,
+          "price": 85,
+          "sku": "WOMENS-BAGS-47-BEI-XL"
+        },
+        {
+          "id": "47-15",
+          "color": "Beige",
+          "colorHex": "#D4A574",
+          "size": "XXL",
+          "stock": 9,
+          "price": 86,
+          "sku": "WOMENS-BAGS-47-BEI-XXL"
+        },
+        {
+          "id": "47-16",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "S",
+          "stock": 5,
+          "price": 82,
+          "sku": "WOMENS-BAGS-47-RED-S"
+        },
+        {
+          "id": "47-17",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "M",
+          "stock": 21,
+          "price": 81,
+          "sku": "WOMENS-BAGS-47-RED-M"
+        },
+        {
+          "id": "47-18",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "L",
+          "stock": 10,
+          "price": 87,
+          "sku": "WOMENS-BAGS-47-RED-L"
+        },
+        {
+          "id": "47-19",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XL",
+          "stock": 22,
+          "price": 86,
+          "sku": "WOMENS-BAGS-47-RED-XL"
+        },
+        {
+          "id": "47-20",
+          "color": "Red",
+          "colorHex": "#EF4444",
+          "size": "XXL",
+          "stock": 22,
+          "price": 81,
+          "sku": "WOMENS-BAGS-47-RED-XXL"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "Brown",
+        "Beige",
+        "Red"
+      ],
+      "availableSizes": [
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
       ]
     },
     {
@@ -762,10 +5030,10 @@
       "stock": 15,
       "brand": "Luxury Jewels",
       "category": "womens-jewellery",
-      "thumbnail": "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -778,10 +5046,10 @@
       "stock": 50,
       "brand": "Classic Pearls",
       "category": "womens-jewellery",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -794,10 +5062,10 @@
       "stock": 35,
       "brand": "Golden Touch",
       "category": "womens-jewellery",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -810,10 +5078,10 @@
       "stock": 100,
       "brand": "SunStyle",
       "category": "sunglasses",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -826,10 +5094,10 @@
       "stock": 80,
       "brand": "Classic Shades",
       "category": "sunglasses",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -842,10 +5110,10 @@
       "stock": 60,
       "brand": "SportShades",
       "category": "sunglasses",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -858,10 +5126,10 @@
       "stock": 200,
       "brand": "AutoTech",
       "category": "automotive",
-      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -874,10 +5142,10 @@
       "stock": 300,
       "brand": "Fresh Air",
       "category": "automotive",
-      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -890,10 +5158,10 @@
       "stock": 150,
       "brand": "PowerTech",
       "category": "automotive",
-      "thumbnail": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -906,10 +5174,10 @@
       "stock": 40,
       "brand": "SafeRide",
       "category": "motorcycle",
-      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -922,10 +5190,10 @@
       "stock": 80,
       "brand": "RideSafe",
       "category": "motorcycle",
-      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -938,10 +5206,10 @@
       "stock": 25,
       "brand": "ProtectRide",
       "category": "motorcycle",
-      "thumbnail": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -954,10 +5222,10 @@
       "stock": 120,
       "brand": "BrightWorks",
       "category": "lighting",
-      "thumbnail": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -970,10 +5238,10 @@
       "stock": 200,
       "brand": "SmartHome",
       "category": "lighting",
-      "thumbnail": "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -986,10 +5254,10 @@
       "stock": 60,
       "brand": "Modern Light",
       "category": "lighting",
-      "thumbnail": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1567225557594-88d73e55f2cb?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1018,10 +5286,10 @@
       "stock": 35,
       "brand": "Samsung",
       "category": "tablets",
-      "thumbnail": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1561154464-82e9adf32764?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1034,10 +5302,10 @@
       "stock": 30,
       "brand": "Microsoft",
       "category": "tablets",
-      "thumbnail": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1050,10 +5318,10 @@
       "stock": 30,
       "brand": "Sony",
       "category": "gaming",
-      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c0c3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c0c3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1606144042614-b2417e99c0c3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1066,10 +5334,10 @@
       "stock": 25,
       "brand": "Microsoft",
       "category": "gaming",
-      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1486401899868-0e435ed85128?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1082,10 +5350,10 @@
       "stock": 60,
       "brand": "Nintendo",
       "category": "gaming",
-      "thumbnail": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1114,10 +5382,10 @@
       "stock": 150,
       "brand": "Apple",
       "category": "audio",
-      "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1484704849700-f032a568e944?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1130,10 +5398,10 @@
       "stock": 80,
       "brand": "Bose",
       "category": "audio",
-      "thumbnail": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1577174881658-0f30157f5053?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1577174881658-0f30157f5053?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1577174881658-0f30157f5053?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1162,10 +5430,10 @@
       "stock": 65,
       "brand": "Samsung",
       "category": "wearables",
-      "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     },
     {
@@ -1178,14 +5446,741 @@
       "stock": 90,
       "brand": "Fitbit",
       "category": "wearables",
-      "thumbnail": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "thumbnail": "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
       "images": [
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
-        "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+        "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 75,
+      "title": "Xiaomi 13 Pro",
+      "description": "Flagship smartphone with Leica camera system and ultra-fast charging. Features Snapdragon 8 Gen 2, 120Hz AMOLED display, and 5000mAh battery for all-day performance.",
+      "price": 699,
+      "brand": "Xiaomi",
+      "category": "smartphones",
+      "stock": 45,
+      "rating": 4.6,
+      "discountPercentage": 9,
+      "thumbnail": "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "75-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 20,
+          "price": 683.04,
+          "sku": "P75-BLA-OS"
+        },
+        {
+          "id": "75-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 19,
+          "price": 667.26,
+          "sku": "P75-WHI-OS"
+        },
+        {
+          "id": "75-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 36,
+          "price": 720.56,
+          "sku": "P75-BLU-OS"
+        },
+        {
+          "id": "75-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 41,
+          "price": 706.08,
+          "sku": "P75-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 76,
+      "title": "ASUS ROG Phone 7",
+      "description": "Gaming smartphone designed for mobile gamers with advanced cooling system, 165Hz display, and customizable gaming controls for ultimate performance.",
+      "price": 899,
+      "brand": "ASUS",
+      "category": "smartphones",
+      "stock": 30,
+      "rating": 4.7,
+      "discountPercentage": 5,
+      "thumbnail": "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "76-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 9,
+          "price": 916.31,
+          "sku": "P76-BLA-OS"
+        },
+        {
+          "id": "76-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 30,
+          "price": 866.53,
+          "sku": "P76-WHI-OS"
+        },
+        {
+          "id": "76-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 43,
+          "price": 900.79,
+          "sku": "P76-BLU-OS"
+        },
+        {
+          "id": "76-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 19,
+          "price": 863.68,
+          "sku": "P76-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 77,
+      "title": "Sony Xperia 1 V",
+      "description": "Premium smartphone with 4K HDR OLED display and professional camera features. Perfect for content creators with exceptional video capabilities.",
+      "price": 1199,
+      "brand": "Sony",
+      "category": "smartphones",
+      "stock": 20,
+      "rating": 4.5,
+      "discountPercentage": 4,
+      "thumbnail": "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "77-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 11,
+          "price": 1148.94,
+          "sku": "P77-BLA-OS"
+        },
+        {
+          "id": "77-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 45,
+          "price": 1195.36,
+          "sku": "P77-WHI-OS"
+        },
+        {
+          "id": "77-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 45,
+          "price": 1217.17,
+          "sku": "P77-BLU-OS"
+        },
+        {
+          "id": "77-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 32,
+          "price": 1204.55,
+          "sku": "P77-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 78,
+      "title": "Motorola Edge 40 Pro",
+      "description": "Sleek Android phone with curved display and near-stock Android experience. Features 50MP camera, 68W fast charging, and premium design.",
+      "price": 599,
+      "brand": "Motorola",
+      "category": "smartphones",
+      "stock": 55,
+      "rating": 4.4,
+      "discountPercentage": 10,
+      "thumbnail": "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "78-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 16,
+          "price": 601.75,
+          "sku": "P78-BLA-OS"
+        },
+        {
+          "id": "78-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 19,
+          "price": 621.82,
+          "sku": "P78-WHI-OS"
+        },
+        {
+          "id": "78-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 6,
+          "price": 622.74,
+          "sku": "P78-BLU-OS"
+        },
+        {
+          "id": "78-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 35,
+          "price": 613.11,
+          "sku": "P78-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 79,
+      "title": "Nothing Phone (2)",
+      "description": "Innovative smartphone with unique Glyph interface and transparent design. Powered by Snapdragon 8+ Gen 1 with clean software experience.",
+      "price": 699,
+      "brand": "Nothing",
+      "category": "smartphones",
+      "stock": 40,
+      "rating": 4.5,
+      "discountPercentage": 7,
+      "thumbnail": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "79-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 27,
+          "price": 673.13,
+          "sku": "P79-BLA-OS"
+        },
+        {
+          "id": "79-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 28,
+          "price": 697.15,
+          "sku": "P79-WHI-OS"
+        },
+        {
+          "id": "79-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 29,
+          "price": 670.51,
+          "sku": "P79-BLU-OS"
+        },
+        {
+          "id": "79-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 35,
+          "price": 732.58,
+          "sku": "P79-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 80,
+      "title": "Oppo Find X6 Pro",
+      "description": "Camera-focused flagship with Hasselblad partnership and versatile triple camera system. Exceptional photography capabilities in all conditions.",
+      "price": 999,
+      "brand": "Oppo",
+      "category": "smartphones",
+      "stock": 35,
+      "rating": 4.6,
+      "discountPercentage": 6,
+      "thumbnail": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "80-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 0,
+          "price": 959.46,
+          "sku": "P80-BLA-OS"
+        },
+        {
+          "id": "80-White",
+          "color": "White",
+          "colorHex": "#FFFFFF",
+          "stock": 18,
+          "price": 1012.78,
+          "sku": "P80-WHI-OS"
+        },
+        {
+          "id": "80-Blue",
+          "color": "Blue",
+          "colorHex": "#3B82F6",
+          "stock": 8,
+          "price": 998.47,
+          "sku": "P80-BLU-OS"
+        },
+        {
+          "id": "80-Purple",
+          "color": "Purple",
+          "colorHex": "#A855F7",
+          "stock": 14,
+          "price": 990.51,
+          "sku": "P80-PUR-OS"
+        }
+      ],
+      "availableColors": [
+        "Black",
+        "White",
+        "Blue",
+        "Purple"
+      ]
+    },
+    {
+      "id": 81,
+      "title": "ASUS ROG Zephyrus G14",
+      "description": "Compact gaming laptop with AMD Ryzen 9 and NVIDIA RTX 4060. Perfect balance of portability and gaming performance with exceptional battery life.",
+      "price": 1699,
+      "brand": "ASUS",
+      "category": "laptops",
+      "stock": 25,
+      "rating": 4.8,
+      "discountPercentage": 7,
+      "thumbnail": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "81-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 31,
+          "price": 1616.76,
+          "sku": "P81-SIL-OS"
+        },
+        {
+          "id": "81-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 30,
+          "price": 1754.51,
+          "sku": "P81-SPA-OS"
+        },
+        {
+          "id": "81-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 26,
+          "price": 1634.14,
+          "sku": "P81-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 82,
+      "title": "Microsoft Surface Laptop 5",
+      "description": "Sleek ultrabook with premium alcantara keyboard and vibrant PixelSense touchscreen. Ideal for productivity and creative work.",
+      "price": 1299,
+      "brand": "Microsoft",
+      "category": "laptops",
+      "stock": 40,
+      "rating": 4.6,
+      "discountPercentage": 5,
+      "thumbnail": "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1484788984921-03950022c9ef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "82-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 42,
+          "price": 1355.32,
+          "sku": "P82-SIL-OS"
+        },
+        {
+          "id": "82-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 1,
+          "price": 1324.23,
+          "sku": "P82-SPA-OS"
+        },
+        {
+          "id": "82-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 11,
+          "price": 1259.19,
+          "sku": "P82-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 83,
+      "title": "Acer Swift 3",
+      "description": "Affordable productivity laptop with Intel Core i5, 16GB RAM, and all-day battery. Perfect for students and professionals on a budget.",
+      "price": 699,
+      "brand": "Acer",
+      "category": "laptops",
+      "stock": 60,
+      "rating": 4.3,
+      "discountPercentage": 12,
+      "thumbnail": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "83-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 14,
+          "price": 666.33,
+          "sku": "P83-SIL-OS"
+        },
+        {
+          "id": "83-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 49,
+          "price": 719.09,
+          "sku": "P83-SPA-OS"
+        },
+        {
+          "id": "83-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 40,
+          "price": 681.39,
+          "sku": "P83-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 84,
+      "title": "Razer Blade 15",
+      "description": "Premium gaming laptop with RTX 4070 and QHD 240Hz display. Sleek aluminum chassis with RGB Chroma lighting.",
+      "price": 2499,
+      "brand": "Razer",
+      "category": "laptops",
+      "stock": 20,
+      "rating": 4.7,
+      "discountPercentage": 4,
+      "thumbnail": "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "84-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 20,
+          "price": 2379.13,
+          "sku": "P84-SIL-OS"
+        },
+        {
+          "id": "84-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 35,
+          "price": 2387,
+          "sku": "P84-SPA-OS"
+        },
+        {
+          "id": "84-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 4,
+          "price": 2379.15,
+          "sku": "P84-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 85,
+      "title": "LG Gram 17",
+      "description": "Ultra-lightweight 17-inch laptop weighing just 1.35kg with 16-hour battery life. Perfect for mobile professionals who need large screen.",
+      "price": 1599,
+      "brand": "LG",
+      "category": "laptops",
+      "stock": 30,
+      "rating": 4.5,
+      "discountPercentage": 8,
+      "thumbnail": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "85-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 12,
+          "price": 1653.96,
+          "sku": "P85-SIL-OS"
+        },
+        {
+          "id": "85-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 47,
+          "price": 1532.38,
+          "sku": "P85-SPA-OS"
+        },
+        {
+          "id": "85-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 46,
+          "price": 1641.91,
+          "sku": "P85-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 86,
+      "title": "MSI Creator Z16",
+      "description": "Content creation powerhouse with RTX 4060, QHD+ display with 100% DCI-P3 color accuracy. Designed for video editors and designers.",
+      "price": 1999,
+      "brand": "MSI",
+      "category": "laptops",
+      "stock": 22,
+      "rating": 4.6,
+      "discountPercentage": 6,
+      "thumbnail": "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ],
+      "variants": [
+        {
+          "id": "86-Silver",
+          "color": "Silver",
+          "colorHex": "#C0C0C0",
+          "stock": 41,
+          "price": 1997.22,
+          "sku": "P86-SIL-OS"
+        },
+        {
+          "id": "86-Space Gray",
+          "color": "Space Gray",
+          "colorHex": "#4A4A4A",
+          "stock": 49,
+          "price": 2037.87,
+          "sku": "P86-SPA-OS"
+        },
+        {
+          "id": "86-Black",
+          "color": "Black",
+          "colorHex": "#000000",
+          "stock": 25,
+          "price": 1921.51,
+          "sku": "P86-BLA-OS"
+        }
+      ],
+      "availableColors": [
+        "Silver",
+        "Space Gray",
+        "Black"
+      ]
+    },
+    {
+      "id": 87,
+      "title": "Versace Eros",
+      "description": "Bold masculine fragrance with notes of mint, lemon, and vanilla. Perfect for evening wear and special occasions with lasting power.",
+      "price": 85,
+      "brand": "Versace",
+      "category": "fragrances",
+      "stock": 70,
+      "rating": 4.7,
+      "discountPercentage": 15,
+      "thumbnail": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 88,
+      "title": "Yves Saint Laurent Black Opium",
+      "description": "Addictive feminine fragrance with coffee, vanilla, and white flowers. Modern and seductive perfume for confident women.",
+      "price": 110,
+      "brand": "YSL",
+      "category": "fragrances",
+      "stock": 85,
+      "rating": 4.8,
+      "discountPercentage": 10,
+      "thumbnail": "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 89,
+      "title": "Giorgio Armani Acqua di Gio",
+      "description": "Fresh aquatic fragrance inspired by Mediterranean breeze. Timeless scent with marine notes and citrus for everyday wear.",
+      "price": 95,
+      "brand": "Armani",
+      "category": "fragrances",
+      "stock": 90,
+      "rating": 4.6,
+      "discountPercentage": 12,
+      "thumbnail": "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1590736969955-71cc94901144?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 90,
+      "title": "Viktor & Rolf Flowerbomb",
+      "description": "Explosive floral bouquet with jasmine, rose, and patchouli. Powerful and feminine scent that makes a statement.",
+      "price": 125,
+      "brand": "Viktor & Rolf",
+      "category": "fragrances",
+      "stock": 65,
+      "rating": 4.7,
+      "discountPercentage": 8,
+      "thumbnail": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 91,
+      "title": "Paco Rabanne 1 Million",
+      "description": "Iconic gold bottle with spicy leather fragrance. Blend of cinnamon, mint, and amber for confident men.",
+      "price": 90,
+      "brand": "Paco Rabanne",
+      "category": "fragrances",
+      "stock": 75,
+      "rating": 4.5,
+      "discountPercentage": 14,
+      "thumbnail": "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1610465299996-30f240ac2b1c?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 92,
+      "title": "Lancôme La Vie Est Belle",
+      "description": "Sweet gourmand fragrance with iris, patchouli, and praline. Celebrates happiness and femininity with every spray.",
+      "price": 115,
+      "brand": "Lancôme",
+      "category": "fragrances",
+      "stock": 80,
+      "rating": 4.8,
+      "discountPercentage": 9,
+      "thumbnail": "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
+      ]
+    },
+    {
+      "id": 93,
+      "title": "Burberry Brit for Her",
+      "description": "Fresh fruity floral with notes of lime, peony, and vanilla. Light and playful fragrance perfect for daytime wear.",
+      "price": 80,
+      "brand": "Burberry",
+      "category": "fragrances",
+      "stock": 70,
+      "rating": 4.4,
+      "discountPercentage": 16,
+      "thumbnail": "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=400&h=400&fit=crop&q=90&auto=format&fm=jpg",
+      "images": [
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg",
+        "https://images.unsplash.com/photo-1588405748880-12d1d2a59d75?w=600&h=600&fit=crop&q=90&auto=format&fm=jpg"
       ]
     }
-  ],
-  "total": 74,
-  "skip": 0,
-  "limit": 74
+  ]
 }

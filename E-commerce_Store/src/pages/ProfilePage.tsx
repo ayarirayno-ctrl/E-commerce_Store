@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useNotification } from '../hooks/useNotification';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import { User as UserIcon, Mail, Package, Settings, LogOut, ShoppingBag, MapPin, CreditCard, Save } from 'lucide-react';
+import { User as UserIcon, Mail, Package, Settings, LogOut, ShoppingBag, MapPin, CreditCard, Save, Award } from 'lucide-react';
+import { LoyaltyDashboard } from '../components/loyalty/LoyaltyDashboard';
 
 interface Order {
   id: string;
@@ -18,7 +19,9 @@ const ProfilePage: React.FC = () => {
   const { user, logout, isAuthenticated, updateProfile } = useAuth();
   const navigate = useNavigate();
   const { showSuccess, showError } = useNotification();
-  const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'settings'>('profile');
+  const [searchParams] = useSearchParams();
+  const tabParam = searchParams.get('tab') as 'profile' | 'orders' | 'loyalty' | 'settings' | null;
+  const [activeTab, setActiveTab] = useState<'profile' | 'orders' | 'loyalty' | 'settings'>(tabParam || 'profile');
   
   // Edit mode
   const [isEditing, setIsEditing] = useState(false);
@@ -163,6 +166,17 @@ const ProfilePage: React.FC = () => {
                   >
                     <Package className="h-5 w-5" />
                     Orders
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('loyalty')}
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                      activeTab === 'loyalty'
+                        ? 'bg-primary-50 text-primary-700 font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    <Award className="h-5 w-5" />
+                    Rewards
                   </button>
                   <button
                     onClick={() => setActiveTab('settings')}
@@ -376,6 +390,13 @@ const ProfilePage: React.FC = () => {
                         </div>
                       ))}
                     </div>
+                  </div>
+                )}
+
+                {/* Loyalty Tab */}
+                {activeTab === 'loyalty' && (
+                  <div>
+                    <LoyaltyDashboard />
                   </div>
                 )}
 

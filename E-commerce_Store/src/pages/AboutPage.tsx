@@ -1,258 +1,176 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import SEO from '../components/common/SEO';
-import { 
-  Users, 
-  Award, 
-  Globe, 
-  Heart, 
-  Shield, 
-  Truck, 
-  Headphones, 
-  Star,
-  CheckCircle,
-  ArrowRight
-} from 'lucide-react';
+import EnhancedSEO from '../components/common/EnhancedSEO';
+import { generateOrganizationSchema } from '../utils/seoUtils';
+import { ShoppingBag, Users, Shield, Truck, Star, Heart } from 'lucide-react';
 
 const AboutPage: React.FC = () => {
-  const stats = [
-    { label: 'Happy Customers', value: '10,000+', icon: Users },
-    { label: 'Products Sold', value: '50,000+', icon: Award },
-    { label: 'Countries Served', value: '25+', icon: Globe },
-    { label: 'Years Experience', value: '5+', icon: Star },
-  ];
-
-  const values = [
-    {
-      title: 'Quality First',
-      description: 'We carefully curate every product to ensure the highest quality standards.',
-      icon: Award,
-    },
-    {
-      title: 'Customer Focus',
-      description: 'Your satisfaction is our priority. We go above and beyond to serve you.',
-      icon: Heart,
-    },
-    {
-      title: 'Trust & Security',
-      description: 'Your data and transactions are protected with industry-leading security.',
-      icon: Shield,
-    },
-    {
-      title: 'Fast Delivery',
-      description: 'Quick and reliable shipping to get your orders to you as fast as possible.',
-      icon: Truck,
-    },
-  ];
+  const organizationSchema = generateOrganizationSchema();
 
   return (
-    <div className="min-h-screen bg-white">
-      <SEO 
-        title="About Us - Modern Store"
-        description="Learn about our story, mission, and values. We're passionate about bringing you the best products with exceptional customer service since 2019."
-        keywords="about us, our story, company mission, e-commerce, customer service"
+    <div className="min-h-screen bg-gray-50">
+      <EnhancedSEO 
+        title="About Us - E-commerce Family's"
+        description="Learn more about E-commerce Family's - your trusted online shopping destination for quality products, fast delivery, and exceptional customer service. We're a family that puts your family first."
+        keywords="about us, e-commerce family, online shopping, quality products, customer service, fast delivery, trust, security"
+        url="https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/about"
         type="website"
+        structuredData={organizationSchema}
       />
-      
+
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container-custom py-20">
+      <section className="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-16">
+        <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              About Our Store
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              🌐 Welcome to E-commerce Family&apos;s
             </h1>
-            <p className="text-xl text-blue-100 leading-relaxed">
-              We&apos;re passionate about bringing you the best products at great prices,
-              with exceptional customer service that makes shopping a pleasure.
+            <p className="text-xl md:text-2xl text-primary-100">
+              Your All-in-One Online Shopping Destination
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Stats Section */}
-      <div className="py-16 bg-gray-50">
-        <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon className="h-8 w-8 text-white" />
-                  </div>
-                  <div className="text-3xl font-bold text-gray-900 mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-gray-600">
-                    {stat.label}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {/* Our Story */}
-      <div className="py-20">
+      {/* Introduction Section */}
+      <section className="py-16">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Our Story
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-center">
+                Introduction
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                Founded in 2019, our e-commerce store started with a simple mission: 
-                to make online shopping better for everyone.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                  From Humble Beginnings
-                </h3>
-                <p className="text-gray-600 mb-6 leading-relaxed">
-                  What started as a small online store selling a few carefully selected products 
-                  has grown into a trusted destination for thousands of customers worldwide. 
-                  We believe that great products should be accessible to everyone.
+              
+              <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+                <p className="text-lg">
+                  Welcome to <span className="font-bold text-primary-600">E-commerce Family&apos;s</span>, 
+                  your all-in-one online shopping destination designed to make buying and selling easier, faster, 
+                  and more enjoyable. Our platform connects families, individuals, and businesses by offering a 
+                  wide range of quality products — from fashion and electronics to home essentials and more.
                 </p>
-                <p className="text-gray-600 leading-relaxed">
-                  Our commitment to quality, customer service, and innovation has helped us 
-                  build lasting relationships with our customers and partners.
+
+                <p className="text-lg">
+                  At <span className="font-bold text-primary-600">E-commerce Family&apos;s</span>, we believe 
+                  shopping should feel like being part of a family: trusted, comfortable, and accessible to everyone. 
+                  With a user-friendly interface, secure payment options, and personalized recommendations, we aim 
+                  to create a seamless online experience that meets your daily needs and exceeds your expectations.
+                </p>
+
+                <p className="text-lg font-semibold text-primary-700">
+                  Join the E-commerce Family&apos;s community today — where convenience, trust, and satisfaction 
+                  come together in one place.
                 </p>
               </div>
-              <div className="bg-gray-100 rounded-lg p-8">
-                <div className="text-center">
-                  <div className="w-24 h-24 bg-primary-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Heart className="h-12 w-12 text-white" />
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-2">
-                    Our Mission
-                  </h4>
-                  <p className="text-gray-600">
-                    To provide exceptional products and service that exceed customer expectations, 
-                    making every shopping experience memorable.
-                  </p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Our Values */}
-      <div className="py-20 bg-gray-50">
+      {/* Our Values Section */}
+      <section className="py-16 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Our Values
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center">
+              What Makes Us Different
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              These core values guide everything we do and help us create
-              the best possible experience for our customers.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => {
-              const Icon = value.icon;
-              return (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
-                  <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="h-6 w-6 text-primary-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
-                    {value.description}
-                  </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Value 1 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <Users className="h-8 w-8 text-white" />
                 </div>
-              );
-            })}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Family First</h3>
+                <p className="text-gray-700">
+                  We treat every customer like family, providing personalized support and care throughout your shopping journey.
+                </p>
+              </div>
+
+              {/* Value 2 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <Shield className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Trust & Security</h3>
+                <p className="text-gray-700">
+                  Your privacy and security are our top priorities. Shop with confidence using our encrypted payment system.
+                </p>
+              </div>
+
+              {/* Value 3 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <Truck className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Fast Delivery</h3>
+                <p className="text-gray-700">
+                  Get your orders delivered quickly with our reliable shipping partners and real-time tracking.
+                </p>
+              </div>
+
+              {/* Value 4 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <Star className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Quality Products</h3>
+                <p className="text-gray-700">
+                  Every product is carefully selected and verified to ensure you receive only the best quality items.
+                </p>
+              </div>
+
+              {/* Value 5 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <ShoppingBag className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Wide Selection</h3>
+                <p className="text-gray-700">
+                  Browse thousands of products across multiple categories to find exactly what you need for your family.
+                </p>
+              </div>
+
+              {/* Value 6 */}
+              <div className="bg-gradient-to-br from-primary-50 to-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow">
+                <div className="w-16 h-16 bg-primary-600 rounded-full flex items-center justify-center mb-6">
+                  <Heart className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Customer Care</h3>
+                <p className="text-gray-700">
+                  Our dedicated support team is always here to help you with any questions or concerns you may have.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Why Choose Us */}
-      <div className="py-20 bg-gray-50">
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-primary-600 to-primary-800 text-white">
         <div className="container-custom">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
-              Why Choose Us?
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Join Our Family?
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We&apos;re committed to providing you with the best shopping experience possible.
+            <p className="text-xl mb-8 text-primary-100">
+              Start shopping today and experience the E-commerce Family&apos;s difference!
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle className="h-8 w-8 text-green-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Quality Guaranteed
-              </h3>
-              <p className="text-gray-600">
-                Every product is carefully selected and tested to ensure it meets our high standards.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Headphones className="h-8 w-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                24/7 Support
-              </h3>
-              <p className="text-gray-600">
-                Our customer support team is always here to help you with any questions or concerns.
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck className="h-8 w-8 text-purple-600" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                Fast Shipping
-              </h3>
-              <p className="text-gray-600">
-                Get your orders delivered quickly with our reliable shipping partners worldwide.
-              </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="/products" 
+                className="btn btn-lg bg-white text-primary-600 hover:bg-gray-100 active:bg-gray-800 active:text-white transition-colors"
+              >
+                Start Shopping
+              </a>
+              <a 
+                href="/contact" 
+                className="btn btn-lg border-2 border-white text-white hover:bg-white hover:text-primary-600 active:bg-gray-200 transition-colors"
+              >
+                Contact Us
+              </a>
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Call to Action */}
-      <div className="py-20 bg-primary-600 text-white">
-        <div className="container-custom text-center">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to Start Shopping?
-          </h2>
-          <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers and discover amazing products at great prices.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/products"
-              className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-flex items-center justify-center"
-            >
-              Shop Now
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            <Link
-              to="/contact"
-              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-colors"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </div>
+      </section>
     </div>
   );
 };

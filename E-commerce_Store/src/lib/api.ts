@@ -39,8 +39,10 @@ api.interceptors.request.use((config) => {
     if (raw) {
       const user = JSON.parse(raw);
       if (user?.token) {
-        config.headers = config.headers || {};
-        config.headers['Authorization'] = `Bearer ${user.token}`;
+        if (!config.headers) {
+          config.headers = new (axios.AxiosHeaders as typeof import('axios').AxiosHeaders)();
+        }
+        config.headers.Authorization = `Bearer ${user.token}`;
       }
     }
   } catch {

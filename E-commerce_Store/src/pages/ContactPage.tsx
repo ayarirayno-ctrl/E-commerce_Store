@@ -235,17 +235,20 @@ const ContactPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Map Section (Placeholder) */}
+        {/* Map Section */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Our Location</h2>
-          <div className="bg-gray-200 rounded-lg overflow-hidden" style={{ height: '400px' }}>
-            <div className="w-full h-full flex items-center justify-center text-gray-500">
-              <div className="text-center">
-                <MapPin className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                <p className="text-lg">Map Integration Placeholder</p>
-                <p className="text-sm mt-2">Google Maps or Mapbox can be integrated here</p>
-              </div>
-            </div>
+          <div className="bg-gray-200 rounded-lg overflow-hidden shadow-lg" style={{ height: '450px' }}>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d102644.01083630649!2d10.674141650000001!3d36.452834299999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13029895efbdd3d3%3A0x2e5d60d1569ce4fe!2sNabeul!5e0!3m2!1sen!2stn!4v1730000000000!5m2!1sen!2stn"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Nabeul Location Map"
+            />
           </div>
         </div>
       </div>

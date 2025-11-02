@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../utils/formatters';
-import { orderService, Order } from '../services/orderService';
+import { orderService } from '../services/orderService';
+import { Order } from '../types';
 import Loading from '../components/ui/Loading';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
@@ -43,7 +44,7 @@ const OrderDetailPage: React.FC = () => {
 
     try {
       setCancelling(true);
-      await orderService.cancelOrder(id, 'Cancelled by customer');
+      await orderService.cancelOrder(id);
       await loadOrder(); // Reload order to show updated status
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Failed to cancel order');
@@ -92,7 +93,8 @@ const OrderDetailPage: React.FC = () => {
     );
   }
 
-  const canCancel = order.orderStatus === 'pending' || order.orderStatus === 'processing';
+  const orderStatus = order.orderStatus || order.status;
+  const canCancel = orderStatus === 'pending' || orderStatus === 'processing';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -134,20 +136,20 @@ const OrderDetailPage: React.FC = () => {
                 })}</span>
               </div>
             </div>
-            <Badge variant={getStatusColor(order.orderStatus)}>
-              {order.orderStatus.charAt(0).toUpperCase() + order.orderStatus.slice(1)}
+            <Badge variant={getStatusColor(order.orderStatus || order.status)}>
+              {(order.orderStatus || order.status).charAt(0).toUpperCase() + (order.orderStatus || order.status).slice(1)}
             </Badge>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-gray-200">
             <div>
               <div className="text-sm text-gray-600 mb-1">Total Amount</div>
-              <div className="text-xl font-bold text-gray-900">{formatPrice(order.total)}</div>
+              <div className="text-xl font-bold text-gray-900">{formatPrice(order.total || order.totalPrice || 0)}</div>
             </div>
             <div>
               <div className="text-sm text-gray-600 mb-1">Payment Status</div>
-              <Badge variant={order.paymentStatus === 'paid' ? 'success' : 'warning'}>
-                {order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1)}
+              <Badge variant={(order.paymentStatus === 'paid' || order.isPaid) ? 'success' : 'warning'}>
+                {order.paymentStatus ? order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1) : (order.isPaid ? 'Paid' : 'Pending')}
               </Badge>
             </div>
             <div>
@@ -197,25 +199,25 @@ const OrderDetailPage: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
-                  <span className="font-medium text-gray-900">{formatPrice(order.subtotal)}</span>
+                  <span className="font-medium text-gray-900">{formatPrice(order.subtotal || order.itemsPrice || 0)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Shipping</span>
-                  <span className="font-medium text-gray-900">{formatPrice(order.shippingCost)}</span>
+                  <span className="font-medium text-gray-900">{formatPrice(order.shippingCost || order.shippingPrice || 0)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Tax</span>
-                  <span className="font-medium text-gray-900">{formatPrice(order.tax)}</span>
+                  <span className="font-medium text-gray-900">{formatPrice(order.tax || order.taxPrice || 0)}</span>
                 </div>
-                {order.discount > 0 && (
+                {(order.discount || 0) > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Discount</span>
-                    <span className="font-medium text-green-600">-{formatPrice(order.discount)}</span>
+                    <span className="font-medium text-green-600">-{formatPrice(order.discount || 0)}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-lg font-semibold border-t border-gray-200 pt-2">
                   <span>Total</span>
-                  <span>{formatPrice(order.total)}</span>
+                  <span>{formatPrice(order.total || order.totalPrice || 0)}</span>
                 </div>
               </div>
             </div>
@@ -231,23 +233,25 @@ const OrderDetailPage: React.FC = () => {
               </h2>
               <div className="text-sm text-gray-700 space-y-1">
                 <p>{order.shippingAddress.street}</p>
-                <p>{order.shippingAddress.city}, {order.shippingAddress.state} {order.shippingAddress.zipCode}</p>
+                <p>{order.shippingAddress.city}{order.shippingAddress.state ? `, ${order.shippingAddress.state}` : ''} {order.shippingAddress.zipCode || order.shippingAddress.postalCode}</p>
                 <p>{order.shippingAddress.country}</p>
               </div>
             </div>
 
             {/* Billing Address */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                <MapPin className="h-5 w-5 mr-2" />
-                Billing Address
-              </h2>
-              <div className="text-sm text-gray-700 space-y-1">
-                <p>{order.billingAddress.street}</p>
-                <p>{order.billingAddress.city}, {order.billingAddress.state} {order.billingAddress.zipCode}</p>
-                <p>{order.billingAddress.country}</p>
+            {order.billingAddress && (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <MapPin className="h-5 w-5 mr-2" />
+                  Billing Address
+                </h2>
+                <div className="text-sm text-gray-700 space-y-1">
+                  <p>{order.billingAddress.street}</p>
+                  <p>{order.billingAddress.city}{order.billingAddress.state ? `, ${order.billingAddress.state}` : ''} {order.billingAddress.zipCode || order.billingAddress.postalCode}</p>
+                  <p>{order.billingAddress.country}</p>
+                </div>
               </div>
-            </div>
+            )}
 
             {order.notes && (
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">

@@ -16,7 +16,8 @@ import {
   Menu,
   X,
   Sun,
-  Moon
+  Moon,
+  BarChart3
 } from 'lucide-react';
 import { useTheme } from '../../contexts/ThemeContext';
 
@@ -27,6 +28,7 @@ const AdminLayout: React.FC = () => {
 
   const menuItems = [
     { icon: LayoutDashboard, label: 'Dashboard', path: '/admin' },
+    { icon: BarChart3, label: 'Analytics', path: '/admin/analytics' },
     { icon: Package, label: 'Produits', path: '/admin/products' },
     { icon: FolderTree, label: 'Catégories', path: '/admin/categories' },
     { icon: ShoppingCart, label: 'Commandes', path: '/admin/orders' },
@@ -63,7 +65,7 @@ const AdminLayout: React.FC = () => {
           </div>
 
           {/* Menu Items */}
-          <ul className="space-y-2">
+          <ul className="space-y-2 pb-4">
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link
@@ -75,18 +77,18 @@ const AdminLayout: React.FC = () => {
                 </Link>
               </li>
             ))}
+            
+            {/* Logout Button */}
+            <li className="pt-4 border-t border-gray-700">
+              <button
+                onClick={handleLogout}
+                className="flex items-center w-full p-3 text-gray-300 rounded-lg hover:bg-red-600 hover:text-white transition-colors"
+              >
+                <LogOut className="w-5 h-5 mr-3" />
+                <span>Déconnexion</span>
+              </button>
+            </li>
           </ul>
-
-          {/* Logout */}
-          <div className="absolute bottom-4 left-0 right-0 px-3">
-            <button
-              onClick={handleLogout}
-              className="flex items-center w-full p-3 text-gray-300 rounded-lg hover:bg-red-600 hover:text-white transition-colors"
-            >
-              <LogOut className="w-5 h-5 mr-3" />
-              <span>Déconnexion</span>
-            </button>
-          </div>
         </div>
       </aside>
 

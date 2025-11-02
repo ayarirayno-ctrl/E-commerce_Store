@@ -48,6 +48,27 @@ const CartItem: React.FC<CartItemProps> = ({
         <p className="text-sm text-gray-500">
           {item.product.brand}
         </p>
+        
+        {/* Variant Info */}
+        {item.selectedVariant && (
+          <div className="flex items-center gap-2 mt-1">
+            {item.selectedVariant.color && (
+              <span className="inline-flex items-center gap-1 text-xs text-gray-600">
+                <span 
+                  className="w-3 h-3 rounded-full border border-gray-300"
+                  style={{ backgroundColor: item.selectedVariant.colorHex || '#ccc' }}
+                />
+                {item.selectedVariant.color}
+              </span>
+            )}
+            {item.selectedVariant.size && (
+              <span className="text-xs text-gray-600">
+                Size: {item.selectedVariant.size}
+              </span>
+            )}
+          </div>
+        )}
+        
         <p className="text-sm font-medium text-gray-900">
           {formatPrice(item.product.price)} each
         </p>

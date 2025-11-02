@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Star } from 'lucide-react';
+import { ShoppingCart, Star, Eye } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { Product } from '../../types';
 import { formatPrice, truncateText } from '../../utils/formatters';
 import { useCart } from '../../hooks/useCart';
@@ -9,6 +10,8 @@ import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import OptimizedImage from '../common/OptimizedImage';
 import { WishlistButton } from '../wishlist/WishlistButton';
+import { StockBadge } from './StockAlert';
+import { QuickViewModal } from './QuickViewModal';
 
 interface ProductCardProps {
   product: Product;
@@ -20,11 +23,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
   const { stats } = useReviews(product.id);
   const isInCartItem = isInCart(product.id);
   const cartQuantity = getItemQuantity(product.id);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const [showQuickView, setShowQuickView] = useState(false);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setIsAddingToCart(true);
     addItemToCart(product);
+    
+    // Reset animation after bounce
+    setTimeout(() => setIsAddingToCart(false), 600);
   };
 
   const discountPrice = product.discountPercentage > 0 
@@ -32,49 +41,95 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
     : product.price;
 
   return (
-    <div className={`group relative bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 ${className}`}>
+    <motion.div 
+      className={`group relative bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200 ${className}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      layout
+    >
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-gray-100">
         <Link to={`/products/${product.id}`}>
-          <OptimizedImage
-            src={product.thumbnail}
-            alt={product.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            loading="lazy"
-          />
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <OptimizedImage
+              src={product.thumbnail}
+              alt={product.title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </motion.div>
         </Link>
         
         {/* Discount Badge */}
         {product.discountPercentage > 0 && (
-          <Badge
-            variant="error"
-            size="sm"
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 20 }}
             className="absolute top-2 left-2"
           >
-            -{product.discountPercentage.toFixed(0)}%
-          </Badge>
+            <Badge variant="error" size="sm">
+              -{product.discountPercentage.toFixed(0)}%
+            </Badge>
+          </motion.div>
         )}
 
         {/* Wishlist Button */}
-        <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <motion.div 
+          className="absolute top-2 right-2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileHover={{ scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.2 }}
+        >
           <WishlistButton product={product} variant="compact" />
-        </div>
+        </motion.div>
 
-        {/* Stock Status */}
-        {product.stock <= 10 && product.stock > 0 && (
-          <div className="absolute bottom-2 left-2">
-            <Badge variant="warning" size="sm">
-              Only {product.stock} left
-            </Badge>
-          </div>
-        )}
+        {/* Stock Status Badge */}
+        <motion.div 
+          className="absolute bottom-2 left-2"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <StockBadge stock={product.stock} lowStockThreshold={10} />
+        </motion.div>
+
+        {/* Quick View Button - Shows on Hover */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black/20"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+        >
+          <motion.button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowQuickView(true);
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-lg hover:shadow-xl transition-all"
+          >
+            <Eye className="h-4 w-4" />
+            <span className="font-medium text-sm">Quick View</span>
+          </motion.button>
+        </motion.div>
 
         {product.stock === 0 && (
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <Badge variant="error" size="md">
-              Out of Stock
-            </Badge>
-          </div>
+          <motion.div 
+            className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <span className="text-white font-semibold text-lg">Out of Stock</span>
+          </motion.div>
         )}
       </div>
 
@@ -137,22 +192,37 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <Button
-          onClick={handleAddToCart}
-          disabled={product.stock === 0}
-          className="w-full"
-          leftIcon={<ShoppingCart className="h-4 w-4" />}
+        <motion.div
+          animate={isAddingToCart ? {
+            scale: [1, 1.2, 1],
+            rotate: [0, 5, -5, 0]
+          } : {}}
+          transition={{ duration: 0.6 }}
         >
-          {isInCartItem ? (
-            <>
-              In Cart ({cartQuantity})
-            </>
-          ) : (
-            'Add to Cart'
-          )}
-        </Button>
+          <Button
+            onClick={handleAddToCart}
+            disabled={product.stock === 0}
+            className="w-full"
+            leftIcon={<ShoppingCart className="h-4 w-4" />}
+          >
+            {isInCartItem ? (
+              <>
+                In Cart ({cartQuantity})
+              </>
+            ) : (
+              'Add to Cart'
+            )}
+          </Button>
+        </motion.div>
       </div>
-    </div>
+
+      {/* Quick View Modal */}
+      <QuickViewModal
+        product={product}
+        isOpen={showQuickView}
+        onClose={() => setShowQuickView(false)}
+      />
+    </motion.div>
   );
 };
 

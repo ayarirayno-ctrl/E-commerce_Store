@@ -3,7 +3,21 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useReviews } from '../hooks/useReviews';
 import { useAuth } from '../contexts/AuthContext';
-import SEO from '../components/common/SEO';
+import { useRecommendations } from '../hooks/useRecommendations';
+import { useProducts } from '../hooks/useProducts';
+import EnhancedSEO from '../components/common/EnhancedSEO';
+import Breadcrumbs from '../components/common/Breadcrumbs';
+import StockAlert from '../components/product/StockAlert';
+import { ImageZoom, ImageLightbox } from '../components/product/ImageZoom';
+import { SocialShare } from '../components/common/SocialShare';
+import ProductRecommendations from '../components/recommendations/ProductRecommendations';
+import { generateProductSchema, generateBreadcrumbSchema } from '../utils/seoUtils';
+import { 
+  generateProductMetaDescription, 
+  generateProductKeywords, 
+  generateProductTitle,
+  generateImageAlt
+} from '../utils/seoMetaUtils';
 import { fetchProductById } from '../store/api/productsApi';
 import { Product } from '../types';
 import { formatPrice } from '../utils/formatters';
@@ -16,6 +30,9 @@ import { ArrowLeft, ShoppingCart, Star, Heart, Share2, Truck, Shield, RotateCcw 
 import mockReviews from '../data/reviews.json';
 import { setReviews } from '../store/slices/reviewsSlice';
 import { useAppDispatch } from '../store';
+import { addNotification } from '../store/slices/uiSlice';
+import ProductVariantSelector from '../components/product/ProductVariantSelector';
+import { ProductVariant } from '../types';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,12 +40,18 @@ const ProductDetailPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { addItemToCart, isInCart, getItemQuantity } = useCart();
   const { isAuthenticated, user } = useAuth();
+  const { items: products } = useProducts();
+  const { trackProductView, getYouMayAlsoLike } = useRecommendations();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [showReviewForm, setShowReviewForm] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [selectedColor, setSelectedColor] = useState<string | undefined>();
+  const [selectedSize, setSelectedSize] = useState<string | undefined>();
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
 
   // Reviews hook
   const productIdNum = id ? parseInt(id) : undefined;
@@ -51,6 +74,8 @@ const ProductDetailPage: React.FC = () => {
         const productData = await fetchProductById(parseInt(id));
         if (productData) {
           setProduct(productData);
+          // Track product view for recommendations
+          trackProductView(productData);
         } else {
           setError('Product not found');
         }
@@ -62,7 +87,7 @@ const ProductDetailPage: React.FC = () => {
     };
 
     loadProduct();
-  }, [id]);
+  }, [id, trackProductView]);
 
   // Load mock reviews on mount
   useEffect(() => {
@@ -90,13 +115,37 @@ const ProductDetailPage: React.FC = () => {
   const handleAddToCart = () => {
     if (!product) return;
     
+    // If product has variants but none selected, show warning
+    if (product.variants && product.variants.length > 0) {
+      if (product.availableColors && !selectedColor) {
+        dispatch(addNotification({
+          type: 'warning',
+          title: 'Select Color',
+          message: 'Please select a color before adding to cart.',
+          duration: 3000,
+        }));
+        return;
+      }
+      if (product.availableSizes && !selectedSize) {
+        dispatch(addNotification({
+          type: 'warning',
+          title: 'Select Size',
+          message: 'Please select a size before adding to cart.',
+          duration: 3000,
+        }));
+        return;
+      }
+    }
+    
+    // Add to cart with selected variant
     for (let i = 0; i < quantity; i++) {
-      addItemToCart(product);
+      addItemToCart(product, 1, selectedVariant || undefined);
     }
   };
 
   const handleQuantityChange = (newQuantity: number) => {
-    if (newQuantity < 1 || newQuantity > (product?.stock || 0)) return;
+    const maxStock = selectedVariant?.stock ?? product?.stock ?? 0;
+    if (newQuantity < 1 || newQuantity > maxStock) return;
     setQuantity(newQuantity);
   };
 
@@ -127,43 +176,78 @@ const ProductDetailPage: React.FC = () => {
     ? product.price * (1 - product.discountPercentage / 100)
     : product.price;
 
+  // Calculate final price based on selected variant
+  const finalPrice = selectedVariant?.price ?? discountPrice;
+  const currentStock = selectedVariant?.stock ?? product.stock;
+
   const isInCartItem = isInCart(product.id);
   const cartQuantity = getItemQuantity(product.id);
 
+  // Generate structured data
+  const productSchema = generateProductSchema({
+    id: product.id,
+    title: product.title,
+    description: product.description,
+    image: product.thumbnail,
+    price: finalPrice,
+    brand: product.brand,
+    rating: stats?.averageRating,
+    ratingCount: stats?.totalReviews,
+    availability: currentStock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+  });
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: 'https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/' },
+    { name: 'Products', url: 'https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products' },
+    { name: product.category, url: `https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products?category=${product.category}` },
+    { name: product.title, url: `https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products/${product.id}` }
+  ]);
+
   return (
     <>
-      <SEO
-        title={product.title}
-        description={product.description}
-        keywords={`${product.category}, ${product.brand}, ${product.title}`}
+      <EnhancedSEO
+        title={generateProductTitle(product)}
+        description={generateProductMetaDescription(product)}
+        keywords={generateProductKeywords(product)}
         image={product.thumbnail}
+        url={`https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/products/${product.id}`}
         type="product"
-        price={discountPrice}
-        currency="EUR"
-        availability={product.stock > 0 ? 'in stock' : 'out of stock'}
-        productId={product.id.toString()}
+        structuredData={[productSchema, breadcrumbSchema]}
       />
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="container-custom py-8">
-        {/* Breadcrumb */}
-        <div className="mb-6">
+        {/* Breadcrumb Navigation */}
+        <div className="mb-6 flex items-center justify-between">
+          <Breadcrumbs 
+            items={[
+              { label: 'Products', href: '/products' },
+              { label: product.category, href: `/products?category=${product.category}` },
+              { label: product.title }
+            ]}
+          />
           <Button
             variant="ghost"
             onClick={() => navigate(-1)}
             leftIcon={<ArrowLeft className="h-4 w-4" />}
+            size="sm"
           >
             Back
           </Button>
         </div>
 
+        {/* Product Content */}
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 transition-colors">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Product Images */}
           <div className="space-y-4">
             {/* Main Image */}
-            <div className="aspect-square bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-              <img
+            <div 
+              className="aspect-square bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden cursor-pointer"
+              onClick={() => setIsLightboxOpen(true)}
+            >
+              <ImageZoom
                 src={product.images[selectedImage] || product.thumbnail}
-                alt={product.title}
+                alt={generateImageAlt(product, selectedImage)}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -183,7 +267,7 @@ const ProductDetailPage: React.FC = () => {
                   >
                     <img
                       src={image}
-                      alt={`${product.title} ${index + 1}`}
+                      alt={generateImageAlt(product, index)}
                       className="w-full h-full object-cover"
                     />
                   </button>
@@ -200,9 +284,16 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Title */}
-            <h1 className="text-3xl font-bold text-gray-900">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
               {product.title}
             </h1>
+
+            {/* Social Share */}
+            <SocialShare
+              url={window.location.href}
+              title={product.title}
+              description={product.description}
+            />
 
             {/* Rating */}
             <div className="flex items-center space-x-4">
@@ -227,38 +318,55 @@ const ProductDetailPage: React.FC = () => {
 
             {/* Price */}
             <div className="flex items-center space-x-4">
-              <span className="text-3xl font-bold text-gray-900">
-                {formatPrice(discountPrice)}
+              <span className="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
+                {formatPrice(finalPrice)}
               </span>
-              {product.discountPercentage > 0 && (
+              {product.discountPercentage > 0 && !selectedVariant?.price && (
                 <>
-                  <span className="text-xl text-gray-500 line-through">
+                  <span className="text-xl text-gray-500 dark:text-gray-400 line-through transition-colors">
                     {formatPrice(product.price)}
                   </span>
-                  <span className="bg-red-100 text-red-800 text-sm font-medium px-2.5 py-0.5 rounded-full">
+                  <span className="bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 text-sm font-medium px-2.5 py-0.5 rounded-full transition-colors">
                     -{product.discountPercentage.toFixed(0)}% OFF
                   </span>
                 </>
               )}
             </div>
 
+            {/* Stock Alert */}
+            <StockAlert stock={product.stock} lowStockThreshold={10} />
+
             {/* Description */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 transition-colors">
                 Description
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed transition-colors">
                 {product.description}
               </p>
             </div>
 
+            {/* Product Variants (Colors & Sizes) */}
+            {(product.availableColors || product.availableSizes) && (
+              <ProductVariantSelector
+                colors={product.availableColors}
+                sizes={product.availableSizes}
+                variants={product.variants}
+                selectedColor={selectedColor}
+                selectedSize={selectedSize}
+                onColorChange={setSelectedColor}
+                onSizeChange={setSelectedSize}
+                onVariantChange={setSelectedVariant}
+              />
+            )}
+
             {/* Stock Status */}
             <div className="flex items-center space-x-2">
-              {product.stock > 0 ? (
+              {currentStock > 0 ? (
                 <>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <span className="text-green-700 font-medium">
-                    In Stock ({product.stock} available)
+                    In Stock ({currentStock} available)
                   </span>
                 </>
               ) : (
@@ -272,7 +380,7 @@ const ProductDetailPage: React.FC = () => {
             </div>
 
             {/* Quantity and Add to Cart */}
-            {product.stock > 0 && (
+            {currentStock > 0 && (
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
                   <label className="text-sm font-medium text-gray-700">
@@ -291,7 +399,7 @@ const ProductDetailPage: React.FC = () => {
                     </span>
                     <button
                       onClick={() => handleQuantityChange(quantity + 1)}
-                      disabled={quantity >= product.stock}
+                      disabled={quantity >= currentStock}
                       className="px-3 py-2 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       +
@@ -403,12 +511,32 @@ const ProductDetailPage: React.FC = () => {
           )}
 
           {reviews.length === 0 && (
-            <div className="text-center py-12 bg-gray-50 rounded-lg">
-              <p className="text-gray-600">No reviews yet. Be the first to review this product!</p>
+            <div className="text-center py-12 bg-gray-50 dark:bg-gray-700 rounded-lg transition-colors">
+              <p className="text-gray-600 dark:text-gray-300 transition-colors">No reviews yet. Be the first to review this product!</p>
             </div>
           )}
         </div>
+        </div>
       </div>
+
+      {/* Product Recommendations */}
+      {product && products.length > 0 && (
+        <ProductRecommendations
+          title="You May Also Like"
+          products={getYouMayAlsoLike(product, products, 8)}
+          type="similar"
+        />
+      )}
+
+      {/* Image Lightbox */}
+      {isLightboxOpen && (
+        <ImageLightbox
+          images={product.images}
+          currentIndex={selectedImage}
+          onClose={() => setIsLightboxOpen(false)}
+          productTitle={product.title}
+        />
+      )}
     </div>
     </>
   );

@@ -8,7 +8,13 @@ export default defineConfig({
     port: 3002,
     host: true,
     open: true,
-    strictPort: false
+    strictPort: false,
+    // Disable cache in development
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    }
   },
   build: {
     rollupOptions: {

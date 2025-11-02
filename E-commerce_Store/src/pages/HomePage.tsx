@@ -1,13 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useProducts } from '../hooks/useProducts';
+import { useRecommendations } from '../hooks/useRecommendations';
 import ProductCard from '../components/product/ProductCard';
+import ProductRecommendations from '../components/recommendations/ProductRecommendations';
 import Loading from '../components/ui/Loading';
-import SEO from '../components/common/SEO';
+import EnhancedSEO from '../components/common/EnhancedSEO';
+import { generateWebSiteSchema, generateKeywords } from '../utils/seoUtils';
+import { generateHomeMetaDescription } from '../utils/seoMetaUtils';
 import { ShoppingBag, Star, Truck, Shield } from 'lucide-react';
 
 const HomePage: React.FC = () => {
   const { items: products, loading, error } = useProducts();
+  const { getTrendingProducts, getPersonalizedRecommendations } = useRecommendations();
 
   if (loading) {
     return (
@@ -37,12 +42,15 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen">
-      <SEO 
-        title="Modern Store - Shop Latest Electronics & Tech Products"
-        description="Discover amazing deals on smartphones, laptops, headphones, and more. Fast shipping, secure payment, and excellent customer service."
-        keywords="electronics, smartphones, laptops, headphones, tech products, online shopping"
+    <div className="min-h-screen dark:bg-gray-900 transition-colors">
+      <EnhancedSEO 
+        title="E-commerce Family's - Votre boutique électronique de confiance"
+        description={generateHomeMetaDescription()}
+        keywords={generateKeywords("electronics smartphones laptops headphones tech products online shopping fast delivery secure payment quality guarantee family trust")}
+        image="https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/hero-banner.jpg"
+        url="https://e-commerce-store-38qrmehtb-rayens-projects-6420fa79.vercel.app/"
         type="website"
+        structuredData={generateWebSiteSchema()}
       />
       
       {/* Hero Section */}
@@ -56,51 +64,55 @@ const HomePage: React.FC = () => {
               Shop the latest technology and electronics with fast shipping and great prices.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <button className="btn btn-lg bg-white text-primary-600 hover:bg-gray-100">
-                Shop Now
-              </button>
-              <button className="btn btn-lg border-2 border-white text-white hover:bg-white hover:text-primary-600">
-                Learn More
-              </button>
+              <Link to="/products">
+                <button className="btn btn-lg bg-white text-primary-600 hover:bg-gray-100 active:bg-gray-800 active:text-white transition-colors">
+                  Shop Now
+                </button>
+              </Link>
+              <Link to="/about">
+                <button className="btn btn-lg bg-white text-primary-600 hover:bg-gray-100 active:bg-gray-800 active:text-white transition-colors">
+                  Learn More
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-white dark:bg-gray-800 transition-colors">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Truck className="h-8 w-8 text-primary-600" />
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                <Truck className="h-8 w-8 text-primary-600 dark:text-primary-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors">
                 Fast Shipping
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300 transition-colors">
                 Free shipping on orders over $50. Get your items delivered in 2-3 business days.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-8 w-8 text-primary-600" />
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                <Shield className="h-8 w-8 text-primary-600 dark:text-primary-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors">
                 Secure Payment
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300 transition-colors">
                 Your payment information is secure with our encrypted checkout process.
               </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="h-8 w-8 text-primary-600" />
+              <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                <Star className="h-8 w-8 text-primary-600 dark:text-primary-400" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2 transition-colors">
                 Quality Guarantee
               </h3>
-              <p className="text-gray-600">
+              <p className="text-gray-600 dark:text-gray-300 transition-colors">
                 All products come with a 30-day money-back guarantee and 1-year warranty.
               </p>
             </div>
@@ -109,13 +121,13 @@ const HomePage: React.FC = () => {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 transition-colors">
               Featured Products
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto transition-colors">
               Discover our handpicked selection of the best products at unbeatable prices.
             </p>
           </div>
@@ -128,8 +140,8 @@ const HomePage: React.FC = () => {
             </div>
           ) : (
             <div className="text-center py-12">
-              <ShoppingBag className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-medium text-gray-900 mb-2">
+              <ShoppingBag className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4 transition-colors" />
+              <h3 className="text-xl font-medium text-gray-900 dark:text-white mb-2 transition-colors">
                 No products available
               </h3>
               <p className="text-gray-600">
@@ -149,6 +161,24 @@ const HomePage: React.FC = () => {
           )}
         </div>
       </section>
+
+      {/* Trending Products Section */}
+      {products.length > 0 && (
+        <ProductRecommendations
+          title="Trending Now"
+          products={getTrendingProducts(products, 8)}
+          type="trending"
+        />
+      )}
+
+      {/* Personalized Recommendations Section */}
+      {products.length > 0 && (
+        <ProductRecommendations
+          title="Recommended For You"
+          products={getPersonalizedRecommendations(products, 8)}
+          type="personalized"
+        />
+      )}
 
       {/* Newsletter Section */}
       <section className="py-16 bg-primary-600 text-white">

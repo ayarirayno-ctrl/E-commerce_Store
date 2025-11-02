@@ -200,6 +200,17 @@ const AuthPage: React.FC = () => {
               </div>
             )}
 
+            {isLogin && (
+              <div className="text-right">
+                <Link
+                  to="/forgot-password"
+                  className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Mot de passe oublié ?
+                </Link>
+              </div>
+            )}
+
             <Button
               type="submit"
               className="w-full"

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../store';
 import { addToCart, removeFromCart, updateQuantity, clearCart, toggleCart } from '../store/slices/cartSlice';
 import { addNotification } from '../store/slices/uiSlice';
-import { Product } from '../types';
+import { Product, ProductVariant } from '../types';
 
 /**
  * Custom hook for cart operations
@@ -11,12 +11,26 @@ export const useCart = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector(state => state.cart);
 
-  const addItemToCart = useCallback((product: Product, quantity: number = 1) => {
-    dispatch(addToCart({ product, quantity }));
+  const addItemToCart = useCallback((
+    product: Product, 
+    quantity: number = 1,
+    selectedVariant?: ProductVariant
+  ) => {
+    dispatch(addToCart({ product, quantity, selectedVariant }));
+    
+    // Build notification message
+    let variantInfo = '';
+    if (selectedVariant) {
+      const parts = [];
+      if (selectedVariant.color) parts.push(selectedVariant.color);
+      if (selectedVariant.size) parts.push(`Size ${selectedVariant.size}`);
+      variantInfo = parts.length > 0 ? ` (${parts.join(', ')})` : '';
+    }
+    
     dispatch(addNotification({
       type: 'success',
       title: 'Added to Cart',
-      message: `${product.title} has been added to your cart.`,
+      message: `${product.title}${variantInfo} has been added to your cart.`,
       duration: 3000,
     }));
   }, [dispatch]);

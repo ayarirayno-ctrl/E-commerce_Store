@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Sécurité Backend</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Interface de test pour vérifier la sécurité du backend" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Tests de Sécurité Backend - E-Commerce</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,8 +88,13 @@
     </div>
 
     <script>
+        // Configuration de l'API Backend
         const API_BASE = 'http://localhost:5000/api';
 
+        /**
+         * Teste les headers de sécurité Helmet
+         * Vérifie que tous les headers de sécurité sont présents
+         */
         async function testSecurityHeaders() {
             const resultDiv = document.getElementById('helmet-result');
             resultDiv.style.display = 'block';
@@ -124,6 +131,10 @@
             }
         }
 
+        /**
+         * Teste le rate limiting avec 10 requêtes rapides
+         * Vérifie que le serveur accepte les requêtes normales
+         */
         async function testRateLimiting() {
             const resultDiv = document.getElementById('rate-limit-result');
             resultDiv.style.display = 'block';
@@ -148,6 +159,10 @@
             resultDiv.textContent = `✅ 10 requêtes envoyées:\n${results.join('\n')}`;
         }
 
+        /**
+         * Teste le dépassement de la limite de rate limiting
+         * Envoie 105 requêtes pour déclencher l'erreur 429
+         */
         async function testRateLimitExceed() {
             const resultDiv = document.getElementById('rate-limit-result');
             resultDiv.style.display = 'block';
@@ -200,6 +215,10 @@ ${results.errors.length > 0 ? `\n\n❌ Erreurs:\n${results.errors.join('\n')}` :
             `.trim();
         }
 
+        /**
+         * Teste la configuration CORS
+         * Vérifie les headers CORS et l'origine autorisée
+         */
         async function testCORS() {
             const resultDiv = document.getElementById('cors-result');
             resultDiv.style.display = 'block';
@@ -229,6 +248,10 @@ ${results.errors.length > 0 ? `\n\n❌ Erreurs:\n${results.errors.join('\n')}` :
             }
         }
 
+        /**
+         * Teste la présence du X-Request-Id
+         * Vérifie que chaque requête a un ID unique
+         */
         async function testRequestId() {
             const resultDiv = document.getElementById('requestid-result');
             resultDiv.style.display = 'block';
@@ -251,6 +274,10 @@ ${results.errors.length > 0 ? `\n\n❌ Erreurs:\n${results.errors.join('\n')}` :
             }
         }
 
+        /**
+         * Teste le schéma d'erreur standardisé
+         * Provoque une erreur 404 et vérifie le format de réponse
+         */
         async function testErrorSchema() {
             const resultDiv = document.getElementById('error-result');
             resultDiv.style.display = 'block';
@@ -289,9 +316,11 @@ Headers:
             }
         }
 
-        // Auto-test au chargement
+        // Initialisation au chargement de la page
         window.addEventListener('load', () => {
-            console.log('Page de test chargée. Backend API:', API_BASE);
+            console.log('🔒 Page de tests de sécurité chargée');
+            console.log('📡 Backend API:', API_BASE);
+            console.log('✅ Prêt pour les tests de sécurité');
         });
     </script>
 </body>

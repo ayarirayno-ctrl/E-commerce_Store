@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { CartItem, CartState } from '../../types/cart';
-import { Product } from '../../types/product';
+import { Product, ProductVariant } from '../../types/product';
 import cartService, { BackendCartItem } from '../../services/cartService';
+import { toastCartActions } from '../../utils/toastUtils';
 
 const initialState: CartState = {
   items: [],
@@ -108,25 +109,46 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<{ product: Product; quantity: number }>) => {
-      const { product, quantity } = action.payload;
-      const existingItem = state.items.find(item => item.id === product.id);
+    addToCart: (state, action: PayloadAction<{ 
+      product: Product; 
+      quantity: number;
+      selectedVariant?: ProductVariant;
+    }>) => {
+      const { product, quantity, selectedVariant } = action.payload;
+      
+      // For items with variants, check if exact variant exists
+      const existingItem = state.items.find(item => {
+        if (selectedVariant && item.selectedVariant) {
+          return item.id === product.id && item.selectedVariant.id === selectedVariant.id;
+        }
+        return item.id === product.id && !item.selectedVariant;
+      });
+      
+      // Use variant price if available, otherwise use base price
+      const itemPrice = selectedVariant?.price ?? product.price;
       
       if (existingItem) {
         existingItem.quantity += quantity;
-        existingItem.totalPrice = existingItem.quantity * product.price;
+        existingItem.totalPrice = existingItem.quantity * itemPrice;
       } else {
         const newItem: CartItem = {
           id: product.id,
           product: {
             id: product.id,
             title: product.title,
-            price: product.price,
+            price: itemPrice,
             thumbnail: product.thumbnail,
             brand: product.brand,
           },
           quantity,
-          totalPrice: quantity * product.price,
+          totalPrice: quantity * itemPrice,
+          selectedVariant: selectedVariant ? {
+            id: selectedVariant.id,
+            color: selectedVariant.color,
+            colorHex: selectedVariant.colorHex,
+            size: selectedVariant.size,
+            sku: selectedVariant.sku,
+          } : undefined,
         };
         state.items.push(newItem);
       }
@@ -134,14 +156,32 @@ const cartSlice = createSlice({
       // Recalculate totals
       state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
       state.totalPrice = state.items.reduce((total, item) => total + item.totalPrice, 0);
+      
+      // Show toast notification with variant info
+      let productName = product.title;
+      if (selectedVariant) {
+        const variantParts = [];
+        if (selectedVariant.color) variantParts.push(selectedVariant.color);
+        if (selectedVariant.size) variantParts.push(selectedVariant.size);
+        if (variantParts.length > 0) {
+          productName += ` (${variantParts.join(', ')})`;
+        }
+      }
+      toastCartActions.added(productName);
     },
     
     removeFromCart: (state, action: PayloadAction<number>) => {
+      const removedItem = state.items.find(item => item.id === action.payload);
       state.items = state.items.filter(item => item.id !== action.payload);
       
       // Recalculate totals
       state.totalItems = state.items.reduce((total, item) => total + item.quantity, 0);
       state.totalPrice = state.items.reduce((total, item) => total + item.totalPrice, 0);
+      
+      // Show toast notification
+      if (removedItem) {
+        toastCartActions.removed(removedItem.product.title);
+      }
     },
     
     updateQuantity: (state, action: PayloadAction<{ id: number; quantity: number }>) => {
@@ -151,9 +191,11 @@ const cartSlice = createSlice({
         if (action.payload.quantity <= 0) {
           // Remove item if quantity is 0 or negative
           state.items = state.items.filter(item => item.id !== action.payload.id);
+          toastCartActions.removed(item.product.title);
         } else {
           item.quantity = action.payload.quantity;
           item.totalPrice = item.quantity * item.product.price;
+          toastCartActions.updated();
         }
         
         // Recalculate totals
@@ -166,6 +208,9 @@ const cartSlice = createSlice({
       state.items = [];
       state.totalPrice = 0;
       state.totalItems = 0;
+      
+      // Show toast notification
+      toastCartActions.cleared();
     },
     
     toggleCart: (state) => {

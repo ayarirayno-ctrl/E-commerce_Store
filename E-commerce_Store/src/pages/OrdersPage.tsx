@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { formatPrice } from '../utils/formatters';
-import { orderService, Order } from '../services/orderService';
+import { orderService } from '../services/orderService';
+import { Order } from '../types';
 import Loading from '../components/ui/Loading';
 import Badge from '../components/ui/Badge';
 import { Package, Truck, CheckCircle, XCircle, Clock } from 'lucide-react';
@@ -125,15 +126,15 @@ const OrdersPage: React.FC = () => {
                         <div>
                           <p className="text-sm text-gray-600">Total</p>
                           <p className="font-semibold text-gray-900">
-                            {formatPrice(order.total)}
+                            {formatPrice(order.total || order.totalPrice || 0)}
                           </p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <Badge variant={getStatusColor(order.orderStatus)}>
+                        <Badge variant={getStatusColor(order.orderStatus || order.status)}>
                           <span className="inline-flex items-center space-x-1">
-                            {getStatusIcon(order.orderStatus)}
-                            <span>{order.orderStatus.charAt(0).toUpperCase() + order.orderStatus.slice(1)}</span>
+                            {getStatusIcon(order.orderStatus || order.status)}
+                            <span>{(order.orderStatus || order.status).charAt(0).toUpperCase() + (order.orderStatus || order.status).slice(1)}</span>
                           </span>
                         </Badge>
                       </div>
@@ -174,10 +175,10 @@ const OrdersPage: React.FC = () => {
                   {/* Order Footer */}
                   <div className="bg-gray-50 px-6 py-3 border-t border-gray-200 flex justify-between items-center">
                     <div className="text-sm text-gray-600">
-                      {order.shippingAddress.city}, {order.shippingAddress.state}
+                      {order.shippingAddress.city}{order.shippingAddress.state ? `, ${order.shippingAddress.state}` : ''}
                     </div>
                     <Link
-                      to={`/orders/${order._id}`}
+                      to={`/orders/${order._id || order.id}`}
                       className="text-primary-600 hover:text-primary-700 font-medium text-sm"
                     >
                       View Details →
