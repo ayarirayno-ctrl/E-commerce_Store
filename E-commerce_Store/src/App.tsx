@@ -21,7 +21,7 @@ import './styles/mobile-responsive.css';
 import ToastProvider from './components/common/ToastProvider';
 import { LoadingAnimation } from './components/common/LoadingAnimation';
 import PrivateRoute from './components/common/PrivateRoute';
-import PrivateAdminRoute from './components/admin/PrivateAdminRoute';
+import AdminRoute from './components/admin/AdminRoute';
 import { InstallPrompt } from './components/pwa/InstallPrompt';
 import { UpdateNotification } from './components/pwa/UpdateNotification';
 import { OfflineIndicator, OnlineIndicator } from './components/pwa/OfflineIndicator';
@@ -44,27 +44,20 @@ const OrdersPage = lazy(() => import('./pages/OrdersPage'));
 const OrderDetailPage = lazy(() => import('./pages/OrderDetailPage'));
 const WishlistPage = lazy(() => import('./pages/WishlistPage'));
 const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage'));
-const ForgotPasswordPage = lazy(() => import('./pages/ForgotPasswordPage'));
+const ForgotPasswordClientPage = lazy(() => import('./pages/ForgotPasswordClientPage'));
 const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const PaymentSuccessPage = lazy(() => import('./pages/PaymentSuccessPage'));
 const PaymentCancelPage = lazy(() => import('./pages/PaymentCancelPage'));
+const EmergencyResetPage = lazy(() => import('./pages/EmergencyResetPage'));
+// Removed: UnifiedLoginPage and SmartRedirect (not used)
 
 // Admin pages
-const AdminLoginPage = lazy(() => import('./pages/admin/AdminLoginPage'));
-const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
-const AdminProductsPage = lazy(() => import('./pages/admin/AdminProductsPage'));
-const AdminOrdersPage = lazy(() => import('./pages/admin/AdminOrdersPage'));
-const AdminCategoriesPage = lazy(() => import('./pages/admin/AdminCategoriesPage'));
-const AdminClientsPage = lazy(() => import('./pages/admin/AdminClientsPage'));
-const AdminPromotionsPage = lazy(() => import('./pages/admin/AdminPromotionsPage'));
-const AdminPromoCodesPage = lazy(() => import('./pages/admin/AdminPromoCodesPage'));
-const AdminAnalyticsPage = lazy(() => import('./pages/admin/AdminAnalyticsPage'));
-const AdminReviewsPage = lazy(() => import('./pages/admin/AdminReviewsPage'));
-const AdminNotificationsPage = lazy(() => import('./pages/admin/AdminNotificationsPage'));
-const AdminLogsPage = lazy(() => import('./pages/admin/AdminLogsPage'));
-const AdminContentPage = lazy(() => import('./pages/admin/AdminContentPage'));
-const AdminRolesPage = lazy(() => import('./pages/admin/AdminRolesPage'));
-const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+
+// Utility pages
+const ClearCachePage = lazy(() => import('./pages/ClearCachePage'));
+
 // Error pages
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
@@ -111,17 +104,19 @@ function AppContent() {
         }>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/wishlist" element={<WishlistPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/checkout" element={<PrivateRoute><CheckoutPage /></PrivateRoute>} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/login" element={<AuthPage />} />
           <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordClientPage userType="client" />} />
+          <Route path="/admin/forgot-password" element={<ForgotPasswordClientPage userType="admin" />} />
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
           <Route path="/payment/success" element={<PaymentSuccessPage />} />
           <Route path="/payment/cancel" element={<PaymentCancelPage />} />
@@ -135,22 +130,19 @@ function AppContent() {
           <Route path="/network-error" element={<NetworkErrorPage />} />
           
           {/* Admin routes */}
-          <Route path="/admin/login" element={<AdminLoginPage />} />
-          <Route path="/admin" element={<PrivateAdminRoute><AdminLayout /></PrivateAdminRoute>}>
-            <Route index element={<AdminDashboard />} />
-            <Route path="products" element={<AdminProductsPage />} />
-            <Route path="orders" element={<AdminOrdersPage />} />
-            <Route path="categories" element={<AdminCategoriesPage />} />
-            <Route path="clients" element={<AdminClientsPage />} />
-            <Route path="promotions" element={<AdminPromotionsPage />} />
-            <Route path="promo-codes" element={<AdminPromoCodesPage />} />
-            <Route path="analytics" element={<AdminAnalyticsPage />} />
-            <Route path="reviews" element={<AdminReviewsPage />} />
-            <Route path="notifications" element={<AdminNotificationsPage />} />
-            <Route path="logs" element={<AdminLogsPage />} />
-            <Route path="content" element={<AdminContentPage />} />
-            <Route path="roles" element={<AdminRolesPage />} />
-          </Route>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route 
+            path="/admin" 
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            } 
+          />
+
+          {/* Utility routes */}
+          <Route path="/clear-cache" element={<ClearCachePage />} />
+          <Route path="/emergency-reset" element={<EmergencyResetPage />} />
           
          {/* 404 - Must be last */}
          <Route path="*" element={<NotFoundPage />} />

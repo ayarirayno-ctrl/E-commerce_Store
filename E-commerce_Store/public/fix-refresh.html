@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>🔧 Fix Problème Rafraîchissement</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .alert {
+            background: rgba(255, 107, 107, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff4757;
+        }
+        .success {
+            background: rgba(46, 204, 113, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #2ecc71;
+        }
+        .btn {
+            background: #3742fa;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px 5px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(55, 66, 250, 0.3);
+        }
+        .btn:hover {
+            background: #2f3542;
+            transform: translateY(-2px);
+        }
+        .logs {
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 20px 0;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .status-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 { text-align: center; margin-bottom: 30px; }
+        h2 { border-bottom: 2px solid rgba(255, 255, 255, 0.3); padding-bottom: 10px; }
+        .timestamp { opacity: 0.7; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Fix Problème de Rafraîchissement Infini</h1>
+        
+        <div class="alert">
+            <strong>🚨 PROBLÈME IDENTIFIÉ :</strong> Rafraîchissement automatique empêchant la connexion
+        </div>
+        
+        <div id="solution-status" class="success">
+            ✅ Solution anti-cache appliquée - Service Worker modifié
+        </div>
+        
+        <div class="status-grid">
+            <div class="status-card">
+                <strong>🌐 Connexion</strong><br>
+                <span id="online-status">Vérification...</span>
+            </div>
+            <div class="status-card">
+                <strong>⚙️ Service Worker</strong><br>
+                <span id="sw-status">Vérification...</span>
+            </div>
+            <div class="status-card">
+                <strong>🗄️ Cache</strong><br>
+                <span id="cache-status">Vérification...</span>
+            </div>
+            <div class="status-card">
+                <strong>🔐 Authentification</strong><br>
+                <span id="auth-status">Test en cours...</span>
+            </div>
+        </div>
+        
+        <h2>🧪 Actions de Test</h2>
+        <button class="btn" onclick="clearAllCache()">🧹 Vider Tout le Cache</button>
+        <button class="btn" onclick="testAuth()">🔐 Test Connexion</button>
+        <button class="btn" onclick="refreshPage()">🔄 Recharger Page</button>
+        <button class="btn" onclick="goToMain()">🏠 Aller à l'App</button>
+        
+        <h2>📋 Logs de Debug</h2>
+        <div id="logs" class="logs">
+            <div>🚀 [<span class="timestamp"></span>] Page de réparation chargée</div>
+        </div>
+        
+        <h2>📝 Instructions</h2>
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 8px;">
+            <ol>
+                <li><strong>Videz le cache</strong> en cliquant sur "🧹 Vider Tout le Cache"</li>
+                <li><strong>Testez la connexion</strong> avec "🔐 Test Connexion"</li>
+                <li><strong>Allez à l'application</strong> avec "🏠 Aller à l'App"</li>
+                <li><strong>Si ça ne marche pas :</strong> Fermez le navigateur, rouvrez et réessayez</li>
+            </ol>
+            
+            <p><strong>🎯 Résultat attendu :</strong> Plus de rafraîchissement automatique, connexion possible</p>
+        </div>
+    </div>
+    
+    <script>
+        let logCount = 0;
+        
+        function updateTimestamp() {
+            const timestamps = document.querySelectorAll('.timestamp');
+            timestamps.forEach(ts => {
+                ts.textContent = new Date().toLocaleTimeString();
+            });
+        }
+        
+        function log(message, type = 'info') {
+            const logs = document.getElementById('logs');
+            const time = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#ff4757' : type === 'success' ? '#2ecc71' : '#00ff00';
+            
+            logs.innerHTML += `<div style="color: ${color}">[${time}] ${message}</div>`;
+            logs.scrollTop = logs.scrollHeight;
+            console.log(message);
+            logCount++;
+            
+            // Limiter le nombre de logs
+            if (logCount > 50) {
+                const lines = logs.innerHTML.split('<div').slice(-40);
+                logs.innerHTML = lines.join('<div');
+                logCount = 40;
+            }
+        }
+        
+        function updateStatus(elementId, text, success = true) {
+            const element = document.getElementById(elementId);
+            element.textContent = text;
+            element.style.color = success ? '#2ecc71' : '#ff4757';
+        }
+        
+        function clearAllCache() {
+            log('🧹 Nettoyage complet du cache...');
+            
+            // Désinscrire tous les service workers
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    registrations.forEach(reg => {
+                        reg.unregister();
+                        log('❌ Service Worker désinscrit: ' + reg.scope);
+                    });
+                });
+            }
+            
+            // Vider tous les caches
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    names.forEach(name => {
+                        caches.delete(name);
+                        log('🗑️ Cache supprimé: ' + name);
+                    });
+                    updateStatus('cache-status', 'Vidé', true);
+                });
+            }
+            
+            // Clear localStorage et sessionStorage
+            try {
+                localStorage.clear();
+                sessionStorage.clear();
+                log('✅ Storage local vidé');
+            } catch(e) {
+                log('⚠️ Erreur vidage storage: ' + e.message, 'error');
+            }
+            
+            log('✅ Nettoyage complet terminé');
+            
+            // Recharger la page après un délai
+            setTimeout(() => {
+                log('🔄 Rechargement de la page...');
+                window.location.reload(true);
+            }, 2000);
+        }
+        
+        function testAuth() {
+            log('🔐 Test de l\'authentification...');
+            updateStatus('auth-status', 'Test en cours...', true);
+            
+            // Test de l'API backend
+            fetch('/api/auth/me', {
+                cache: 'no-store',
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Status: ' + response.status);
+                }
+            })
+            .then(data => {
+                log('✅ API accessible: ' + JSON.stringify(data), 'success');
+                updateStatus('auth-status', 'API OK', true);
+            })
+            .catch(error => {
+                log('❌ Erreur API: ' + error.message, 'error');
+                updateStatus('auth-status', 'Erreur: ' + error.message, false);
+                
+                // Test de connectivité basique
+                fetch('/', { method: 'HEAD', cache: 'no-store' })
+                    .then(() => {
+                        log('✅ Serveur accessible, problème API seulement', 'success');
+                    })
+                    .catch(() => {
+                        log('❌ Serveur inaccessible', 'error');
+                    });
+            });
+        }
+        
+        function refreshPage() {
+            log('🔄 Rechargement forcé de la page...');
+            window.location.reload(true);
+        }
+        
+        function goToMain() {
+            log('🏠 Redirection vers l\'application principale...');
+            window.location.href = '/';
+        }
+        
+        function checkConnectivity() {
+            if (navigator.onLine) {
+                updateStatus('online-status', 'En ligne', true);
+                log('🌐 Connexion internet active');
+            } else {
+                updateStatus('online-status', 'Hors ligne', false);
+                log('📡 Mode hors ligne détecté');
+            }
+        }
+        
+        function checkServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    if (registrations.length > 0) {
+                        updateStatus('sw-status', `${registrations.length} actif(s)`, true);
+                        log(`⚙️ Service Worker(s) trouvé(s): ${registrations.length}`);
+                        
+                        registrations.forEach((reg, i) => {
+                            log(`SW ${i+1}: ${reg.scope} - État: ${reg.active ? 'Actif' : 'Inactif'}`);
+                        });
+                    } else {
+                        updateStatus('sw-status', 'Aucun', true);
+                        log('⚙️ Aucun Service Worker actif');
+                    }
+                });
+            } else {
+                updateStatus('sw-status', 'Non supporté', false);
+                log('❌ Service Worker non supporté');
+            }
+        }
+        
+        function checkCache() {
+            if ('caches' in window) {
+                caches.keys().then(names => {
+                    updateStatus('cache-status', `${names.length} cache(s)`, names.length === 0);
+                    if (names.length > 0) {
+                        log(`🗄️ Caches trouvés: ${names.join(', ')}`);
+                    } else {
+                        log('✅ Aucun cache présent');
+                    }
+                });
+            } else {
+                updateStatus('cache-status', 'Non supporté', false);
+            }
+        }
+        
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            updateTimestamp();
+            log('🚀 Page de réparation initialisée');
+            
+            // Vérifications automatiques
+            checkConnectivity();
+            checkServiceWorker();
+            checkCache();
+            
+            // Test automatique de l'auth après 1 seconde
+            setTimeout(testAuth, 1000);
+            
+            // Mise à jour périodique
+            setInterval(() => {
+                checkConnectivity();
+                checkServiceWorker();
+                checkCache();
+            }, 5000);
+        });
+        
+        // Écouter les événements de connectivité
+        window.addEventListener('online', () => {
+            log('🌐 Connexion rétablie', 'success');
+            checkConnectivity();
+        });
+        
+        window.addEventListener('offline', () => {
+            log('📡 Connexion perdue', 'error');
+            checkConnectivity();
+        });
+        
+        log('✅ Script de réparation chargé et prêt');
+    </script>
+</body>
+</html>

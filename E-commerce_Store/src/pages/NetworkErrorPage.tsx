@@ -24,7 +24,8 @@ const NetworkErrorPage = () => {
   }, []);
 
   const handleRefresh = () => {
-    window.location.reload();
+    console.log('Refresh désactivé - utilisez F5 manuellement si nécessaire');
+    // window.location.reload() SUPPRIMÉ
   };
 
   return (
@@ -98,7 +99,7 @@ const NetworkErrorPage = () => {
           <Link to="/">
             <Button variant="outline" className="w-full sm:w-auto">
               <Home className="w-5 h-5 mr-2" />
-              Retour à l'accueil
+              Retour à l&apos;accueil
             </Button>
           </Link>
         </div>

@@ -73,10 +73,10 @@ class ErrorBoundary extends Component<Props, State> {
               
               <Button
                 variant="outline"
-                onClick={() => window.location.reload()}
-                className="w-full"
+                onClick={() => console.log('Refresh désactivé - utilisez F5 manuellement')}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
               >
-                Refresh Page
+                Actualiser (F5)
               </Button>
             </div>
           </div>

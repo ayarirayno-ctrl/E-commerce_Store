@@ -7,18 +7,19 @@ export default defineConfig({
   server: {
     port: 3002,
     host: true,
-    open: true,
-    strictPort: false,
-    // Disable cache in development
-    headers: {
-      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0'
+    strictPort: true, // Force le port 3002, erreur si occupé
+    // DÉSACTIVER COMPLÈTEMENT LE HMR
+    hmr: false, // Plus de Hot Module Reload
+    watch: {
+      ignored: ['**/*'] // Ignorer tous les changements de fichiers
     }
   },
   build: {
     rollupOptions: {
       output: {
+        entryFileNames: `[name]-[hash].js`,
+        chunkFileNames: `[name]-[hash].js`, 
+        assetFileNames: `[name]-[hash].[ext]`,
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
@@ -26,9 +27,12 @@ export default defineConfig({
         }
       }
     },
-    // Enable service worker caching
     manifest: true,
-    sourcemap: false
+    sourcemap: false,
+    minify: 'terser',
+    terserOptions: {
+      compress: true
+    }
   },
   // PWA configuration
   publicDir: 'public'

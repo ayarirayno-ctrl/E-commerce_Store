@@ -98,6 +98,20 @@ app.use('/api/categories', categoriesRoutes);
 // Alias routes for payment endpoints
 app.use('/api/payments', stripeRoutes);
 
+// Route de base pour éviter "Cannot GET /"
+app.get('/', (req, res) => {
+  res.json({ 
+    message: '🛍️ E-commerce Backend API',
+    status: 'running',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      api: '/api/*'
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Route de test
 app.get('/api/health', (req, res) => {
   res.json({ 

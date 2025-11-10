@@ -40,10 +40,10 @@ const CategoriesPage: React.FC = () => {
           </h2>
           <p className="text-gray-600 mb-4">{error}</p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => console.log('Refresh désactivé - utilisez F5 manuellement')}
             className="btn btn-primary"
           >
-            Try Again
+            Actualiser (F5)
           </button>
         </div>
       </div>

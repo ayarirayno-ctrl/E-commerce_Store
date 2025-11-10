@@ -7,10 +7,6 @@ import Button from '../components/ui/Button';
  * Displayed for unexpected server errors
  */
 const ErrorPage = () => {
-  const handleRefresh = () => {
-    window.location.reload();
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 to-orange-50 px-4">
       <div className="max-w-md w-full text-center">
@@ -23,7 +19,7 @@ const ErrorPage = () => {
 
         {/* Error Message */}
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          Oups ! Une erreur s'est produite
+          Oups ! Une erreur s&apos;est produite
         </h1>
         <p className="text-gray-600 mb-8">
           Nous rencontrons actuellement des difficultés techniques. 
@@ -32,7 +28,7 @@ const ErrorPage = () => {
 
         {/* Error Code */}
         <div className="bg-white rounded-lg shadow-sm p-4 mb-8">
-          <p className="text-sm text-gray-500">Code d'erreur</p>
+          <p className="text-sm text-gray-500">Code d&apos;erreur</p>
           <p className="text-lg font-mono text-gray-900">500 - Internal Server Error</p>
         </div>
 
@@ -40,16 +36,16 @@ const ErrorPage = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             variant="primary"
-            onClick={handleRefresh}
+            onClick={() => console.log('Refresh désactivé - utilisez F5 manuellement')}
             className="w-full sm:w-auto"
           >
             <RefreshCw className="w-5 h-5 mr-2" />
-            Réessayer
+            Réessayer (F5)
           </Button>
           <Link to="/">
             <Button variant="outline" className="w-full sm:w-auto">
               <Home className="w-5 h-5 mr-2" />
-              Retour à l'accueil
+              Retour à l&apos;accueil
             </Button>
           </Link>
         </div>

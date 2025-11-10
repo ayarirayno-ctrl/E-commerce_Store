@@ -79,7 +79,8 @@ export function useServiceWorker() {
   const updateServiceWorker = () => {
     if (state.registration?.waiting) {
       state.registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-      window.location.reload();
+      console.log('Service Worker mis à jour - refresh désactivé - utilisez F5 manuellement');
+      // window.location.reload() SUPPRIMÉ
     }
   };
 

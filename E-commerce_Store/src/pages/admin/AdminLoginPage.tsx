@@ -49,8 +49,8 @@ const AdminLoginPage: React.FC = () => {
       
       console.log('🚀 Redirecting to /admin...');
       
-      // Rediriger vers le dashboard admin
-      window.location.href = '/admin';
+      // Rediriger vers le dashboard admin SANS recharger la page
+      navigate('/admin', { replace: true });
       return;
     }
 

@@ -5,6 +5,8 @@ import {
   getClientProfile,
   updateClientProfile,
   changePassword,
+  forgotPassword,
+  resetPassword,
 } from '../controllers/clientAuthController';
 import { clientAuthMiddleware } from '../middleware/clientAuthMiddleware';
 
@@ -13,6 +15,8 @@ const router = express.Router();
 // Public routes
 router.post('/register', registerClient);
 router.post('/login', loginClient);
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
 
 // Protected routes (require authentication)
 router.get('/profile', clientAuthMiddleware, getClientProfile);

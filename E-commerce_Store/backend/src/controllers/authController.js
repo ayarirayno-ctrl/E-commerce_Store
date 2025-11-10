@@ -47,6 +47,23 @@ export const register = async (req, res) => {
 
   } catch (error) {
     console.error('Erreur inscription:', error);
+    
+    // Gestion spécifique des erreurs de validation Mongoose
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        message: 'Erreur de validation',
+        error: error.message 
+      });
+    }
+    
+    // Gestion des erreurs de duplication (email déjà utilisé)
+    if (error.code === 11000) {
+      return res.status(400).json({ 
+        message: 'Cet email est déjà utilisé' 
+      });
+    }
+    
+    // Autres erreurs serveur
     res.status(500).json({ 
       message: 'Erreur lors de l\'inscription',
       error: error.message 

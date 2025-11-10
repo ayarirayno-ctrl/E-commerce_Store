@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Debug Authentification</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .btn-danger {
+            background: #dc3545;
+        }
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Debug Authentification E-Commerce</h1>
+        
+        <div class="form-group">
+            <button onclick="checkLocalStorage()">1. Vérifier localStorage</button>
+        </div>
+        
+        <div class="form-group">
+            <button onclick="clearLocalStorage()" class="btn-danger">2. Vider localStorage</button>
+        </div>
+        
+        <div class="form-group">
+            <button onclick="testBackend()">3. Tester Backend (Port 5000)</button>
+        </div>
+        
+        <div class="form-group">
+            <button onclick="testFrontend()">4. Tester Frontend (Port 3002)</button>
+        </div>
+
+        <hr>
+
+        <h3>Test de Connexion</h3>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" id="email" value="demo@example.com" />
+        </div>
+        
+        <div class="form-group">
+            <label>Mot de passe:</label>
+            <input type="password" id="password" value="demo123" />
+        </div>
+        
+        <div class="form-group">
+            <button onclick="testLogin()">5. Tester Connexion</button>
+        </div>
+
+        <div class="form-group">
+            <button onclick="testAdminLogin()">6. Tester Connexion Admin</button>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <button onclick="fixInfiniteRedirect()" class="btn-warning">🔧 CORRIGER Boucle Infinie</button>
+        </div>
+
+        <div id="result" class="info">
+            Prêt pour les tests...
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        
+        function showResult(message, type = 'info') {
+            const result = document.getElementById('result');
+            result.className = type;
+            result.textContent = message;
+        }
+
+        function checkLocalStorage() {
+            showResult('🔍 Vérification du localStorage...', 'info');
+            
+            const user = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
+            const adminToken = localStorage.getItem('admin_token');
+            
+            let result = '=== ÉTAT DU LOCALSTORAGE ===\n\n';
+            
+            if (user) {
+                try {
+                    const parsed = JSON.parse(user);
+                    result += `✅ USER TROUVÉ:\n${JSON.stringify(parsed, null, 2)}\n\n`;
+                } catch (e) {
+                    result += `❌ USER CORROMPU: ${user}\n\n`;
+                }
+            } else {
+                result += '❌ Aucun USER trouvé\n\n';
+            }
+            
+            result += `TOKEN: ${token ? '✅ ' + token.substring(0, 20) + '...' : '❌ Absent'}\n`;
+            result += `ADMIN_TOKEN: ${adminToken ? '✅ ' + adminToken.substring(0, 20) + '...' : '❌ Absent'}\n\n`;
+            
+            result += '=== AUTRES CLÉS ===\n';
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                result += `${key}: ${localStorage.getItem(key)?.substring(0, 50)}...\n`;
+            }
+            
+            showResult(result, 'info');
+        }
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            sessionStorage.clear();
+            showResult('✅ LOCALSTORAGE VIDÉ!\n\nEssayez maintenant de vous reconnecter.', 'success');
+        }
+
+        async function testBackend() {
+            showResult('⏳ Test du backend...', 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}/health`);
+                if (response.ok) {
+                    showResult('✅ BACKEND OK - Port 5000 accessible', 'success');
+                } else {
+                    throw new Error(`Status: ${response.status}`);
+                }
+            } catch (error) {
+                showResult(
+                    `❌ BACKEND INACCESSIBLE\n\n` +
+                    `Erreur: ${error.message}\n\n` +
+                    `Solutions:\n` +
+                    `1. Vérifier que le backend est démarré (npm run dev)\n` +
+                    `2. Vérifier le port 5000\n` +
+                    `3. Vérifier les paramètres CORS`,
+                    'error'
+                );
+            }
+        }
+
+        async function testFrontend() {
+            showResult('⏳ Test du frontend...', 'info');
+            
+            try {
+                const response = await fetch('http://localhost:3002/');
+                if (response.ok) {
+                    showResult('✅ FRONTEND OK - Port 3002 accessible', 'success');
+                } else {
+                    throw new Error(`Status: ${response.status}`);
+                }
+            } catch (error) {
+                showResult(
+                    `❌ FRONTEND INACCESSIBLE\n\n` +
+                    `Erreur: ${error.message}\n\n` +
+                    `Solutions:\n` +
+                    `1. Vérifier que le frontend est démarré (npm run dev)\n` +
+                    `2. Vérifier le port 3002`,
+                    'error'
+                );
+            }
+        }
+
+        async function testLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            showResult('⏳ Test de connexion...', 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ CONNEXION RÉUSSIE!\n\n` +
+                        `User: ${data.user?.firstName || 'N/A'} ${data.user?.lastName || ''}\n` +
+                        `Email: ${data.user?.email}\n` +
+                        `Role: ${data.user?.role}\n` +
+                        `Token: ${data.token?.substring(0, 20)}...\n\n` +
+                        `Données complètes:\n${JSON.stringify(data, null, 2)}`,
+                        'success'
+                    );
+                } else {
+                    showResult(
+                        `❌ ÉCHEC DE LA CONNEXION\n\n` +
+                        `Status: ${response.status}\n` +
+                        `Message: ${data.message}\n\n` +
+                        `Réponse complète:\n${JSON.stringify(data, null, 2)}`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult(
+                    `❌ ERREUR RÉSEAU\n\n` +
+                    `${error.message}\n\n` +
+                    `Vérifiez que le backend est démarré!`,
+                    'error'
+                );
+            }
+        }
+
+        async function testAdminLogin() {
+            showResult('⏳ Test connexion admin...', 'info');
+            
+            // Test avec les identifiants démo admin
+            try {
+                const response = await fetch(`${API_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        email: 'ayarirayen539@gmail.com', 
+                        password: 'admin123' 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ CONNEXION ADMIN RÉUSSIE!\n\n` +
+                        `Admin: ${data.user?.firstName || 'N/A'} ${data.user?.lastName || ''}\n` +
+                        `Email: ${data.user?.email}\n` +
+                        `Role: ${data.user?.role}\n` +
+                        `Token: ${data.token?.substring(0, 20)}...\n\n` +
+                        `Données complètes:\n${JSON.stringify(data, null, 2)}`,
+                        'success'
+                    );
+                } else {
+                    showResult(
+                        `❌ ÉCHEC CONNEXION ADMIN\n\n` +
+                        `Status: ${response.status}\n` +
+                        `Message: ${data.message}\n\n` +
+                        `Réponse complète:\n${JSON.stringify(data, null, 2)}`,
+                        'error'
+                    );
+                }
+            } catch (error) {
+                showResult(
+                    `❌ ERREUR RÉSEAU ADMIN\n\n` +
+                    `${error.message}\n\n` +
+                    `Vérifiez que le backend est démarré!`,
+                    'error'
+                );
+            }
+        }
+
+        function fixInfiniteRedirect() {
+            showResult('🔧 Application des correctifs...', 'warning');
+            
+            // Vider tout le localStorage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Vider aussi les cookies
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+            
+            let result = '✅ CORRECTIFS APPLIQUÉS:\n\n';
+            result += '1. ✅ localStorage vidé\n';
+            result += '2. ✅ sessionStorage vidé\n';
+            result += '3. ✅ Cookies supprimés\n\n';
+            result += '🚀 PROCHAINES ÉTAPES:\n';
+            result += '1. Fermer cet onglet\n';
+            result += '2. Aller sur http://localhost:3002\n';
+            result += '3. Essayer de vous connecter\n\n';
+            result += '⚠️ Si le problème persiste:\n';
+            result += '• Redémarrer les serveurs\n';
+            result += '• Vider le cache du navigateur (Ctrl+Shift+Del)';
+            
+            showResult(result, 'success');
+            
+            // Redirection automatique après 3 secondes
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3002/auth';
+            }, 3000);
+        }
+
+        // Auto-test au chargement
+        window.onload = function() {
+            setTimeout(() => {
+                checkLocalStorage();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

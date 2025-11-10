@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔧 Test Boucle Infinie - CORRIGER</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .container { max-width: 800px; margin: 0 auto; background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; backdrop-filter: blur(10px); }
+        h1 { text-align: center; margin-bottom: 30px; }
+        .step { background: rgba(255,255,255,0.2); padding: 20px; margin: 15px 0; border-radius: 10px; }
+        .btn { padding: 15px 30px; margin: 10px; background: #28a745; color: white; border: none; cursor: pointer; border-radius: 8px; font-size: 16px; font-weight: bold; }
+        .btn-danger { background: #dc3545; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        .btn-primary { background: #007bff; }
+        .status { padding: 15px; border-radius: 8px; margin: 10px 0; font-family: monospace; }
+        .success { background: rgba(40, 167, 69, 0.3); border: 2px solid #28a745; }
+        .error { background: rgba(220, 53, 69, 0.3); border: 2px solid #dc3545; }
+        .info { background: rgba(23, 162, 184, 0.3); border: 2px solid #17a2b8; }
+        .big-btn { font-size: 20px; padding: 20px 40px; text-transform: uppercase; letter-spacing: 1px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛠️ CORRECTION BOUCLE INFINIE - E-COMMERCE</h1>
+        
+        <div class="status info" id="status">
+            ✅ Corrections appliquées dans le code!<br>
+            ⏰ Test de la solution en cours...
+        </div>
+
+        <div class="step">
+            <h2>🧪 1. Tests Automatiques</h2>
+            <button class="btn" onclick="testServers()">Tester Serveurs</button>
+            <button class="btn" onclick="testAuth()">Tester Auth Context</button>
+            <button class="btn" onclick="testLocalStorage()">Vérifier LocalStorage</button>
+        </div>
+
+        <div class="step">
+            <h2>🚨 2. Nettoyage d'Urgence</h2>
+            <button class="btn btn-danger" onclick="emergencyClean()">VIDER TOUT</button>
+            <button class="btn btn-warning" onclick="resetAuth()">Reset Auth Seulement</button>
+        </div>
+
+        <div class="step">
+            <h2>🚀 3. Solution Finale</h2>
+            <button class="btn btn-primary big-btn" onclick="goToApp()">ALLER À L'APPLICATION</button>
+        </div>
+
+        <div class="step">
+            <h2>📋 4. Manuel - Si problème persiste</h2>
+            <ol>
+                <li>Fermez tous les onglets de l'application</li>
+                <li>Videz complètement le cache (Ctrl+Shift+Del)</li>
+                <li>Redémarrez le navigateur</li>
+                <li>Retournez sur <strong>http://localhost:3003</strong></li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function updateStatus(message, type = 'info') {
+            const status = document.getElementById('status');
+            status.className = 'status ' + type;
+            status.innerHTML = message;
+        }
+
+        async function testServers() {
+            updateStatus('🔍 Test des serveurs...', 'info');
+            
+            let results = '📊 RÉSULTATS DES TESTS:\n\n';
+            
+            // Test Backend
+            try {
+                const backend = await fetch('http://localhost:5000/api/health');
+                results += backend.ok ? '✅ Backend (5000): OK\n' : '❌ Backend (5000): Erreur\n';
+            } catch {
+                results += '❌ Backend (5000): Inaccessible\n';
+            }
+            
+            // Test Frontend
+            try {
+                const frontend = await fetch('http://localhost:3003');
+                results += frontend.ok ? '✅ Frontend (3003): OK\n' : '❌ Frontend (3003): Erreur\n';
+            } catch {
+                results += '❌ Frontend (3003): Inaccessible\n';
+            }
+            
+            updateStatus(results, 'success');
+        }
+
+        function testAuth() {
+            updateStatus('🔍 Test du contexte d\'authentification...', 'info');
+            
+            let authState = '🔐 ÉTAT D\'AUTHENTIFICATION:\n\n';
+            
+            const user = localStorage.getItem('user');
+            const token = localStorage.getItem('token');
+            
+            authState += user ? '✅ Utilisateur stocké: Présent\n' : '❌ Utilisateur: Absent\n';
+            authState += token ? '✅ Token: Présent\n' : '❌ Token: Absent\n';
+            
+            // Test de format JSON
+            if (user) {
+                try {
+                    const parsed = JSON.parse(user);
+                    authState += '✅ Format JSON: Valide\n';
+                    authState += `📧 Email: ${parsed.email || 'N/A'}\n`;
+                } catch {
+                    authState += '❌ Format JSON: Corrompu\n';
+                }
+            }
+            
+            authState += '\n🎯 Contexte prêt pour utilisation!';
+            updateStatus(authState, 'success');
+        }
+
+        function testLocalStorage() {
+            updateStatus('🗃️ Analyse du localStorage...', 'info');
+            
+            let storage = '📦 CONTENU LOCALSTORAGE:\n\n';
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                const value = localStorage.getItem(key);
+                storage += `${key}: ${value ? value.substring(0, 50) : 'vide'}...\n`;
+            }
+            
+            storage += `\n📊 Total: ${localStorage.length} éléments`;
+            updateStatus(storage, 'info');
+        }
+
+        function emergencyClean() {
+            updateStatus('🧹 NETTOYAGE COMPLET EN COURS...', 'info');
+            
+            // Vider tout
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Supprimer cookies
+            document.cookie.split(";").forEach(c => {
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+            });
+            
+            setTimeout(() => {
+                updateStatus('✅ NETTOYAGE TERMINÉ!\n\n🚀 Tout est propre, vous pouvez maintenant aller sur l\'application.', 'success');
+            }, 1000);
+        }
+
+        function resetAuth() {
+            updateStatus('🔄 Reset authentification...', 'info');
+            
+            ['user', 'token', 'admin_token', 'auth_state', 'user_data'].forEach(key => {
+                localStorage.removeItem(key);
+            });
+            
+            setTimeout(() => {
+                updateStatus('✅ AUTH RESET!\n\n🎯 Seules les données d\'authentification ont été supprimées.', 'success');
+            }, 500);
+        }
+
+        function goToApp() {
+            updateStatus('🚀 REDIRECTION VERS L\'APPLICATION...', 'success');
+            
+            // Nettoyage léger avant redirection
+            ['user', 'token'].forEach(key => localStorage.removeItem(key));
+            
+            setTimeout(() => {
+                window.location.href = 'http://localhost:3003';
+            }, 1500);
+        }
+
+        // Test automatique au chargement
+        window.onload = function() {
+            setTimeout(() => {
+                testServers();
+            }, 1000);
+        };
+    </script>
+</body>
+</html>

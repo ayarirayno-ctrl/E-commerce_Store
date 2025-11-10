@@ -73,8 +73,15 @@ export const useVoiceSearch = (
       return;
     }
 
-    // @ts-expect-error - Web Speech API types
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition = (window as unknown as any).SpeechRecognition || (window as unknown as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      setState(prev => ({ 
+        ...prev, 
+        error: 'Voice recognition not available' 
+      }));
+      return;
+    }
+    
     const recognitionInstance = new SpeechRecognition();
 
     recognitionInstance.continuous = false; // Arrêter après une phrase

@@ -90,16 +90,19 @@ export const logLogin = async (req: AuthRequest, res: Response, next: NextFuncti
     const originalJson = res.json.bind(res);
 
     res.json = function (data: any) {
-      if (res.statusCode === 200 && data.user) {
+      // Gérer à la fois les connexions admin (data.admin) et user (data.user)
+      const userOrAdmin = data.admin || data.user;
+      
+      if (res.statusCode === 200 && userOrAdmin) {
         setImmediate(async () => {
           try {
             await AdminLog.create({
               action: 'login',
-              adminId: data.user._id,
-              adminEmail: data.user.email,
-              targetModel: 'User',
-              targetId: data.user._id,
-              description: `Connexion admin: ${data.user.email}`,
+              adminId: userOrAdmin._id || userOrAdmin.id,
+              adminEmail: userOrAdmin.email,
+              targetModel: data.admin ? 'Admin' : 'User',
+              targetId: userOrAdmin._id || userOrAdmin.id,
+              description: `Connexion ${data.admin ? 'admin' : 'user'}: ${userOrAdmin.email}`,
               ipAddress: req.ip || req.socket.remoteAddress,
               userAgent: req.get('user-agent'),
             });

@@ -117,6 +117,11 @@ const OptimizedImage = ({
 
   // Generate srcset for responsive images
   const generateSrcSet = (baseSrc: string): string => {
+    // Check if baseSrc is valid
+    if (!baseSrc || typeof baseSrc !== 'string') {
+      return '';
+    }
+    
     // If it's a data URL or external CDN already optimized, skip
     if (baseSrc.startsWith('data:') || baseSrc.includes('unsplash')) {
       return '';

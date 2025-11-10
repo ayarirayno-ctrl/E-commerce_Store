@@ -51,7 +51,8 @@ app.use('/api/', limiter);
 // CORS configuration - restrict to known origins
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [
   'http://localhost:3010',
-  'http://localhost:3000'
+  'http://localhost:3000',
+  'http://localhost:3002'
 ];
 
 app.use(cors({

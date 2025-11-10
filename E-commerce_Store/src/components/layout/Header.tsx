@@ -75,28 +75,29 @@ const Header: React.FC = () => {
           </nav>
 
           {/* Search Bar */}
-          <div className="hidden lg:flex flex-1 max-w-lg mx-8">
-            <form onSubmit={handleSearch} className="w-full">
-              <div className="relative flex items-center space-x-2">
-                <div className="relative flex-1">
-                  <Input
-                    type="text"
-                    placeholder="Search products or use voice..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    leftIcon={<Search className="h-4 w-4" />}
-                    className="pr-12"
-                  />
-                  <Button
-                    type="submit"
-                    size="sm"
-                    className="absolute right-1 top-1/2 transform -translate-y-1/2"
-                  >
-                    Search
-                  </Button>
+          <div className="hidden lg:flex max-w-md mx-6">
+            <form onSubmit={handleSearch} className="w-full flex items-center space-x-2">
+              <div className="relative w-64">
+                <Input
+                  type="text"
+                  placeholder="Search products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  leftIcon={<Search className="h-4 w-4" />}
+                  className="pr-12"
+                />
+                {/* Bouton Vocal à droite dans le champ */}
+                <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
+                  <VoiceSearchButton onVoiceResult={handleVoiceResult} />
                 </div>
-                <VoiceSearchButton onVoiceResult={handleVoiceResult} />
               </div>
+              {/* Bouton Search bleu séparé à droite */}
+              <Button
+                type="submit"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+              >
+                Search
+              </Button>
             </form>
           </div>
 
@@ -140,14 +141,6 @@ const Header: React.FC = () => {
                     >
                       <ShoppingCart className="h-4 w-4 inline mr-2" />
                       My Orders
-                    </Link>
-                    <Link
-                      to="/admin/login"
-                      className="block px-4 py-2 text-sm text-blue-600 hover:bg-gray-100 border-t border-gray-200"
-                      onClick={() => setShowUserMenu(false)}
-                    >
-                      <User className="h-4 w-4 inline mr-2" />
-                      Admin Access
                     </Link>
                     <button
                       onClick={() => {
@@ -239,28 +232,29 @@ const Header: React.FC = () => {
         </div>
 
         {/* Mobile Search */}
-        <div className="lg:hidden pb-4">
-          <form onSubmit={handleSearch}>
-            <div className="relative flex items-center space-x-2">
-              <div className="relative flex-1">
-                <Input
-                  type="text"
-                  placeholder="Search or use voice..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  leftIcon={<Search className="h-4 w-4" />}
-                  className="pr-12"
-                />
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="absolute right-1 top-1/2 transform -translate-y-1/2"
-                >
-                  Search
-                </Button>
+        <div className="lg:hidden pb-4 px-2">
+          <form onSubmit={handleSearch} className="flex items-center space-x-2">
+            <div className="relative flex-1">
+              <Input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                leftIcon={<Search className="h-4 w-4" />}
+                className="pr-12"
+              />
+              {/* Bouton Vocal à droite dans le champ - Version Mobile */}
+              <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
+                <VoiceSearchButton onVoiceResult={handleVoiceResult} />
               </div>
-              <VoiceSearchButton onVoiceResult={handleVoiceResult} />
             </div>
+            {/* Bouton Search bleu séparé à droite - Mobile */}
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2"
+            >
+              Search
+            </Button>
           </form>
         </div>
 

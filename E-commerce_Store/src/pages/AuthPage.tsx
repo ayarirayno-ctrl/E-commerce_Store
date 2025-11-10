@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import Button from '../components/ui/Button';
@@ -7,10 +7,18 @@ import { LogIn, UserPlus, Mail, Lock, User as UserIcon } from 'lucide-react';
 
 const AuthPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login, register } = useAuth();
+  const { login, register, user, loading: authLoading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (!authLoading && user) {
+      console.log('🏠 AuthPage: User already authenticated, redirecting to home');
+      navigate('/home', { replace: true });
+    }
+  }, [user, authLoading, navigate]);
   
   const [formData, setFormData] = useState({
     name: '',
@@ -69,11 +77,15 @@ const AuthPage: React.FC = () => {
 
     try {
       if (isLogin) {
-        await login(formData.email, formData.password);
+        const userData = await login(formData.email, formData.password);
+        console.log('✅ Login successful, redirecting...', userData.email);
+        // Redirect to home after successful login
+        navigate('/home', { replace: true });
       } else {
         await register(formData.name, formData.email, formData.password);
+        console.log('✅ Registration successful, redirecting to login...');
+        setIsLogin(true); // Switch to login mode instead of redirecting
       }
-      navigate('/');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {

@@ -8,6 +8,8 @@ export interface IAdmin {
   role: 'super-admin' | 'admin' | 'manager';
   isActive: boolean;
   lastLogin?: Date;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -41,6 +43,14 @@ const adminSchema = new mongoose.Schema<IAdmin>({
   },
   lastLogin: {
     type: Date
+  },
+  resetPasswordToken: {
+    type: String,
+    select: false
+  },
+  resetPasswordExpires: {
+    type: Date,
+    select: false
   }
 }, {
   timestamps: true

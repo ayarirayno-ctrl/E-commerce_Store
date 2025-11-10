@@ -17,6 +17,8 @@ export interface IClient extends Document {
   isActive?: boolean;
   emailVerified?: boolean;
   blocked?: boolean;
+  resetPasswordToken?: string;
+  resetPasswordExpires?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -36,6 +38,8 @@ const ClientSchema: Schema = new Schema({
   isActive: { type: Boolean, default: true },
   emailVerified: { type: Boolean, default: false },
   blocked: { type: Boolean, default: false },
+  resetPasswordToken: { type: String, select: false },
+  resetPasswordExpires: { type: Date, select: false },
 }, { timestamps: true });
 
 // Hash password before saving

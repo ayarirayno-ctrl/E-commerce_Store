@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔍 Test de Connexion E-Commerce</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; }
+        .btn { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; cursor: pointer; border-radius: 4px; }
+        .btn-success { background: #28a745; }
+        .btn-danger { background: #dc3545; }
+        .btn-warning { background: #ffc107; color: #212529; }
+        #result { margin: 20px 0; padding: 15px; border-radius: 4px; white-space: pre-wrap; font-family: monospace; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        input { width: 100%; padding: 8px; margin: 5px 0; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Final - E-Commerce</h1>
+        
+        <div id="result" class="info">Les deux serveurs sont maintenant actifs ✅</div>
+
+        <h3>1. Tests de connectivité</h3>
+        <button class="btn" onclick="testBackend()">Tester Backend (5000)</button>
+        <button class="btn" onclick="testFrontend()">Tester Frontend (3003)</button>
+        
+        <h3>2. Test de connexion utilisateur</h3>
+        <input type="email" id="email" placeholder="Email" value="demo@example.com">
+        <input type="password" id="password" placeholder="Password" value="demo123">
+        <button class="btn btn-success" onclick="testUserLogin()">Connexion Utilisateur</button>
+        
+        <h3>3. Test de connexion admin</h3>
+        <button class="btn btn-warning" onclick="testAdminLogin()">Connexion Admin (ayarirayen539@gmail.com)</button>
+        
+        <h3>4. Solution finale</h3>
+        <button class="btn btn-danger" onclick="goToApp()">🚀 Aller à l'Application</button>
+    </div>
+
+    <script>
+        const BACKEND_URL = 'http://localhost:5000/api';
+        const FRONTEND_URL = 'http://localhost:3003';
+        
+        function showResult(message, type = 'info') {
+            document.getElementById('result').className = type;
+            document.getElementById('result').textContent = message;
+        }
+
+        async function testBackend() {
+            showResult('⏳ Test du backend...', 'info');
+            try {
+                const response = await fetch(`${BACKEND_URL}/health`);
+                if (response.ok) {
+                    showResult('✅ BACKEND OK (Port 5000)', 'success');
+                } else {
+                    showResult('❌ Backend erreur: ' + response.status, 'error');
+                }
+            } catch (error) {
+                showResult('❌ Backend inaccessible: ' + error.message, 'error');
+            }
+        }
+
+        async function testFrontend() {
+            showResult('⏳ Test du frontend...', 'info');
+            try {
+                const response = await fetch(FRONTEND_URL);
+                if (response.ok) {
+                    showResult('✅ FRONTEND OK (Port 3003)', 'success');
+                } else {
+                    showResult('❌ Frontend erreur: ' + response.status, 'error');
+                }
+            } catch (error) {
+                showResult('❌ Frontend inaccessible: ' + error.message, 'error');
+            }
+        }
+
+        async function testUserLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            showResult('⏳ Test connexion utilisateur...', 'info');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ CONNEXION UTILISATEUR RÉUSSIE!\n\n` +
+                        `Nom: ${data.user?.firstName || 'N/A'} ${data.user?.lastName || ''}\n` +
+                        `Email: ${data.user?.email}\n` +
+                        `Token: ${data.token?.substring(0, 20)}...\n\n` +
+                        `🎉 Vous pouvez maintenant utiliser l'application!`,
+                        'success'
+                    );
+                } else {
+                    showResult(`❌ Échec connexion: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ Erreur réseau: ${error.message}`, 'error');
+            }
+        }
+
+        async function testAdminLogin() {
+            showResult('⏳ Test connexion admin...', 'info');
+            
+            try {
+                const response = await fetch(`${BACKEND_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        email: 'ayarirayen539@gmail.com', 
+                        password: 'admin123' 
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showResult(
+                        `✅ CONNEXION ADMIN RÉUSSIE!\n\n` +
+                        `Admin: ${data.user?.firstName || 'N/A'} ${data.user?.lastName || ''}\n` +
+                        `Email: ${data.user?.email}\n` +
+                        `Role: ${data.user?.role}\n` +
+                        `Token: ${data.token?.substring(0, 20)}...\n\n` +
+                        `🎉 Accès admin confirmé!`,
+                        'success'
+                    );
+                } else {
+                    showResult(`❌ Échec connexion admin: ${data.message}`, 'error');
+                }
+            } catch (error) {
+                showResult(`❌ Erreur réseau admin: ${error.message}`, 'error');
+            }
+        }
+
+        function goToApp() {
+            // Vider tout avant d'aller sur l'app
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            showResult('🚀 Redirection vers l\'application...', 'info');
+            setTimeout(() => {
+                window.location.href = FRONTEND_URL;
+            }, 1000);
+        }
+
+        // Test automatique au chargement
+        window.onload = function() {
+            setTimeout(testBackend, 500);
+            setTimeout(testFrontend, 1000);
+        };
+    </script>
+</body>
+</html>

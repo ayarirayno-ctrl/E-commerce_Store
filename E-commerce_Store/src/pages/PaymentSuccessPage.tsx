@@ -37,7 +37,7 @@ const PaymentSuccessPage: React.FC = () => {
 
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/stripe/session/${sessionId}`
+          `${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/stripe/session/${sessionId}`
         );
 
         if (!response.ok) {

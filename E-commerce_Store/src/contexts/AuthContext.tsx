@@ -5,8 +5,6 @@ import { useNotification } from '../hooks/useNotification';
 import { useAppDispatch } from '../store';
 import { fetchCart } from '../store/slices/cartSlice';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
 interface ApiError {
   message?: string;
 }
@@ -26,7 +24,6 @@ interface User {
   };
   avatar?: string;
   emailVerified?: boolean;
-  token: string;
 }
 
 interface AuthContextType {
@@ -59,26 +56,52 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const { showSuccess, showError } = useNotification();
   const dispatch = useAppDispatch();
 
-  // Check for existing user on mount
+  // Initialize auth state ONCE on mount - NO DEPENDENCIES
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
+    let isMounted = true;
+
+    const initAuth = () => {
       try {
-        const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser);
-        // Set axios default header
-  // Authorization sera ajouté automatiquement par l'interceptor via localStorage
+        const storedUser = localStorage.getItem('user');
+        const storedToken = localStorage.getItem('token');
+        
+        if (storedUser && storedToken) {
+          try {
+            const parsedUser = JSON.parse(storedUser);
+            if (isMounted && parsedUser && parsedUser.id) {
+              setUser(parsedUser);
+              // Set token for API calls
+              api.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+            } else {
+              localStorage.removeItem('user');
+              localStorage.removeItem('token');
+            }
+          } catch {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+          }
+        }
       } catch (error) {
-        console.error('Failed to parse stored user:', error);
-        localStorage.removeItem('user');
+        console.error('Auth init error:', error);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
       }
-    }
-    setLoading(false);
-  }, []);
+    };
+
+    // Small delay to prevent race conditions
+    const timer = setTimeout(initAuth, 100);
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timer);
+    };
+  }, []); // EMPTY ARRAY - NEVER RE-RUN
 
   const login = async (email: string, password: string): Promise<User> => {
     try {
-      const response = await api.post(`${API_URL}/auth/login`, {
+      const response = await api.post('/auth/login', {
         email,
         password,
       });
@@ -92,90 +115,89 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         address: response.data.user.address,
         avatar: response.data.user.avatar,
         emailVerified: response.data.user.isEmailVerified,
-        token: response.data.token,
       };
 
-      setUser(userData);
+      const token = response.data.token;
+
+      // Store in localStorage
       localStorage.setItem('user', JSON.stringify(userData));
-      localStorage.setItem('token', response.data.token);
-        
-      // Sync cart from backend
+      localStorage.setItem('token', token);
+
+      // Set token for API calls
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      setUser(userData);
+      
+      // Load user's cart
       dispatch(fetchCart());
-        
-      showSuccess('Connexion réussie !');
-      
+
       return userData;
-    } catch (error: unknown) {
-      console.error('Login failed:', error);
+    } catch (error) {
       const axiosError = error as AxiosError<ApiError>;
-      
-      // Extract error message from API response
-      const errorMessage = axiosError.response?.data?.message || 'Login failed';
-      
-      // Show error notification with the message from backend (includes "You are blocked from admin device")
-      showError(errorMessage);
-      
-      throw new Error(errorMessage);
+      const message = axiosError.response?.data?.message || 'Login failed';
+      throw new Error(message);
     }
   };
 
   const register = async (name: string, email: string, password: string): Promise<void> => {
     try {
-      // Séparer le prénom et nom
-      const nameParts = name.trim().split(' ');
-      const firstName = nameParts[0] || name;
-      const lastName = nameParts.slice(1).join(' ') || nameParts[0];
+      const [firstName, ...lastNameParts] = name.split(' ');
+      const lastName = lastNameParts.join(' ') || '';
 
-      const response = await api.post(`${API_URL}/auth/register`, {
+      await api.post('/auth/register', {
         firstName,
         lastName,
         email,
         password,
       });
 
-      showSuccess(response.data.message || 'Inscription réussie ! Vérifiez votre email pour activer votre compte.');
-    } catch (error: unknown) {
-      console.error('Registration failed:', error);
+      showSuccess('Registration successful! Please check your email to verify your account.');
+    } catch (error) {
       const axiosError = error as AxiosError<ApiError>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Erreur lors de l\'inscription';
-      showError(errorMessage);
-      throw new Error(errorMessage);
+      const message = axiosError.response?.data?.message || 'Registration failed';
+      throw new Error(message);
     }
   };
 
   const logout = () => {
-    setUser(null);
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    showSuccess('Déconnexion réussie!');
+    try {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      delete api.defaults.headers.common['Authorization'];
+      setUser(null);
+      
+      // Clear cart data
+      dispatch({ type: 'cart/clearCart' });
+      
+      showSuccess('Logged out successfully');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
   const updateProfile = async (data: Partial<User>): Promise<void> => {
     try {
-      const response = await api.put(`${API_URL}/users/profile`, {
-        phone: data.phone,
-        address: data.address,
-      });
-
-      const updatedUser: User = {
+      const response = await api.put('/auth/profile', data);
+      
+      const updatedUser = {
         ...user!,
-        phone: response.data.user.phone,
-        address: response.data.user.address,
+        ...response.data.user,
+        name: `${response.data.user.firstName} ${response.data.user.lastName}`,
       };
 
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
-      showSuccess('Profil mis à jour!');
-    } catch (error: unknown) {
-      console.error('Update profile failed:', error);
+      
+      showSuccess('Profile updated successfully');
+    } catch (error) {
       const axiosError = error as AxiosError<ApiError>;
-      const errorMessage = axiosError.response?.data?.message || axiosError.message || 'Erreur lors de la mise à jour du profil';
-      showError(errorMessage);
-      throw new Error(errorMessage);
+      const message = axiosError.response?.data?.message || 'Profile update failed';
+      showError(message);
+      throw new Error(message);
     }
   };
 
-  const value: AuthContextType = {
+  const value = {
     user,
     login,
     register,
@@ -185,5 +207,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     loading,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
