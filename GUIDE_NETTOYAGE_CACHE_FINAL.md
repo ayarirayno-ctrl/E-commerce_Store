@@ -41,7 +41,7 @@ Vous continuez à voir l'ancienne version même après les modifications.
 **Windows :**
 ```powershell
 # Supprimer le cache Vite et Node
-cd "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store"
+cd "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend"
 Remove-Item -Path "node_modules\.vite" -Recurse -Force -ErrorAction SilentlyContinue
 Remove-Item -Path "dist" -Recurse -Force -ErrorAction SilentlyContinue
 npm cache clean --force
@@ -66,7 +66,7 @@ npm cache clean --force
 
 4. **Redémarrer le frontend** (dans un autre terminal)
    ```powershell
-   cd "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store"
+   cd "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend"
    npm run dev
    ```
 

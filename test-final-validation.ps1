@@ -21,7 +21,7 @@ try {
 
 # Test 2: Vérification du Service Worker
 Write-Host "`n✅ Test 2: Service Worker et anti-cache" -ForegroundColor Green
-$swContent = Get-Content -Path "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store\public\sw.js" -Raw
+$swContent = Get-Content -Path "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend\public\sw.js" -Raw
 if ($swContent -match "skipWaiting") {
     Write-Host "   Service Worker anti-cache: ACTIF ✅" -ForegroundColor Green
 } else {

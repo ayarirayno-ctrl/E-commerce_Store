@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # Keycloak Identity and Access Management
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: ecommerce-keycloak
+    environment:
+      # Admin credentials
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      
+      # Database configuration (H2 en dev, PostgreSQL en prod)
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_password
+      
+      # Hostname configuration
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_STRICT: false
+      KC_HOSTNAME_STRICT_HTTPS: false
+      
+      # HTTP configuration
+      KC_HTTP_ENABLED: true
+      KC_HTTP_PORT: 8080
+      
+      # Proxy settings
+      KC_PROXY: edge
+    ports:
+      - "8180:8080"
+    command:
+      - start-dev
+    depends_on:
+      - postgres
+    networks:
+      - ecommerce-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health/ready"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # PostgreSQL Database pour Keycloak
+  postgres:
+    image: postgres:15-alpine
+    container_name: ecommerce-postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ecommerce-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U keycloak"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # MongoDB pour l'application e-commerce (optionnel si déjà installé localement)
+  # mongodb:
+  #   image: mongo:7
+  #   container_name: ecommerce-mongodb
+  #   environment:
+  #     MONGO_INITDB_DATABASE: ecommerce_store
+  #   ports:
+  #     - "27017:27017"
+  #   volumes:
+  #     - mongodb_data:/data/db
+  #   networks:
+  #     - ecommerce-network
+
+volumes:
+  postgres_data:
+    driver: local
+  # mongodb_data:
+  #   driver: local
+
+networks:
+  ecommerce-network:
+    driver: bridge

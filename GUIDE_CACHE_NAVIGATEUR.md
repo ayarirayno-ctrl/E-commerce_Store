@@ -59,7 +59,7 @@ Si rien ne marche, redémarrez le serveur Vite :
 # 2. Attendez 3 secondes
 # 3. Relancez :
 
-cd "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store"
+cd "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend"
 npm run dev
 ```
 

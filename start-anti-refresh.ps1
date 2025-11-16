@@ -31,7 +31,7 @@ Start-Sleep -Seconds 2
 
 Write-Host "`n🚀 Démarrage du backend..." -ForegroundColor Green
 Start-Job -Name "Backend" -ScriptBlock {
-    Set-Location "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store\backend"
+    Set-Location "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend\backend"
     node src/server.js
 }
 
@@ -39,7 +39,7 @@ Start-Sleep -Seconds 3
 
 Write-Host "`n🌐 Démarrage du frontend..." -ForegroundColor Green
 Start-Job -Name "Frontend" -ScriptBlock {
-    Set-Location "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store"
+    Set-Location "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend"
     npm run dev
 }
 
@@ -90,7 +90,7 @@ while ($true) {
         Write-Host "[$time] ⚠️ Backend arrêté - Redémarrage..." -ForegroundColor Yellow
         Remove-Job -Name "Backend" -Force -ErrorAction SilentlyContinue
         Start-Job -Name "Backend" -ScriptBlock {
-            Set-Location "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store\backend"
+            Set-Location "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend\backend"
             node src/server.js
         }
     }
@@ -99,7 +99,7 @@ while ($true) {
         Write-Host "[$time] ⚠️ Frontend arrêté - Redémarrage..." -ForegroundColor Yellow
         Remove-Job -Name "Frontend" -Force -ErrorAction SilentlyContinue
         Start-Job -Name "Frontend" -ScriptBlock {
-            Set-Location "c:\Users\Admin\Desktop\e-commerce\E-commerce_Store\E-commerce_Store"
+            Set-Location "C:\Users\Admin\Desktop\e-commerce\E-commerce_Store\frontend"
             npm run dev
         }
     }
