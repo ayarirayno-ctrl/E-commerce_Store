@@ -77,14 +77,11 @@ const AuthPage: React.FC = () => {
 
     try {
       if (isLogin) {
-        const userData = await login(formData.email, formData.password);
-        console.log('✅ Login successful, redirecting...', userData.email);
-        // Redirect to home after successful login
-        navigate('/home', { replace: true });
+        await login(formData.email, formData.password);
+        navigate('/');
       } else {
         await register(formData.name, formData.email, formData.password);
-        console.log('✅ Registration successful, redirecting to login...');
-        setIsLogin(true); // Switch to login mode instead of redirecting
+        navigate('/');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

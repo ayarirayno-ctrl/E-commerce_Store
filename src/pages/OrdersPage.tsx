@@ -5,7 +5,8 @@ import { orderService } from '../services/orderService';
 import { Order } from '../types';
 import Loading from '../components/ui/Loading';
 import Badge from '../components/ui/Badge';
-import { Package, Truck, CheckCircle, XCircle, Clock } from 'lucide-react';
+import Input from '../components/ui/Input';
+import { Package, Truck, CheckCircle, XCircle, Clock, Search, Filter } from 'lucide-react';
 
 const OrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -13,11 +14,14 @@ const OrdersPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<string>('date');
 
   useEffect(() => {
     loadOrders();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, statusFilter, searchTerm, sortBy]);
 
   const loadOrders = async () => {
     try {
@@ -78,6 +82,52 @@ const OrdersPage: React.FC = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="container-custom py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-8">My Orders</h1>
+
+        {/* Filters and Search */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Search */}
+            <div className="col-span-1">
+              <Input
+                type="text"
+                placeholder="Search by order number..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                leftIcon={<Search className="h-4 w-4" />}
+              />
+            </div>
+            
+            {/* Status Filter */}
+            <div className="col-span-1">
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            
+            {/* Sort */}
+            <div className="col-span-1">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              >
+                <option value="date">Sort by Date (Newest)</option>
+                <option value="dateAsc">Sort by Date (Oldest)</option>
+                <option value="total">Sort by Total (High to Low)</option>
+                <option value="totalAsc">Sort by Total (Low to High)</option>
+              </select>
+            </div>
+          </div>
+        </div>
 
         {error && (
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">

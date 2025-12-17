@@ -40,8 +40,8 @@ const AdminClientsPage: React.FC = () => {
 
   const fetchClients = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/admin/clients', {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('http://localhost:5000/api/admin/users', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -49,7 +49,7 @@ const AdminClientsPage: React.FC = () => {
       const data = await response.json();
       
       if (data.success) {
-        setClients(data.clients || []);
+        setClients(data.users || []);
       } else {
         console.error('Erreur:', data.message);
       }
@@ -62,8 +62,8 @@ const AdminClientsPage: React.FC = () => {
 
   const fetchBlockedClients = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/admin/clients/blocked', {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('http://localhost:5000/api/admin/users?blocked=true', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },

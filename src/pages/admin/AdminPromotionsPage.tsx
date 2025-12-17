@@ -35,7 +35,7 @@ const AdminPromotionsPage: React.FC = () => {
 
   const fetchPromotions = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const url = statusFilter === 'all' 
         ? 'http://localhost:5000/api/promotions'
         : `http://localhost:5000/api/promotions?status=${statusFilter}`;
@@ -54,7 +54,7 @@ const AdminPromotionsPage: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/promotions/stats', {
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -71,7 +71,7 @@ const AdminPromotionsPage: React.FC = () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cette promotion ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/promotions/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -332,7 +332,7 @@ const PromotionForm: React.FC<PromotionFormProps> = ({ promotion, onSuccess, onC
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const url = promotion
         ? `http://localhost:5000/api/promotions/${promotion._id}`
         : 'http://localhost:5000/api/promotions';

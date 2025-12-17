@@ -2,13 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Provider, useDispatch } from 'react-redux';
 import { lazy, Suspense, useEffect } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
-import { ReactKeycloakProvider } from '@react-keycloak/web';
-import keycloak, { keycloakInitOptions, setupTokenRefresh } from './config/keycloak';
 import { store } from './store';
 import { setNotificationDispatcher } from './lib/api';
 import { addNotification } from './store/slices/uiSlice';
 import { ThemeProvider } from './contexts/ThemeContext';
-import { KeycloakAuthProvider } from './contexts/KeycloakAuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import CartSidebar from './components/cart/CartSidebar';
@@ -51,10 +49,14 @@ const ResetPasswordPage = lazy(() => import('./pages/ResetPasswordPage'));
 const PaymentSuccessPage = lazy(() => import('./pages/PaymentSuccessPage'));
 const PaymentCancelPage = lazy(() => import('./pages/PaymentCancelPage'));
 const EmergencyResetPage = lazy(() => import('./pages/EmergencyResetPage'));
+// Removed: UnifiedLoginPage and SmartRedirect (not used)
 
 // Admin pages
-const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminLogin = lazy(() => import('./pages/admin/AdminLoginPage'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+
+// Diagnostic page
+const DiagnosticPage = lazy(() => import('./pages/DiagnosticPage'));
 
 // Utility pages
 const ClearCachePage = lazy(() => import('./pages/ClearCachePage'));
@@ -63,30 +65,6 @@ const ClearCachePage = lazy(() => import('./pages/ClearCachePage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 const ErrorPage = lazy(() => import('./pages/ErrorPage'));
 const NetworkErrorPage = lazy(() => import('./pages/NetworkErrorPage'));
-
-// Keycloak event handler
-const keycloakEventHandler = (event: unknown, error: unknown) => {
-  console.log('Keycloak event:', event, error);
-  
-  if (event === 'onAuthSuccess') {
-    setupTokenRefresh();
-    console.log('✅ Authentication successful');
-  } else if (event === 'onAuthError') {
-    console.error('❌ Authentication error:', error);
-  } else if (event === 'onAuthRefreshError') {
-    console.error('❌ Token refresh error:', error);
-  } else if (event === 'onAuthLogout') {
-    console.log('👋 User logged out');
-  }
-};
-
-// Keycloak loading component
-const KeycloakLoadingComponent = (
-  <div className="min-h-screen flex items-center justify-center">
-    <LoadingAnimation />
-    <p className="ml-4 text-gray-600">Chargement de l'authentification...</p>
-  </div>
-);
 
 // AppContent component with dispatch access
 function AppContent() {
@@ -99,9 +77,9 @@ function AppContent() {
       dispatch(addNotification(notification));
     });
 
-    // Load promo codes
-    import('./data/promoCodes.json').then((data) => {
-      dispatch({ type: 'promoCodes/setPromoCodes', payload: data.promoCodes });
+    // Load promo codes from backend
+    import('./store/slices/promoCodesSlice').then((module) => {
+      dispatch(module.loadPromotionsFromBackend() as any);
     });
 
     // Load applied promo code from localStorage
@@ -123,83 +101,98 @@ function AppContent() {
       <Header />
       <main className="flex-1" id="main-content">
         <Suspense fallback={
-          <div className="flex justify-center items-center h-96">
-            <LoadingAnimation />
+          <div className="min-h-screen flex items-center justify-center">
+            <LoadingAnimation size="lg" text="Loading page..." variant="bounce" />
           </div>
         }>
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/products" element={<ProductsPage />} />
-            <Route path="/products/:id" element={<ProductDetailPage />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/auth" element={<AuthPage />} />
-            <Route path="/verify-email" element={<VerifyEmailPage />} />
-            <Route path="/forgot-password" element={<ForgotPasswordClientPage />} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
-            <Route path="/emergency-reset" element={<EmergencyResetPage />} />
-            <Route path="/clear-cache" element={<ClearCachePage />} />
-            
-            {/* Protected client routes */}
-            <Route path="/cart" element={<PrivateRoute><CartPage /></PrivateRoute>} />
-            <Route path="/checkout" element={<PrivateRoute><CheckoutPage /></PrivateRoute>} />
-            <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
-            <Route path="/orders" element={<PrivateRoute><OrdersPage /></PrivateRoute>} />
-            <Route path="/orders/:id" element={<PrivateRoute><OrderDetailPage /></PrivateRoute>} />
-            <Route path="/wishlist" element={<PrivateRoute><WishlistPage /></PrivateRoute>} />
-            <Route path="/payment-success" element={<PrivateRoute><PaymentSuccessPage /></PrivateRoute>} />
-            <Route path="/payment-cancel" element={<PrivateRoute><PaymentCancelPage /></PrivateRoute>} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+          <Route path="/checkout" element={<PrivateRoute><CheckoutPage /></PrivateRoute>} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/login" element={<AuthPage />} />
+          <Route path="/verify-email/:token" element={<VerifyEmailPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordClientPage userType="client" />} />
+          <Route path="/admin/forgot-password" element={<ForgotPasswordClientPage userType="admin" />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+          <Route path="/payment/success" element={<PaymentSuccessPage />} />
+          <Route path="/payment/cancel" element={<PaymentCancelPage />} />
+          <Route path="/profile" element={<PrivateRoute><ProfilePage /></PrivateRoute>} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/orders" element={<PrivateRoute><OrdersPage /></PrivateRoute>} />
+          <Route path="/orders/:id" element={<PrivateRoute><OrderDetailPage /></PrivateRoute>} />
+          
+          {/* Error pages */}
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="/network-error" element={<NetworkErrorPage />} />
+          
+          {/* Diagnostic page */}
+          <Route path="/diagnostic" element={<DiagnosticPage />} />
+          
+          {/* Admin routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route 
+            path="/admin" 
+            element={
+              <AdminRoute>
+                <AdminDashboard />
+              </AdminRoute>
+            } 
+          />
 
-            {/* Admin routes */}
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
-
-            {/* Error routes */}
-            <Route path="/error" element={<ErrorPage />} />
-            <Route path="/network-error" element={<NetworkErrorPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </main>
-      <Footer />
-      <CartSidebar />
-      <ChatWidget />
-      <ProductComparator />
-      <CompareFloatingBar />
-      <InstallPrompt />
-      {needsUpdate && <UpdateNotification onUpdate={updateServiceWorker} />}
-      <OfflineIndicator />
-      <OnlineIndicator />
-    </div>
+          {/* Utility routes */}
+          <Route path="/clear-cache" element={<ClearCachePage />} />
+          <Route path="/emergency-reset" element={<EmergencyResetPage />} />
+          
+         {/* 404 - Must be last */}
+         <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </main>
+    <Footer />
+    <CartSidebar />
+    <NotificationSystem />
+    
+    {/* PWA Components */}
+    <InstallPrompt />
+    {needsUpdate && <UpdateNotification onUpdate={updateServiceWorker} />}
+    <OfflineIndicator />
+    <OnlineIndicator />
+    
+    {/* Product Comparison */}
+    <ProductComparator />
+    <CompareFloatingBar />
+    
+    {/* Live Chat Support */}
+    <ChatWidget />
+  </div>
   );
 }
 
 function App() {
   return (
     <ErrorBoundary>
-      <ReactKeycloakProvider
-        authClient={keycloak}
-        initOptions={keycloakInitOptions}
-        LoadingComponent={KeycloakLoadingComponent}
-        onEvent={keycloakEventHandler}
-      >
-        <HelmetProvider>
-          <Provider store={store}>
-            <Router>
-              <ThemeProvider>
-                <KeycloakAuthProvider>
-                  <ToastProvider>
-                    <NotificationSystem />
-                    <AppContent />
-                  </ToastProvider>
-                </KeycloakAuthProvider>
-              </ThemeProvider>
-            </Router>
-          </Provider>
-        </HelmetProvider>
-      </ReactKeycloakProvider>
+      <HelmetProvider>
+        <Provider store={store}>
+          <Router future={{ 
+            v7_startTransition: true,
+            v7_relativeSplatPath: true 
+          }}>
+            <ThemeProvider>
+              <AuthProvider>
+                <AppContent />
+                <ToastProvider />
+              </AuthProvider>
+            </ThemeProvider>
+          </Router>
+        </Provider>
+      </HelmetProvider>
     </ErrorBoundary>
   );
 }

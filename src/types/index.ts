@@ -100,7 +100,13 @@ export interface RootState {
   products: import('./product').ProductState;
   cart: import('./cart').CartState;
   ui: UIState;
-  wishlist: { items: import('./product').Product[] };
+  wishlist: {
+    items: import('./product').Product[];
+    backendItems: any[];
+    loading: boolean;
+    error: string | null;
+    synced: boolean;
+  };
   reviews: {
     items: import('./product').Review[];
     stats: Record<number, import('./product').ReviewStats>;

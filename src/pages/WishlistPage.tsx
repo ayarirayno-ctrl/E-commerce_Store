@@ -1,40 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Heart, ShoppingCart, X, ArrowLeft } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Heart, ShoppingCart, X, ArrowLeft, Lock } from 'lucide-react';
 import { useWishlist } from '../hooks/useWishlist';
 import { useCart } from '../hooks/useCart';
+import { useAuth } from '../contexts/AuthContext';
 import { formatPrice } from '../utils/formatters';
 import { Product } from '../types/product';
 import Button from '../components/ui/Button';
 import OptimizedImage from '../components/common/OptimizedImage';
 
 const WishlistPage: React.FC = () => {
-  const { items, removeItem, clearAll } = useWishlist();
+  const { items, removeItem, clearAll, moveToCart, loading } = useWishlist();
   const { addItemToCart } = useCart();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
+  // ✅ RÈGLE: Wishlist accessible uniquement aux utilisateurs authentifiés
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=/wishlist');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleAddToCart = (product: Product) => {
-    addItemToCart(product);
+    if (isAuthenticated) {
+      // Use backend moveToCart for authenticated users
+      moveToCart(product.id, 1);
+    } else {
+      // Fallback to local cart for non-authenticated users
+      addItemToCart(product);
+    }
   };
+
+  if (!isAuthenticated) {
+    return null; // Redirection en cours
+  }
 
   if (items.length === 0) {
     return (
       <div className="container-custom min-h-screen py-16">
         <div className="max-w-2xl mx-auto text-center">
-          <div className="mb-6">
-            <Heart className="h-24 w-24 text-gray-300 mx-auto" />
-          </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Your Wishlist is Empty
-          </h1>
-          <p className="text-gray-600 mb-8">
-            Save your favorite items for later by clicking the heart icon on any product.
-          </p>
-          <Link to="/products">
-            <Button size="lg">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Continue Shopping
-            </Button>
-          </Link>
+          {loading ? (
+            <div className="flex flex-col items-center justify-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mb-4"></div>
+              <p className="text-gray-600">Loading your wishlist...</p>
+            </div>
+          ) : (
+            <>
+              <div className="mb-6">
+                <Heart className="h-24 w-24 text-gray-300 mx-auto" />
+              </div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-4">
+                Your Wishlist is Empty
+              </h1>
+              <p className="text-gray-600 mb-8">
+                Save your favorite items for later by clicking the heart icon on any product.
+              </p>
+              <Link to="/products">
+                <Button size="lg">
+                  <ArrowLeft className="h-5 w-5 mr-2" />
+                  Continue Shopping
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     );
@@ -135,10 +164,10 @@ const WishlistPage: React.FC = () => {
                   <Button
                     onClick={() => handleAddToCart(product)}
                     fullWidth
-                    disabled={product.stock === 0}
+                    disabled={product.stock === 0 || loading}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />
-                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                    {loading ? 'Moving...' : product.stock === 0 ? 'Out of Stock' : 'Move to Cart'}
                   </Button>
                 </div>
               </div>

@@ -1,36 +1,31 @@
 import { Navigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
+import Loading from '../ui/Loading';
 
 interface AdminRouteProps {
   children: React.ReactNode;
 }
 
 const AdminRoute = ({ children }: AdminRouteProps) => {
-  // Vérifier si l'utilisateur a un token admin valide
-  const adminToken = localStorage.getItem('adminToken');
-  const adminUser = localStorage.getItem('adminUser');
+  const { isAuthenticated, isAdmin, loading } = useAuth();
 
-  if (!adminToken || !adminUser) {
-    // Si pas de token admin, rediriger vers la page de connexion admin
+  // Show loading while checking auth status
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loading size="lg" text="Vérification des droits d'administration..." />
+      </div>
+    );
+  }
+
+  // Redirect to login if not authenticated or not admin
+  if (!isAuthenticated || !isAdmin) {
+    console.log('🔒 AdminRoute: Redirecting to admin login - not admin');
     return <Navigate to="/admin/login" replace />;
   }
 
-  try {
-    const admin = JSON.parse(adminUser);
-    
-    // Vérifier que l'utilisateur a le rôle admin
-    if (admin.role !== 'admin') {
-      return <Navigate to="/admin/login" replace />;
-    }
-
-    // Si tout est OK, afficher le composant enfant
-    return <>{children}</>;
-  } catch (error) {
-    // Si erreur lors du parsing du JSON, rediriger vers login
-    console.error('Erreur lors de la vérification du token admin:', error);
-    localStorage.removeItem('adminToken');
-    localStorage.removeItem('adminUser');
-    return <Navigate to="/admin/login" replace />;
-  }
+  console.log('✅ AdminRoute: Rendering admin panel');
+  return <>{children}</>;
 };
 
 export default AdminRoute;

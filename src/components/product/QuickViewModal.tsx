@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShoppingCart, Eye, Star, Heart, ExternalLink, Minus, Plus } from 'lucide-react';
+import { X, ShoppingCart, Eye, Star, Heart, ExternalLink, Minus, Plus, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../types';
 import { formatPrice } from '../../utils/formatters';
 import { useCart } from '../../hooks/useCart';
 import { useWishlist } from '../../hooks/useWishlist';
+import { useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 
@@ -23,6 +24,7 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
   const navigate = useNavigate();
   const { addItemToCart } = useCart();
   const { addItem: addToWishlist, isInWishlist } = useWishlist();
+  const { isAuthenticated } = useAuth();
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -33,6 +35,13 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
     : product.price;
 
   const handleAddToCart = () => {
+    // ✅ Vérification: Utilisateur doit être authentifié pour acheter
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=' + encodeURIComponent(window.location.pathname));
+      onClose();
+      return;
+    }
+    
     for (let i = 0; i < quantity; i++) {
       addItemToCart(product);
     }
@@ -75,6 +84,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
               <button
                 onClick={onClose}
                 className="p-2 hover:bg-white/50 dark:hover:bg-gray-700/50 rounded-lg transition-colors"
+                aria-label="Close quick view"
+                title="Close"
               >
                 <X className="h-6 w-6 text-gray-600 dark:text-gray-400" />
               </button>
@@ -106,6 +117,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                     <button
                       onClick={() => addToWishlist(product)}
                       className="absolute top-4 right-4 p-3 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-full shadow-lg hover:scale-110 transition-transform"
+                      aria-label={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+                      title={isInWishlist(product.id) ? "Remove from wishlist" : "Add to wishlist"}
                     >
                       <Heart
                         className={`h-5 w-5 ${
@@ -220,6 +233,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
                         disabled={quantity <= 1}
                         className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        aria-label="Decrease quantity"
+                        title="Decrease quantity"
                       >
                         <Minus className="h-4 w-4" />
                       </button>
@@ -230,6 +245,8 @@ export const QuickViewModal: React.FC<QuickViewModalProps> = ({
                         onClick={() => setQuantity(Math.min(product.stock, quantity + 1))}
                         disabled={quantity >= product.stock}
                         className="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        aria-label="Increase quantity"
+                        title="Increase quantity"
                       >
                         <Plus className="h-4 w-4" />
                       </button>

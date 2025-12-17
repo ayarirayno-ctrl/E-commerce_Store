@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import type { 
   PromoCode, 
   AppliedPromoCode, 
@@ -6,6 +6,32 @@ import type {
   PromoCodeValidation 
 } from '../../types/promoCode';
 import type { CartItem } from '../../types/cart';
+
+// Async thunk to load promotions from backend
+export const loadPromotionsFromBackend = createAsyncThunk(
+  'promoCodes/loadPromotions',
+  async () => {
+    try {
+      // Get active promotions from backend (public route)
+      const response = await fetch('http://localhost:5000/api/promotions/active', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to load promotions');
+      }
+      
+      const data = await response.json();
+      return data.promotions || [];
+    } catch (error) {
+      console.error('Error loading promotions:', error);
+      // Fallback to JSON file
+      const jsonData = await import('../../data/promoCodes.json');
+      return jsonData.promoCodes || [];
+    }
+  }
+);
 
 const initialState: PromoCodeState = {
   availableCodes: [],
@@ -73,6 +99,21 @@ const promoCodesSlice = createSlice({
         promoCode.usedCount += 1;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadPromotionsFromBackend.pending, (state) => {
+        state.validationLoading = true;
+        state.error = null;
+      })
+      .addCase(loadPromotionsFromBackend.fulfilled, (state, action) => {
+        state.availableCodes = action.payload;
+        state.validationLoading = false;
+      })
+      .addCase(loadPromotionsFromBackend.rejected, (state, action) => {
+        state.validationLoading = false;
+        state.error = action.error.message || 'Failed to load promotions';
+      });
   },
 });
 

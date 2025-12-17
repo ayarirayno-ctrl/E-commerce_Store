@@ -45,8 +45,8 @@ const AdminCategoriesPage: React.FC = () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cette catégorie ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch(`http://localhost:5000/api/categories/${id}`, {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`http://localhost:5000/api/admin/categories/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -328,10 +328,10 @@ const CategoryForm: React.FC<CategoryFormProps> = ({ category, parentCategories,
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const url = category
-        ? `http://localhost:5000/api/categories/${category._id}`
-        : 'http://localhost:5000/api/categories';
+        ? `http://localhost:5000/api/admin/categories/${category._id}`
+        : 'http://localhost:5000/api/admin/categories';
       
       const method = category ? 'PUT' : 'POST';
 

@@ -5,6 +5,20 @@ import ProductCard from './ProductCard';
 import { store } from '../../store';
 import type { Product } from '../../types/product';
 
+// Mock useAuth hook with authenticated user
+vi.mock('../../contexts/AuthContext', () => ({
+  useAuth: () => ({
+    user: { id: '1', email: 'test@test.com', name: 'Test User' },
+    login: vi.fn(),
+    logout: vi.fn(),
+    register: vi.fn(),
+    updateProfile: vi.fn(),
+    isAuthenticated: true, // User is authenticated
+    loading: false,
+  }),
+  AuthProvider: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
+}));
+
 // Mock OptimizedImage to avoid IntersectionObserver in unit tests
 vi.mock('../common/OptimizedImage', () => ({
   default: (props: { alt?: string }) => <img alt={props.alt} />,

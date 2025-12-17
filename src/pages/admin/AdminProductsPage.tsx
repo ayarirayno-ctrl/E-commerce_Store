@@ -35,7 +35,12 @@ const AdminProductsPage: React.FC = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/products');
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('http://localhost:5000/api/admin/products', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       setProducts(data.products || []);
     } catch (error) {
@@ -49,8 +54,8 @@ const AdminProductsPage: React.FC = () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer ce produit ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -259,10 +264,10 @@ const ProductForm: React.FC<ProductFormProps> = ({ product, onSuccess, onCancel 
     setLoading(true);
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const url = product
-        ? `http://localhost:5000/api/products/${product._id}`
-        : 'http://localhost:5000/api/products';
+        ? `http://localhost:5000/api/admin/products/${product._id}`
+        : 'http://localhost:5000/api/admin/products';
       
       const method = product ? 'PUT' : 'POST';
 

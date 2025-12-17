@@ -57,7 +57,7 @@ const AdminLogsPage: React.FC = () => {
 
   const fetchLogs = useCallback(async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       let url = 'http://localhost:5000/api/admin/logs';
       
       const params = new URLSearchParams();
@@ -92,7 +92,7 @@ const AdminLogsPage: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/admin/logs/stats', {
         headers: { 'Authorization': `Bearer ${token}` },
       });

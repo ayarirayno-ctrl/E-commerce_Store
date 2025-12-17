@@ -1,0 +1,432 @@
+# Script de configuration automatique Keycloak pour E-commerce Store
+# Authentification Admin et User
+
+Write-Host "🚀 Configuration Keycloak pour E-commerce Store" -ForegroundColor Cyan
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host ""
+
+# Variables de configuration
+$KEYCLOAK_URL = "http://localhost:9090"
+$ADMIN_USER = "admin"
+$ADMIN_PASSWORD = "admin123"
+$REALM_NAME = "ecommerce"
+
+# Fonction pour obtenir le token admin
+function Get-AdminToken {
+    Write-Host "🔑 Obtention du token admin..." -ForegroundColor Yellow
+    
+    $body = @{
+        username = $ADMIN_USER
+        password = $ADMIN_PASSWORD
+        grant_type = "password"
+        client_id = "admin-cli"
+    }
+    
+    try {
+        $response = Invoke-RestMethod -Uri "$KEYCLOAK_URL/realms/master/protocol/openid-connect/token" `
+            -Method Post -Body $body -ContentType "application/x-www-form-urlencoded"
+        Write-Host "✅ Token obtenu avec succès" -ForegroundColor Green
+        return $response.access_token
+    } catch {
+        Write-Host "❌ Erreur lors de l'obtention du token: $_" -ForegroundColor Red
+        exit 1
+    }
+}
+
+# Fonction pour créer le realm
+function New-Realm {
+    param($token)
+    
+    Write-Host "🌍 Création du realm '$REALM_NAME'..." -ForegroundColor Yellow
+    
+    $realmConfig = @{
+        realm = $REALM_NAME
+        enabled = $true
+        displayName = "E-commerce Store"
+        displayNameHtml = "<b>E-commerce</b> Store"
+        registrationAllowed = $true
+        registrationEmailAsUsername = $false
+        editUsernameAllowed = $false
+        resetPasswordAllowed = $true
+        rememberMe = $true
+        verifyEmail = $false
+        loginWithEmailAllowed = $true
+        duplicateEmailsAllowed = $false
+        sslRequired = "none"
+        accessTokenLifespan = 3600
+        accessTokenLifespanForImplicitFlow = 900
+        ssoSessionIdleTimeout = 1800
+        ssoSessionMaxLifespan = 36000
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms" `
+            -Method Post -Headers $headers -Body $realmConfig
+        Write-Host "✅ Realm créé avec succès" -ForegroundColor Green
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Realm existe déjà, utilisation du realm existant" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création du realm: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Fonction pour créer les rôles
+function New-Roles {
+    param($token)
+    
+    Write-Host "👥 Création des rôles..." -ForegroundColor Yellow
+    
+    $roles = @(
+        @{ name = "super-admin"; description = "Super administrateur avec tous les droits" },
+        @{ name = "admin"; description = "Administrateur avec droits de gestion" },
+        @{ name = "manager"; description = "Manager avec droits limités" },
+        @{ name = "client"; description = "Client standard" },
+        @{ name = "user"; description = "Utilisateur standard" }
+    )
+    
+    $headers = @{
+        "Authorization" = "Bearer $token"
+        "Content-Type" = "application/json"
+    }
+    
+    foreach ($role in $roles) {
+        try {
+            $roleBody = $role | ConvertTo-Json
+            Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/roles" `
+                -Method Post -Headers $headers -Body $roleBody
+            Write-Host "  ✅ Rôle '$($role.name)' créé" -ForegroundColor Green
+        } catch {
+            if ($_.Exception.Response.StatusCode -eq 409) {
+                Write-Host "  ⚠️  Rôle '$($role.name)' existe déjà" -ForegroundColor Yellow
+            } else {
+                Write-Host "  ❌ Erreur pour le rôle '$($role.name)': $_" -ForegroundColor Red
+            }
+        }
+    }
+}
+
+# Fonction pour créer le client Admin
+function New-AdminClient {
+    param($token)
+    
+    Write-Host "🔐 Création du client Admin..." -ForegroundColor Yellow
+    
+    $adminClient = @{
+        clientId = "ecommerce-admin"
+        name = "E-commerce Admin Console"
+        description = "Client pour l'interface d'administration"
+        enabled = $true
+        publicClient = $true
+        directAccessGrantsEnabled = $true
+        standardFlowEnabled = $true
+        implicitFlowEnabled = $false
+        serviceAccountsEnabled = $false
+        protocol = "openid-connect"
+        rootUrl = "http://localhost:5173"
+        baseUrl = "/admin"
+        redirectUris = @(
+            "http://localhost:5173/*",
+            "http://localhost:5173/admin/*"
+        )
+        webOrigins = @(
+            "http://localhost:5173"
+        )
+        attributes = @{
+            "pkce.code.challenge.method" = "S256"
+        }
+        defaultRoles = @("admin")
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/clients" `
+            -Method Post -Headers $headers -Body $adminClient
+        Write-Host "✅ Client Admin créé avec succès" -ForegroundColor Green
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Client Admin existe déjà" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création du client Admin: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Fonction pour créer le client Frontend (Users)
+function New-FrontendClient {
+    param($token)
+    
+    Write-Host "🌐 Création du client Frontend (Users)..." -ForegroundColor Yellow
+    
+    $frontendClient = @{
+        clientId = "ecommerce-frontend"
+        name = "E-commerce Frontend"
+        description = "Client pour les utilisateurs finaux"
+        enabled = $true
+        publicClient = $true
+        directAccessGrantsEnabled = $true
+        standardFlowEnabled = $true
+        implicitFlowEnabled = $false
+        serviceAccountsEnabled = $false
+        protocol = "openid-connect"
+        rootUrl = "http://localhost:5173"
+        baseUrl = "/"
+        redirectUris = @(
+            "http://localhost:5173/*"
+        )
+        webOrigins = @(
+            "http://localhost:5173"
+        )
+        attributes = @{
+            "pkce.code.challenge.method" = "S256"
+        }
+        defaultRoles = @("client")
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/clients" `
+            -Method Post -Headers $headers -Body $frontendClient
+        Write-Host "✅ Client Frontend créé avec succès" -ForegroundColor Green
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Client Frontend existe déjà" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création du client Frontend: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Fonction pour créer le client Backend
+function New-BackendClient {
+    param($token)
+    
+    Write-Host "⚙️  Création du client Backend..." -ForegroundColor Yellow
+    
+    $backendClient = @{
+        clientId = "ecommerce-backend"
+        name = "E-commerce Backend API"
+        description = "Client pour l'API backend"
+        enabled = $true
+        publicClient = $false
+        bearerOnly = $true
+        standardFlowEnabled = $false
+        directAccessGrantsEnabled = $false
+        serviceAccountsEnabled = $false
+        protocol = "openid-connect"
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/clients" `
+            -Method Post -Headers $headers -Body $backendClient
+        Write-Host "✅ Client Backend créé avec succès" -ForegroundColor Green
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Client Backend existe déjà" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création du client Backend: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Fonction pour créer un utilisateur admin de test
+function New-TestAdmin {
+    param($token)
+    
+    Write-Host "👤 Création d'un utilisateur admin de test..." -ForegroundColor Yellow
+    
+    $testAdmin = @{
+        username = "testadmin"
+        email = "admin@ecommerce.com"
+        firstName = "Test"
+        lastName = "Admin"
+        enabled = $true
+        emailVerified = $true
+        credentials = @(
+            @{
+                type = "password"
+                value = "Admin123!"
+                temporary = $false
+            }
+        )
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        $null = Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users" `
+            -Method Post -Headers $headers -Body $testAdmin
+        Write-Host "✅ Utilisateur admin de test créé (testadmin / Admin123!)" -ForegroundColor Green
+        
+        # Attribuer le rôle super-admin
+        Start-Sleep -Seconds 1
+        
+        # Obtenir l'ID de l'utilisateur
+        $users = Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users?username=testadmin" `
+            -Method Get -Headers $headers
+        $userId = $users[0].id
+        
+        # Obtenir l'ID du rôle super-admin
+        $role = Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/roles/super-admin" `
+            -Method Get -Headers $headers
+        
+        # Assigner le rôle
+        $roleMapping = @(@{
+            id = $role.id
+            name = $role.name
+        }) | ConvertTo-Json -Depth 10 -AsArray
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users/$userId/role-mappings/realm" `
+            -Method Post -Headers $headers -Body $roleMapping
+        Write-Host "✅ Rôle super-admin assigné" -ForegroundColor Green
+        
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Utilisateur admin de test existe déjà" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création de l'utilisateur: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Fonction pour créer un utilisateur client de test
+function New-TestUser {
+    param($token)
+    
+    Write-Host "👤 Création d'un utilisateur client de test..." -ForegroundColor Yellow
+    
+    $testUser = @{
+        username = "testuser"
+        email = "user@ecommerce.com"
+        firstName = "Test"
+        lastName = "User"
+        enabled = $true
+        emailVerified = $true
+        credentials = @(
+            @{
+                type = "password"
+                value = "User123!"
+                temporary = $false
+            }
+        )
+    } | ConvertTo-Json -Depth 10
+    
+    try {
+        $headers = @{
+            "Authorization" = "Bearer $token"
+            "Content-Type" = "application/json"
+        }
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users" `
+            -Method Post -Headers $headers -Body $testUser
+        Write-Host "✅ Utilisateur client de test créé (testuser / User123!)" -ForegroundColor Green
+        
+        # Attribuer le rôle client
+        Start-Sleep -Seconds 1
+        
+        $users = Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users?username=testuser" `
+            -Method Get -Headers $headers
+        $userId = $users[0].id
+        
+        $role = Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/roles/client" `
+            -Method Get -Headers $headers
+        
+        $roleMapping = @(@{
+            id = $role.id
+            name = $role.name
+        }) | ConvertTo-Json -Depth 10 -AsArray
+        
+        Invoke-RestMethod -Uri "$KEYCLOAK_URL/admin/realms/$REALM_NAME/users/$userId/role-mappings/realm" `
+            -Method Post -Headers $headers -Body $roleMapping
+        Write-Host "✅ Rôle client assigné" -ForegroundColor Green
+        
+    } catch {
+        if ($_.Exception.Response.StatusCode -eq 409) {
+            Write-Host "⚠️  Utilisateur client de test existe déjà" -ForegroundColor Yellow
+        } else {
+            Write-Host "❌ Erreur lors de la création de l'utilisateur: $_" -ForegroundColor Red
+        }
+    }
+}
+
+# Exécution principale
+Write-Host "⏳ Vérification de la disponibilité de Keycloak..." -ForegroundColor Yellow
+try {
+    $null = Invoke-RestMethod -Uri "$KEYCLOAK_URL/health/ready" -TimeoutSec 5
+    Write-Host "✅ Keycloak est prêt!" -ForegroundColor Green
+} catch {
+    Write-Host "❌ Keycloak n'est pas accessible sur $KEYCLOAK_URL" -ForegroundColor Red
+    Write-Host "   Assurez-vous que Keycloak est démarré avec: docker-compose up -d" -ForegroundColor Yellow
+    exit 1
+}
+
+Write-Host ""
+
+# Obtenir le token
+$token = Get-AdminToken
+
+# Créer la configuration
+New-Realm -token $token
+Start-Sleep -Seconds 2
+
+New-Roles -token $token
+Start-Sleep -Seconds 2
+
+New-AdminClient -token $token
+Start-Sleep -Seconds 1
+
+New-FrontendClient -token $token
+Start-Sleep -Seconds 1
+
+New-BackendClient -token $token
+Start-Sleep -Seconds 2
+
+New-TestAdmin -token $token
+Start-Sleep -Seconds 2
+
+New-TestUser -token $token
+
+Write-Host ""
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host "✨ Configuration Keycloak terminée!" -ForegroundColor Green
+Write-Host "================================================" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "📋 Informations de connexion:" -ForegroundColor Yellow
+Write-Host ""
+Write-Host "🌐 Console Keycloak: http://localhost:8180" -ForegroundColor Cyan
+Write-Host "   Admin: $ADMIN_USER / $ADMIN_PASSWORD" -ForegroundColor White
+Write-Host ""
+Write-Host "🔐 Realm: $REALM_NAME" -ForegroundColor Cyan
+Write-Host ""
+Write-Host "👥 Utilisateurs de test:" -ForegroundColor Cyan
+Write-Host "   Admin: testadmin / Admin123!" -ForegroundColor White
+Write-Host "   User:  testuser / User123!" -ForegroundColor White
+Write-Host ""
+Write-Host "🎯 Prochaines étapes:" -ForegroundColor Yellow
+Write-Host "   1. Accédez à http://localhost:8180" -ForegroundColor White
+Write-Host "   2. Vérifiez la configuration dans le realm 'ecommerce'" -ForegroundColor White
+Write-Host "   3. Configurez le backend avec les variables d'environnement" -ForegroundColor White
+Write-Host "   4. Intégrez le frontend avec Keycloak" -ForegroundColor White
+Write-Host ""

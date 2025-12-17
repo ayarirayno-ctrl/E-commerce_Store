@@ -2,19 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { formatPrice } from '../utils/formatters';
 import { orderService } from '../services/orderService';
+import { useCart } from '../hooks/useCart';
 import { Order } from '../types';
 import Loading from '../components/ui/Loading';
 import Badge from '../components/ui/Badge';
 import Button from '../components/ui/Button';
-import { ArrowLeft, Package, Truck, MapPin, CreditCard, Calendar } from 'lucide-react';
+import { ArrowLeft, Package, Truck, MapPin, CreditCard, Calendar, RefreshCcw } from 'lucide-react';
 
 const OrderDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { addItemToCart } = useCart();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState(false);
+  const [reordering, setReordering] = useState(false);
 
   useEffect(() => {
     loadOrder();
@@ -50,6 +53,35 @@ const OrderDetailPage: React.FC = () => {
       alert(err instanceof Error ? err.message : 'Failed to cancel order');
     } finally {
       setCancelling(false);
+    }
+  };
+
+  const handleReorder = async () => {
+    if (!order) return;
+
+    try {
+      setReordering(true);
+      // Add all items to cart
+      for (const item of order.items) {
+        await addItemToCart({
+          id: typeof item.product === 'string' ? parseInt(item.product) : 0,
+          title: item.name,
+          description: '',
+          price: item.price,
+          discountPercentage: 0,
+          rating: 0,
+          stock: 100, // Assume stock available
+          brand: '',
+          category: '',
+          thumbnail: item.image,
+          images: [item.image],
+        }, item.quantity);
+      }
+      navigate('/cart');
+    } catch (err) {
+      alert(err instanceof Error ? err.message : 'Failed to reorder');
+    } finally {
+      setReordering(false);
     }
   };
 
@@ -108,16 +140,27 @@ const OrderDetailPage: React.FC = () => {
           >
             Back to Orders
           </Button>
-          {canCancel && (
+          <div className="flex gap-2">
             <Button
-              variant="outline"
-              onClick={handleCancelOrder}
-              loading={cancelling}
-              disabled={cancelling}
+              variant="primary"
+              onClick={handleReorder}
+              loading={reordering}
+              disabled={reordering}
+              leftIcon={<RefreshCcw className="h-4 w-4" />}
             >
-              Cancel Order
+              Order Again
             </Button>
-          )}
+            {canCancel && (
+              <Button
+                variant="outline"
+                onClick={handleCancelOrder}
+                loading={cancelling}
+                disabled={cancelling}
+              >
+                Cancel Order
+              </Button>
+            )}
+          </div>
         </div>
 
         {/* Order Header */}

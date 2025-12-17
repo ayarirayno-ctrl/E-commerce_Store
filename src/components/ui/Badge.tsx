@@ -8,7 +8,7 @@ export interface BadgeProps {
   className?: string;
 }
 
-const Badge: React.FC<BadgeProps> = ({
+const Badge: React.FC<BadgeProps> = React.memo(({
   children,
   variant = 'primary',
   size = 'md',
@@ -43,7 +43,9 @@ const Badge: React.FC<BadgeProps> = ({
       {children}
     </span>
   );
-};
+});
+
+Badge.displayName = 'Badge';
 
 export default Badge;
 

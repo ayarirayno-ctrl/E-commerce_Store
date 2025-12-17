@@ -1,16 +1,13 @@
 import { Product, ProductApiResponse } from '../../types';
-import productsData from '../../data/products.json';
 import { ENDPOINTS, buildUrl } from '../../config/api';
 
 /**
  * API service for products
- * Connects to Express backend API with local fallback
+ * TOUJOURS connecté au backend MongoDB (pas de fallback JSON)
  */
-const FALLBACK_DATA = productsData as ProductApiResponse;
-const USE_BACKEND = import.meta.env.VITE_USE_BACKEND === 'true' || false;
 
 /**
- * Fetch products from API with fallback to local data
+ * Fetch products from MongoDB backend API
  */
 export const fetchProducts = async (params?: {
   search?: string;
@@ -19,103 +16,115 @@ export const fetchProducts = async (params?: {
   limit?: number;
   skip?: number;
 }): Promise<ProductApiResponse> => {
-  // Use backend API if enabled
-  if (USE_BACKEND) {
-    try {
-      console.log('Fetching products from backend with params:', params);
-      
-      const queryParams = new URLSearchParams();
-      if (params?.search) queryParams.append('search', params.search);
-      if (params?.category) queryParams.append('category', params.category);
-      if (params?.limit) queryParams.append('limit', params.limit.toString());
-      if (params?.skip) queryParams.append('page', Math.floor((params.skip / (params.limit || 10)) + 1).toString());
-
-  const response = await fetch(`${buildUrl(ENDPOINTS.PRODUCTS.LIST)}?${queryParams.toString()}`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch products from backend');
-      }
-      
-      const data = await response.json();
-      
-      // Transform backend response to match ProductApiResponse format
-      return {
-        products: data.products || [],
-        total: data.totalProducts || 0,
-        skip: params?.skip || 0,
-        limit: params?.limit || 10
-      };
-    } catch (error) {
-      console.error('Backend API error, falling back to local data:', error);
-      // Fall through to local data
+  try {
+    console.log('🔄 Fetching products from MongoDB backend with params:', params);
+    
+    const queryParams = new URLSearchParams();
+    if (params?.search) queryParams.append('search', params.search);
+    if (params?.category) queryParams.append('category', params.category);
+    if (params?.brand) queryParams.append('brand', params.brand);
+    if (params?.limit) queryParams.append('limit', params.limit.toString());
+    
+    // Convert skip to page number for backend
+    if (params?.skip) {
+      const page = Math.floor((params.skip / (params.limit || 10)) + 1);
+      queryParams.append('page', page.toString());
     }
+
+    const url = `${buildUrl(ENDPOINTS.PRODUCTS.LIST)}?${queryParams.toString()}`;
+    console.log('📡 API URL:', url);
+    
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: Failed to fetch products from backend`);
+    }
+    
+    const data = await response.json();
+    console.log('✅ Products loaded from MongoDB:', data.totalProducts, 'total');
+    
+    // Transform backend response to match ProductApiResponse format
+    return {
+      products: data.products || [],
+      total: data.totalProducts || 0,
+      skip: params?.skip || 0,
+      limit: params?.limit || 10
+    };
+  } catch (error) {
+    console.error('❌ Backend API error:', error);
+    // Return empty array instead of fallback
+    return {
+      products: [],
+      total: 0,
+      skip: 0,
+      limit: 10
+    };
   }
-  
-  // Use local data by default for better performance and reliability
-  console.log('Fetching products with params:', params);
-  
-  let filteredProducts = FALLBACK_DATA.products;
-  
-  // Apply search filter
-  if (params?.search) {
-    const searchTerm = params.search.toLowerCase();
-    filteredProducts = filteredProducts.filter(
-      product => 
-        product.title.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm) ||
-        product.brand.toLowerCase().includes(searchTerm) ||
-        product.category.toLowerCase().includes(searchTerm)
-    );
-  }
-  
-  // Apply category filter
-  if (params?.category) {
-    filteredProducts = filteredProducts.filter(
-      product => product.category.toLowerCase() === params.category?.toLowerCase()
-    );
-  }
-  
-  // Apply brand filter
-  if (params?.brand) {
-    filteredProducts = filteredProducts.filter(
-      product => product.brand.toLowerCase() === params.brand?.toLowerCase()
-    );
-  }
-  
-  // Apply pagination
-  const skip = params?.skip || 0;
-  const limit = params?.limit || filteredProducts.length;
-  const paginatedProducts = filteredProducts.slice(skip, skip + limit);
-  
-  return {
-    ...FALLBACK_DATA,
-    products: paginatedProducts,
-    total: filteredProducts.length,
-    skip,
-    limit,
-  };
 };
 
 /**
- * Fetch a single product by ID
+ * Fetch a single product by ID from MongoDB
  */
-export const fetchProductById = async (id: number): Promise<Product | null> => {
-  console.log('Fetching product by ID:', id);
-  
-  // Use local data for better performance and reliability
-  const product = FALLBACK_DATA.products.find(p => p.id === id);
-  return product || null;
+export const fetchProductById = async (id: string): Promise<Product | null> => {
+  try {
+    console.log('🔄 Fetching product by ID from MongoDB:', id);
+    const response = await fetch(`${buildUrl(ENDPOINTS.PRODUCTS.LIST)}/${id}`);
+    
+    if (!response.ok) {
+      throw new Error(`Product not found: ${id}`);
+    }
+    
+    const product = await response.json();
+    console.log('✅ Product loaded from MongoDB:', product.name);
+    return product;
+  } catch (error) {
+    console.error('❌ Error fetching product by ID:', error);
+    return null;
+  }
 };
 
 /**
- * Fetch product categories
+ * Fetch categories from MongoDB backend
  */
 export const fetchCategories = async (): Promise<string[]> => {
-  console.log('Fetching categories');
-  
-  // Use local data - extract unique categories
-  const categories = [...new Set(FALLBACK_DATA.products.map(product => product.category))];
-  return categories;
+  try {
+    console.log('🔄 Fetching categories from MongoDB backend');
+    const response = await fetch(`${buildUrl(ENDPOINTS.PRODUCTS.LIST)}/categories`);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch categories');
+    }
+    
+    const data = await response.json();
+    console.log('✅ Categories loaded from MongoDB:', data);
+    return data.categories || data || [];
+  } catch (error) {
+    console.error('❌ Error fetching categories:', error);
+    return [];
+  }
+};
+
+/**
+ * Fetch brands from MongoDB (distinct brands from products)
+ */
+export const fetchBrands = async (): Promise<string[]> => {
+  try {
+    console.log('🔄 Fetching brands from MongoDB backend');
+    // Get all products and extract unique brands
+    const response = await fetch(`${buildUrl(ENDPOINTS.PRODUCTS.LIST)}?limit=1000`);
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch brands');
+    }
+    
+    const data = await response.json();
+    const brands = [...new Set(data.products.map((p: any) => p.brand).filter(Boolean))];
+    console.log('✅ Brands extracted from MongoDB:', brands);
+    return brands as string[];
+  } catch (error) {
+    console.error('❌ Error fetching brands:', error);
+    return [];
+  }
 };
 
 /**

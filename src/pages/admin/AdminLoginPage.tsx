@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Lock, Mail, ShieldCheck, AlertCircle, Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
+import api from '../../lib/api';
+import { useAuth } from '../../contexts/AuthContext';
 
 const AdminLoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const authContext = useAuth();
+  console.log('🔍 AuthContext available:', authContext);
+  console.log('🔍 setUser available:', typeof authContext.setUser);
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -19,60 +23,89 @@ const AdminLoginPage: React.FC = () => {
     setError('');
     setLoading(true);
 
-    console.log('🔐 Login attempt:', { email, password });
+    console.log('🔐 Admin login attempt:', { email });
 
-    // MODE DEMO : Connexion admin directe sans backend
-    if (email.trim() === 'ayarirayen539@gmail.com' && password.trim() === 'admin123') {
-      console.log('✅ Demo credentials matched!');
-      
-      // Créer un utilisateur admin en mode démo
-      const demoAdmin = {
-        id: 'demo-admin-1',
-        email: 'ayarirayen539@gmail.com',
-        firstName: 'Rayen',
-        lastName: 'Ayari',
-        role: 'admin',
-        token: 'demo-token-' + Date.now(),
-        isEmailVerified: true
-      };
-      
-      console.log('👤 Demo admin created:', demoAdmin);
-      
-      // Sauvegarder dans localStorage
-      localStorage.setItem('user', JSON.stringify(demoAdmin));
-      localStorage.setItem('token', demoAdmin.token);
-      
-      console.log('💾 Saved to localStorage');
-      
-      // Petit délai pour simuler la connexion
-      await new Promise(resolve => setTimeout(resolve, 300));
-      
-      console.log('🚀 Redirecting to /admin...');
-      
-      // Rediriger vers le dashboard admin SANS recharger la page
-      navigate('/admin', { replace: true });
-      return;
-    }
-
-    console.log('❌ Not demo credentials, trying API login...');
-
-    // Connexion normale via API (seulement si ce n'est pas le compte démo)
     try {
-      const user = await login(email, password);
-      
-      // Check if user is admin
-      if (user.role !== 'admin') {
-        setError('Access denied. This page is reserved for administrators.');
+      // Use backend admin API for authentication
+      const response = await api.post('/admin/auth/login', {
+        email,
+        password,
+      });
+
+      console.log('✅ Admin login successful:', response.data);
+
+      const { token, admin } = response.data;
+
+      // Create admin user object
+      const adminUser = {
+        id: admin._id || admin.id,
+        email: admin.email,
+        name: admin.name,
+        role: admin.role,
+      };
+
+      console.log('👤 Admin user created:', adminUser);
+
+      // Test localStorage availability first
+      try {
+        const testKey = '__storage_test__';
+        localStorage.setItem(testKey, 'test');
+        const testValue = localStorage.getItem(testKey);
+        localStorage.removeItem(testKey);
+        console.log('✅ localStorage test:', testValue === 'test' ? 'ACCESSIBLE' : 'ERREUR');
+      } catch (storageError) {
+        console.error('❌ localStorage BLOQUÉ:', storageError);
+        setError('Votre navigateur bloque le localStorage. Vérifiez vos paramètres de confidentialité ou désactivez le mode navigation privée.');
         setLoading(false);
         return;
       }
 
-      // Automatic redirect to admin dashboard
-      navigate('/admin', { replace: true });
+      // Store in localStorage
+      try {
+        localStorage.setItem('user', JSON.stringify(adminUser));
+        localStorage.setItem('token', token);
+        
+        // Verify it was saved
+        const savedUser = localStorage.getItem('user');
+        const savedToken = localStorage.getItem('token');
+        console.log('💾 Saved to localStorage - Vérification:');
+        console.log('  User:', savedUser ? '✓ Sauvegardé' : '✗ ÉCHEC');
+        console.log('  Token:', savedToken ? '✓ Sauvegardé' : '✗ ÉCHEC');
+        
+        if (!savedUser || !savedToken) {
+          console.error('❌ localStorage n\'a pas persisté les données!');
+          setError('Impossible de sauvegarder la session. Vérifiez les paramètres de votre navigateur.');
+          setLoading(false);
+          return;
+        }
+      } catch (storageError) {
+        console.error('❌ Erreur lors de la sauvegarde dans localStorage:', storageError);
+        setError('Impossible de sauvegarder la session. Votre navigateur bloque le stockage local.');
+        setLoading(false);
+        return;
+      }
+
+      // Set token for API calls
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      
+      // IMPORTANT: Update AuthContext state
+      console.log('🔍 About to update AuthContext with setUser:', typeof authContext.setUser);
+      if (authContext.setUser) {
+        authContext.setUser(adminUser);
+        console.log('✅ AuthContext updated with admin user');
+      } else {
+        console.error('❌ setUser is not available in AuthContext!');
+      }
+
+      console.log('🚀 Redirecting to /admin...');
+      console.log('📍 Current URL:', window.location.href);
+      console.log('📍 Target URL: /admin');
+
+      // Force immediate redirect
+      window.location.href = '/admin';
     } catch (err: unknown) {
-      // Errors are already handled by AuthContext with notification
+      console.error('❌ Admin login error:', err);
       const error = err as { response?: { data?: { message?: string } }; message?: string };
-      console.log('❌ Login error:', error);
       setError(error.response?.data?.message || error.message || 'Invalid email or password');
       setLoading(false);
     }

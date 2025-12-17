@@ -44,7 +44,7 @@ const AdminNotificationsPage: React.FC = () => {
 
   const fetchNotifications = useCallback(async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       let url = 'http://localhost:5000/api/notifications';
       
       const params = new URLSearchParams();
@@ -71,7 +71,7 @@ const AdminNotificationsPage: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/notifications/stats', {
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -92,7 +92,7 @@ const AdminNotificationsPage: React.FC = () => {
 
   const markAsRead = async (id: string) => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/notifications/${id}/read`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -109,7 +109,7 @@ const AdminNotificationsPage: React.FC = () => {
 
   const markAllAsRead = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/notifications/read-all', {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -128,7 +128,7 @@ const AdminNotificationsPage: React.FC = () => {
     if (!confirm('Supprimer cette notification ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/notifications/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -147,7 +147,7 @@ const AdminNotificationsPage: React.FC = () => {
     if (!confirm('Supprimer toutes les notifications lues ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/notifications/read', {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },

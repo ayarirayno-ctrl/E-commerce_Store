@@ -71,7 +71,7 @@ const ProductDetailPage: React.FC = () => {
       
       try {
         setLoading(true);
-        const productData = await fetchProductById(parseInt(id));
+        const productData = await fetchProductById(id);
         if (productData) {
           setProduct(productData);
           // Track product view for recommendations
@@ -114,6 +114,18 @@ const ProductDetailPage: React.FC = () => {
 
   const handleAddToCart = () => {
     if (!product) return;
+    
+    // ✅ RÈGLE IMPORTANTE: Utilisateur doit être authentifié pour acheter
+    if (!isAuthenticated) {
+      dispatch(addNotification({
+        type: 'warning',
+        title: 'Authentication Required',
+        message: 'Please sign in to add items to your cart.',
+        duration: 4000,
+      }));
+      navigate('/auth?redirect=' + encodeURIComponent(window.location.pathname));
+      return;
+    }
     
     // If product has variants but none selected, show warning
     if (product.variants && product.variants.length > 0) {

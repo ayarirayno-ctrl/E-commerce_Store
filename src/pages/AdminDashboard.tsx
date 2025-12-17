@@ -19,6 +19,8 @@ import {
   Mail,
   DollarSign
 } from 'lucide-react';
+import AdminProductsManagement from './admin/AdminProductsManagement';
+import AdminClientsManagement from './admin/AdminClientsManagement';
 
 interface Stats {
   orders: number;
@@ -33,6 +35,8 @@ const AdminDashboard: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [adminUser, setAdminUser] = useState<{id: string, name: string, email: string, role: string} | null>(null);
   const [users, setUsers] = useState<any[]>([]);
+  const [orders, setOrders] = useState<any[]>([]);
+  const [ordersLoading, setOrdersLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
   const [editingUser, setEditingUser] = useState<any>(null);
@@ -70,15 +74,22 @@ const AdminDashboard: React.FC = () => {
     try {
       setStats(prev => ({ ...prev, loading: true }));
       
-      const [productsRes, statsRes, usersRes] = await Promise.all([
+      const token = localStorage.getItem('token');
+      const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+      
+      const [productsRes, statsRes, usersRes, ordersRes] = await Promise.all([
         fetch('http://localhost:5000/api/products'),
-        fetch('http://localhost:5000/api/admin/stats'),
-        fetch('http://localhost:5000/api/admin/users')
+        fetch('http://localhost:5000/api/admin/stats', { headers }),
+        fetch('http://localhost:5000/api/admin/users', { headers }),
+        fetch('http://localhost:5000/api/orders/admin/all', { headers })
       ]);
 
       let productsCount = 0;
       let usersCount = 0;
       let usersList = [];
+      let ordersList = [];
+      let ordersCount = 0;
+      let totalRevenue = 0;
 
       if (productsRes.ok) {
         const productsData = await productsRes.json();
@@ -95,12 +106,20 @@ const AdminDashboard: React.FC = () => {
         usersList = usersData.users || [];
       }
 
+      if (ordersRes.ok) {
+        const ordersData = await ordersRes.json();
+        ordersList = ordersData.orders || [];
+        ordersCount = ordersList.length;
+        totalRevenue = ordersList.reduce((sum: number, order: any) => sum + (order.total || 0), 0);
+      }
+
       setUsers(usersList);
+      setOrders(ordersList);
       setStats({
-        orders: 0, // Pour l'instant pas d'API orders
+        orders: ordersCount,
         products: productsCount,
         users: usersCount,
-        revenue: 0, // Pour l'instant pas de calcul revenue
+        revenue: totalRevenue,
         loading: false
       });
     } catch (error) {
@@ -245,102 +264,24 @@ const AdminDashboard: React.FC = () => {
           </div>
         );
       case 'products':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Gestion des Produits</h2>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <p className="text-gray-600">Interface de gestion des produits en cours de développement...</p>
-            </div>
-          </div>
-        );
+        return <AdminProductsManagement />;
       case 'orders':
         return (
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Gestion des Commandes</h2>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <p className="text-gray-600">Interface de gestion des commandes en cours de développement...</p>
-            </div>
-          </div>
-        );
-      case 'users':
-        return (
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Gestion des Utilisateurs</h2>
             
-            {/* Statistiques des utilisateurs */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-              <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg">
-                <div className="flex items-center">
-                  <Users className="h-8 w-8 text-blue-600" />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-blue-900">Total Utilisateurs</p>
-                    <p className="text-2xl font-semibold text-blue-900">
-                      {stats.loading ? '...' : stats.users}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-green-50 border border-green-200 p-4 rounded-lg">
-                <div className="flex items-center">
-                  <UserCheck className="h-8 w-8 text-green-600" />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-green-900">Utilisateurs Actifs</p>
-                    <p className="text-2xl font-semibold text-green-900">
-                      {stats.loading ? '...' : stats.users}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-orange-50 border border-orange-200 p-4 rounded-lg">
-                <div className="flex items-center">
-                  <UserPlus className="h-8 w-8 text-orange-600" />
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-orange-900">Nouveaux (30j)</p>
-                    <p className="text-2xl font-semibold text-orange-900">
-                      {stats.loading ? '...' : stats.users}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Actions rapides */}
-            <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Actions Rapides</h3>
-              <div className="flex flex-wrap gap-3">
-                <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  <UserPlus className="h-4 w-4 mr-2" />
-                  Ajouter Utilisateur
-                </button>
-                <button className="flex items-center px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors">
-                  <Download className="h-4 w-4 mr-2" />
-                  Exporter CSV
-                </button>
-                <button className="flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                  <Mail className="h-4 w-4 mr-2" />
-                  Email Groupé
-                </button>
-              </div>
-            </div>
-
-            {/* Liste des utilisateurs */}
-            <div className="bg-white rounded-lg shadow-md">
+            {/* Orders List */}
+            <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <div className="p-6 border-b border-gray-200">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-semibold text-gray-900">Liste des Utilisateurs</h3>
-                  <div className="flex space-x-2">
-                    <input 
-                      type="text" 
-                      placeholder="Rechercher un utilisateur..." 
-                      className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <select className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                      <option>Tous les statuts</option>
-                      <option>Actif</option>
-                      <option>Inactif</option>
-                      <option>Suspendu</option>
-                    </select>
-                  </div>
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-gray-900">Liste des commandes</h3>
+                  <button 
+                    onClick={loadRealStats}
+                    className="flex items-center gap-2 px-4 py-2 text-sm bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+                  >
+                    <RefreshCw className="h-4 w-4" />
+                    Actualiser
+                  </button>
                 </div>
               </div>
               
@@ -349,19 +290,19 @@ const AdminDashboard: React.FC = () => {
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Utilisateur
+                        ID Commande
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Email
+                        Client
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Date
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        Montant
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Statut
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date d&apos;inscription
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Dernière connexion
                       </th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                         Actions
@@ -369,36 +310,89 @@ const AdminDashboard: React.FC = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {users.length === 0 ? (
+                    {ordersLoading ? (
+                      <tr>
+                        <td colSpan={6} className="px-6 py-4 text-center text-gray-500">
+                          <RefreshCw className="h-5 w-5 animate-spin mx-auto mb-2" />
+                          Chargement des commandes...
+                        </td>
+                      </tr>
+                    ) : orders.length === 0 ? (
                       <tr>
                         <td colSpan={6} className="px-6 py-12 text-center">
-                          <div className="flex flex-col items-center">
-                            <Users className="h-12 w-12 text-gray-400 mb-3" />
-                            <p className="text-gray-500 text-lg font-medium">Aucun utilisateur inscrit</p>
-                            <p className="text-gray-400 text-sm">Les utilisateurs apparaîtront ici lorsqu&apos;ils s&apos;inscriront sur votre boutique.</p>
-                          </div>
+                          <ShoppingCart className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                          <p className="text-gray-500 text-lg">Aucune commande pour le moment</p>
+                          <p className="text-gray-400 text-sm mt-2">Les commandes apparaîtront ici une fois créées par les clients</p>
                         </td>
                       </tr>
                     ) : (
-                      users.map((user: any) => (
-                        <tr key={user.id}>
+                      orders.map((order: any) => (
+                        <tr key={order._id} className="hover:bg-gray-50">
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <div className="flex items-center">
-                              <div className="flex-shrink-0 h-10 w-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center">
-                                <span className="text-white text-sm font-semibold">{user.name.charAt(0).toUpperCase()}</span>
-                              </div>
-                              <div className="ml-4">
-                                <div className="text-sm font-medium text-gray-900">{user.name}</div>
-                              </div>
+                            <div className="text-sm font-medium text-gray-900">
+                              #{order._id.substring(0, 8)}...
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {user.email}
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900">
+                              {order.user?.firstName || 'Client'} {order.user?.lastName || ''}
+                            </div>
+                            <div className="text-sm text-gray-500">{order.user?.email || 'N/A'}</div>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                              {user.status}
+                            <div className="text-sm text-gray-900">
+                              {new Date(order.createdAt).toLocaleDateString('fr-FR')}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {new Date(order.createdAt).toLocaleTimeString('fr-FR')}
+                            </div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm font-semibold text-gray-900">
+                              ${order.total?.toFixed(2) || '0.00'}
+                            </div>
+                            <div className="text-sm text-gray-500">{order.items?.length || 0} article(s)</div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              order.status === 'delivered' ? 'bg-green-100 text-green-800' :
+                              order.status === 'shipped' ? 'bg-blue-100 text-blue-800' :
+                              order.status === 'processing' ? 'bg-yellow-100 text-yellow-800' :
+                              order.status === 'cancelled' ? 'bg-red-100 text-red-800' :
+                              'bg-gray-100 text-gray-800'
+                            }`}>
+                              {order.status === 'pending' ? 'En attente' :
+                               order.status === 'processing' ? 'En cours' :
+                               order.status === 'shipped' ? 'Expédié' :
+                               order.status === 'delivered' ? 'Livré' :
+                               order.status === 'cancelled' ? 'Annulé' : order.status}
                             </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                            <button
+                              onClick={() => {/* TODO: Voir détails */}}
+                              className="text-purple-600 hover:text-purple-900 mr-3"
+                            >
+                              Voir
+                            </button>
+                            <button
+                              onClick={() => {/* TODO: Changer statut */}}
+                              className="text-blue-600 hover:text-blue-900"
+                            >
+                              Statut
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        );
+      case 'users':
+        return <AdminClientsManagement />;
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                             {new Date(user.createdAt).toLocaleDateString('fr-FR')}

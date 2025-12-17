@@ -56,8 +56,8 @@ const AdminOrdersPage: React.FC = () => {
 
   const fetchOrders = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('http://localhost:5000/api/admin/orders', {
         headers: {
           'Authorization': `Bearer ${token}`,
         },
@@ -73,8 +73,8 @@ const AdminOrdersPage: React.FC = () => {
 
   const updateOrderStatus = async (orderId: string, newStatus: string) => {
     try {
-      const token = localStorage.getItem('admin_token');
-      const response = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`http://localhost:5000/api/admin/orders/${orderId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

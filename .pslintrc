@@ -1,0 +1,16 @@
+@{
+    Rules = @{
+        PSUseApprovedVerbs = @{
+            Enable = $false
+        }
+        PSUseDeclaredVarsMoreThanAssignments = @{
+            Enable = $false
+        }
+        PSAvoidUsingPositionalParameters = @{
+            Enable = $false
+        }
+        PSAvoidUsingCmdletAliases = @{
+            Enable = $false
+        }
+    }
+}

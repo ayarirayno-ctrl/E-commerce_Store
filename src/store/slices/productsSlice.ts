@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ProductFilters, ProductState } from '../../types';
-import { fetchProducts } from '../api/productsApi';
+import { fetchProducts, fetchCategories, fetchBrands } from '../api/productsApi';
 
 const initialState: ProductState = {
   items: [],
@@ -11,7 +11,7 @@ const initialState: ProductState = {
   brands: [],
 };
 
-// Async thunk for fetching products
+// Async thunk for fetching products from MongoDB
 export const fetchProductsAsync = createAsyncThunk(
   'products/fetchProducts',
   async (params?: { search?: string; category?: string; brand?: string }) => {
@@ -20,29 +20,20 @@ export const fetchProductsAsync = createAsyncThunk(
   }
 );
 
-// Async thunk for fetching categories
+// Async thunk for fetching categories from MongoDB
 export const fetchCategoriesAsync = createAsyncThunk(
   'products/fetchCategories',
   async () => {
-    // In a real app, this would be an API call
-    const categories = [
-      'smartphones',
-      'laptops',
-      'audio',
-      'gaming',
-      'tablets',
-      'wearables',
-    ];
+    const categories = await fetchCategories();
     return categories;
   }
 );
 
-// Async thunk for fetching brands
+// Async thunk for fetching brands from MongoDB
 export const fetchBrandsAsync = createAsyncThunk(
   'products/fetchBrands',
   async () => {
-    // In a real app, this would be an API call
-    const brands = ['Apple', 'Samsung', 'Sony', 'Dell', 'Nintendo'];
+    const brands = await fetchBrands();
     return brands;
   }
 );

@@ -23,6 +23,13 @@ export const setNotificationDispatcher = (dispatcher: typeof notificationDispatc
   notificationDispatcher = dispatcher;
 };
 
+// Token getter function - will be set by App component with Keycloak token
+let tokenGetter: (() => string | undefined) | null = null;
+
+export const setTokenGetter = (getter: () => string | undefined) => {
+  tokenGetter = getter;
+};
+
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 15000,
@@ -32,9 +39,20 @@ const api: AxiosInstance = axios.create({
   },
 });
 
-// Attach Authorization from localStorage user token
+// Attach Authorization token (Keycloak or fallback to localStorage)
 api.interceptors.request.use((config) => {
   try {
+    // Try to get token from Keycloak first
+    const keycloakToken = tokenGetter?.();
+    if (keycloakToken) {
+      if (!config.headers) {
+        config.headers = new (axios.AxiosHeaders as typeof import('axios').AxiosHeaders)();
+      }
+      config.headers.Authorization = `Bearer ${keycloakToken}`;
+      return config;
+    }
+    
+    // Fallback to localStorage for backward compatibility
     const raw = localStorage.getItem('user');
     if (raw) {
       const user = JSON.parse(raw);

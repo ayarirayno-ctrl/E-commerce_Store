@@ -27,6 +27,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
+    const errorId = `${inputId}-error`;
+    const helperTextId = `${inputId}-helper`;
     
     const baseClasses = 'block w-full px-3 py-2 border rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-0 transition-colors duration-200 sm:text-sm';
     
@@ -65,6 +67,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               className
             )}
             ref={ref}
+            aria-invalid={!!error}
+            aria-describedby={
+              error ? errorId : helperText ? helperTextId : undefined
+            }
             {...props}
           />
           
@@ -76,13 +82,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </div>
         
         {error && (
-          <p className="text-sm text-red-600" role="alert">
+          <p className="text-sm text-red-600" role="alert" id={errorId}>
             {error}
           </p>
         )}
         
         {helperText && !error && (
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500" id={helperTextId}>
             {helperText}
           </p>
         )}

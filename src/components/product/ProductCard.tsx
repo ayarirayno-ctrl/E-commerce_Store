@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ShoppingCart, Star, Eye } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShoppingCart, Star, Eye, Lock } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Product } from '../../types';
 import { formatPrice, truncateText } from '../../utils/formatters';
 import { useCart } from '../../hooks/useCart';
 import { useReviews } from '../../hooks/useReviews';
+import { useAuth } from '../../contexts/AuthContext';
 import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import OptimizedImage from '../common/OptimizedImage';
@@ -21,6 +22,8 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
   const { addItemToCart, isInCart, getItemQuantity } = useCart();
   const { stats } = useReviews(product.id);
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const isInCartItem = isInCart(product.id);
   const cartQuantity = getItemQuantity(product.id);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -29,6 +32,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // ✅ Vérification: Utilisateur doit être authentifié pour ajouter au panier
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=' + encodeURIComponent(window.location.pathname));
+      return;
+    }
+    
     setIsAddingToCart(true);
     addItemToCart(product);
     
@@ -115,6 +125,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-lg hover:shadow-xl transition-all"
+            aria-label={`Quick view for ${product.title}`}
           >
             <Eye className="h-4 w-4" />
             <span className="font-medium text-sm">Quick View</span>
@@ -127,6 +138,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
+            role="status"
+            aria-label="Out of stock"
           >
             <span className="text-white font-semibold text-lg">Out of Stock</span>
           </motion.div>
@@ -203,9 +216,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
             onClick={handleAddToCart}
             disabled={product.stock === 0}
             className="w-full"
-            leftIcon={<ShoppingCart className="h-4 w-4" />}
+            leftIcon={!isAuthenticated ? <Lock className="h-4 w-4" /> : <ShoppingCart className="h-4 w-4" />}
+            variant={!isAuthenticated ? 'secondary' : 'primary'}
           >
-            {isInCartItem ? (
+            {!isAuthenticated ? (
+              'Sign In to Buy'
+            ) : isInCartItem ? (
               <>
                 In Cart ({cartQuantity})
               </>
@@ -226,4 +242,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, className }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);

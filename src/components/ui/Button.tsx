@@ -11,7 +11,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   fullWidth?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = React.memo(React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
@@ -49,8 +49,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
     aria-label={ariaLabel}
-    aria-busy={loading}
-    aria-disabled={disabled || loading}
+    aria-busy={loading ? 'true' : 'false'}
+    aria-disabled={disabled || loading ? 'true' : 'false'}
         className={cn(
           baseClasses,
           variants[variant],
@@ -89,7 +89,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {!loading && rightIcon && <span className="ml-2">{rightIcon}</span>}
       </button>
     );
-  }
+  })
 );
 
 Button.displayName = 'Button';

@@ -59,7 +59,7 @@ const AdminReviewsPage: React.FC = () => {
 
   const fetchReviews = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       let url = 'http://localhost:5000/api/reviews';
       
       const params = new URLSearchParams();
@@ -82,7 +82,7 @@ const AdminReviewsPage: React.FC = () => {
 
   const fetchStats = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch('http://localhost:5000/api/reviews/stats', {
         headers: { 'Authorization': `Bearer ${token}` },
       });
@@ -97,7 +97,7 @@ const AdminReviewsPage: React.FC = () => {
 
   const handleApprove = async (id: string) => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/reviews/${id}/approve`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -114,7 +114,7 @@ const AdminReviewsPage: React.FC = () => {
 
   const handleReject = async (id: string) => {
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/reviews/${id}/reject`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -133,7 +133,7 @@ const AdminReviewsPage: React.FC = () => {
     if (!confirm('Êtes-vous sûr de vouloir supprimer cet avis ?')) return;
 
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/reviews/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -437,7 +437,7 @@ const ReviewDetail: React.FC<ReviewDetailProps> = ({ review, onApprove, onReject
 
     setLoading(true);
     try {
-      const token = localStorage.getItem('admin_token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`http://localhost:5000/api/reviews/${review._id}/response`, {
         method: 'POST',
         headers: {

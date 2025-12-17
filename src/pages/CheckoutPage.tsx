@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
+import { useAuth } from '../contexts/AuthContext';
 import { usePromoCodes } from '../hooks/usePromoCodes';
 import { useNotification } from '../hooks/useNotification';
 import { formatPrice } from '../utils/formatters';
@@ -33,6 +34,7 @@ interface FormErrors {
 const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const { items, totalPrice } = useCart();
+  const { isAuthenticated } = useAuth();
   const { showError } = useNotification();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -53,11 +55,22 @@ const CheckoutPage: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const { appliedCode, discountAmount, getFinalTotal } = usePromoCodes();
 
+  // ✅ RÈGLE CRITIQUE: Checkout accessible uniquement aux utilisateurs authentifiés
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=/checkout');
+    }
+  }, [isAuthenticated, navigate]);
+
   const shippingCost = totalPrice >= 50 ? 0 : 9.99;
   const taxRate = 0.08;
   const subtotal = totalPrice;
   const taxAmount = (subtotal - discountAmount) * taxRate;
   const finalTotal = getFinalTotal() + shippingCost + taxAmount;
+
+  if (!isAuthenticated) {
+    return null; // Redirection en cours
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

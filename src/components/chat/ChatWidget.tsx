@@ -112,12 +112,16 @@ const ChatWidget: React.FC = () => {
                 <button
                   onClick={handleMinimize}
                   className="text-white hover:bg-white/20 rounded p-1 transition-colors"
+                  aria-label="Minimize chat"
+                  title="Minimize chat"
                 >
                   <Minimize2 className="h-5 w-5" />
                 </button>
                 <button
                   onClick={closeChat}
                   className="text-white hover:bg-white/20 rounded p-1 transition-colors"
+                  aria-label="Close chat"
+                  title="Close chat"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -127,7 +131,7 @@ const ChatWidget: React.FC = () => {
             {!isMinimized && (
               <>
                 {/* Messages */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-4" style={{ maxHeight: '400px' }}>
+                <div className="flex-1 overflow-y-auto p-4 space-y-4 max-h-[400px]">
                   {session?.messages.map((msg) => (
                     <motion.div
                       key={msg.id}

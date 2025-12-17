@@ -1,5 +1,7 @@
 import { Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useWishlist } from '../../hooks/useWishlist';
+import { useAuth } from '../../contexts/AuthContext';
 import type { Product } from '../../types/product';
 import { cn } from '../../utils/cn';
 
@@ -15,11 +17,20 @@ export const WishlistButton = ({
   variant = 'default',
 }: WishlistButtonProps) => {
   const { isInWishlist, toggleItem } = useWishlist();
+  const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const inWishlist = isInWishlist(product.id);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // ✅ Vérification: Utilisateur doit être authentifié pour gérer wishlist
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=' + encodeURIComponent(window.location.pathname));
+      return;
+    }
+    
     toggleItem(product);
   };
 

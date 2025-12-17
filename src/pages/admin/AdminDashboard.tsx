@@ -24,15 +24,20 @@ const AdminDashboard: React.FC = () => {
 
   const loadRealStats = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/admin/stats');
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('http://localhost:5000/api/admin/analytics/dashboard', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
           setStats({
-            users: data.users,
-            products: data.products,
-            orders: data.orders,
-            revenue: data.revenue
+            users: data.data.totalUsers || 0,
+            products: data.data.totalProducts || 0,
+            orders: data.data.totalOrders || 0,
+            revenue: data.data.totalRevenue || 0
           });
         }
       }

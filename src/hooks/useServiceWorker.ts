@@ -18,52 +18,10 @@ export function useServiceWorker() {
   });
 
   useEffect(() => {
-    if (!state.isSupported) {
-      console.log('Service Worker not supported');
-      return;
-    }
-
-    // Register service worker
-    const registerServiceWorker = async () => {
-      try {
-        const registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/',
-        });
-
-        console.log('Service Worker registered:', registration);
-
-        setState(prev => ({
-          ...prev,
-          isRegistered: true,
-          registration,
-        }));
-
-        // Check for updates
-        registration.addEventListener('updatefound', () => {
-          const newWorker = registration.installing;
-
-          if (newWorker) {
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // New service worker available
-                setState(prev => ({ ...prev, needsUpdate: true }));
-              }
-            });
-          }
-        });
-
-        // Check for updates every hour
-        setInterval(() => {
-          registration.update();
-        }, 60 * 60 * 1000);
-      } catch (error) {
-        console.error('Service Worker registration failed:', error);
-      }
-    };
-
-    registerServiceWorker();
-
-    // Handle online/offline status
+    // Service Worker DÉSACTIVÉ pour éviter toute interférence avec Keycloak
+    // Ne pas enregistrer de service worker pour une meilleure compatibilité
+    
+    // Handle online/offline status uniquement
     const handleOnline = () => setState(prev => ({ ...prev, isOnline: true }));
     const handleOffline = () => setState(prev => ({ ...prev, isOnline: false }));
 
@@ -74,7 +32,7 @@ export function useServiceWorker() {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, [state.isSupported]);
+  }, []);
 
   const updateServiceWorker = () => {
     if (state.registration?.waiting) {

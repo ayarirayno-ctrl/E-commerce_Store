@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
+import { useAuth } from '../contexts/AuthContext';
 import { usePromoCodes } from '../hooks/usePromoCodes';
 import { useAbandonedCart } from '../hooks/useAbandonedCart';
 import { formatPrice } from '../utils/formatters';
@@ -13,10 +14,18 @@ import { ShoppingBag, ArrowLeft } from 'lucide-react';
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
   const { items, totalItems, totalPrice, clearCartItems } = useCart();
+  const { isAuthenticated } = useAuth();
   const { appliedCode, discountAmount, getFinalTotal, validateAndApply } = usePromoCodes();
   const { getUserAbandonedCarts, markCartAsRecovered } = useAbandonedCart();
   const [showAbandonedCartModal, setShowAbandonedCartModal] = useState(false);
   const [selectedAbandonedCart, setSelectedAbandonedCart] = useState<import('../types/abandonedCart').AbandonedCart | null>(null);
+
+  // ✅ RÈGLE: Panier accessible uniquement aux utilisateurs authentifiés
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/auth?redirect=/cart');
+    }
+  }, [isAuthenticated, navigate]);
 
   // Check for abandoned carts on mount
   useEffect(() => {
@@ -105,7 +114,20 @@ const CartPage: React.FC = () => {
               
               <div className="divide-y divide-gray-200">
                 {items.map((item) => (
-                  <CartItem key={item.id} item={item} />
+                  <div key={item.id}>
+                    <CartItem item={item} />
+                    {/* Stock validation */}
+                    {item.product.stock !== undefined && item.quantity > item.product.stock && (
+                      <div className="px-6 pb-3">
+                        <p className="text-sm text-red-600 flex items-center gap-1">
+                          <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          Only {item.product.stock} {item.product.stock === 1 ? 'item' : 'items'} available in stock
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
@@ -162,8 +184,27 @@ const CartPage: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="space-y-3">
-                <Link to="/checkout" className="block">
-                  <Button className="w-full" size="lg">
+                <Link 
+                  to="/checkout" 
+                  className="block"
+                  onClick={(e) => {
+                    // Check if any item exceeds stock
+                    const hasStockIssue = items.some(item => 
+                      item.product.stock !== undefined && item.quantity > item.product.stock
+                    );
+                    if (hasStockIssue) {
+                      e.preventDefault();
+                      alert('Some items in your cart exceed available stock. Please adjust quantities.');
+                    }
+                  }}
+                >
+                  <Button 
+                    className="w-full" 
+                    size="lg"
+                    disabled={items.some(item => 
+                      item.product.stock !== undefined && item.quantity > item.product.stock
+                    )}
+                  >
                     Proceed to Checkout
                   </Button>
                 </Link>

@@ -28,11 +28,13 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
+  setUser: (user: User | null) => void;
   login: (email: string, password: string) => Promise<User>;
   register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
   updateProfile: (data: Partial<User>) => Promise<void>;
   isAuthenticated: boolean;
+  isAdmin: boolean;
   loading: boolean;
 }
 
@@ -101,40 +103,48 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<User> => {
     try {
+      console.log('🔐 Attempting login via backend API...', { email });
+      
+      // Use backend JWT API for authentication
       const response = await api.post('/auth/login', {
         email,
         password,
       });
-
-      const userData: User = {
-        id: response.data.user.id || response.data.user._id,
-        name: `${response.data.user.firstName} ${response.data.user.lastName}`,
-        email: response.data.user.email,
-        role: response.data.user.role,
-        phone: response.data.user.phone,
-        address: response.data.user.address,
-        avatar: response.data.user.avatar,
-        emailVerified: response.data.user.isEmailVerified,
+      
+      console.log('✅ Login successful:', response.data);
+      
+      const { token, user: userData } = response.data;
+      
+      const user: User = {
+        id: userData._id || userData.id,
+        name: `${userData.firstName} ${userData.lastName}`,
+        email: userData.email,
+        role: userData.role || 'user',
+        phone: userData.phone,
+        address: userData.address,
+        avatar: userData.avatar,
+        emailVerified: userData.isEmailVerified,
       };
 
-      const token = response.data.token;
-
       // Store in localStorage
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', token);
 
       // Set token for API calls
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      setUser(userData);
+      setUser(user);
       
       // Load user's cart
       dispatch(fetchCart());
 
-      return userData;
+      showSuccess('Login successful!');
+      return user;
     } catch (error) {
+      console.error('❌ Login error:', error);
       const axiosError = error as AxiosError<ApiError>;
-      const message = axiosError.response?.data?.message || 'Login failed';
+      const message = axiosError.response?.data?.message || 'Invalid credentials';
+      showError(message);
       throw new Error(message);
     }
   };
@@ -199,11 +209,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const value = {
     user,
+    setUser,
     login,
     register,
     logout,
     updateProfile,
     isAuthenticated: !!user,
+    isAdmin: user?.role === 'admin',
     loading,
   };
 

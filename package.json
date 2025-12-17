@@ -14,13 +14,11 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@react-keycloak/web": "^3.4.0",
     "@reduxjs/toolkit": "^2.0.1",
     "@stripe/react-stripe-js": "^2.9.0",
     "@stripe/stripe-js": "^2.4.0",
     "axios": "^1.13.1",
     "framer-motion": "^12.23.24",
-    "keycloak-js": "^26.2.1",
     "lucide-react": "^0.294.0",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
@@ -29,7 +27,7 @@
     "react-hot-toast": "^2.6.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.20.1",
-    "recharts": "^3.3.0"
+    "recharts": "^3.4.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
